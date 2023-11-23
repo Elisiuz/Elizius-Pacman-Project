@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <conio.h>
-#include <windows.h>
+#include <allegro.h>
 
 //Crear tres mapas
 // Primero las funciones que carguen cada mapa
@@ -11,16 +10,18 @@ void cargarmapa2();
 void cargarmapa3();
 void menu();
 void motordejuego();
-void pintarmapa(int matrizjuego[20][30]);
+void pintarmapa(int matrizjuego[20][30], BITMAP *buffer);
 void movimientopacman(int matrizjuego[20][30], int posicionpacman[2]);
-void OcultaCursor();
+void init();
 
 int main() {
 	
+	init();
 	motordejuego();
 	
 	return 0; 	
 }
+END_OF_MAIN();
 
 void cargarmapa1(int matrizjuego[20][30]){
 	
@@ -69,30 +70,47 @@ void motordejuego(){
 	int posicionpacman[2];
 	posicionpacman[0]=13;
 	posicionpacman[1]=13;
+	BITMAP *buffer = create_bitmap(960,660);
 		
 	cargarmapa1(matrizjuego);
 	do{
-		pintarmapa(matrizjuego);
-		movimientopacman(matrizjuego, posicionpacman);
-	//	system ("pause");
-		system ("cls");
+		pintarmapa(matrizjuego,buffer);
+		//movimientopacman(matrizjuego, posicionpacman);
+		//system ("pause");
+		//system ("cls");
+		blit(buffer,screen,0,0,0,0,960,660);
 	}while(true);
 }
 
-void pintarmapa(int matrizjuego[20][30]){
+void pintarmapa(int matrizjuego[20][30], BITMAP *buffer){
 	int i,j; 
+	BITMAP *vectorMapa[10];
+	vectorMapa[0] = load_bitmap("CuerpoPacman_II.bmp", NULL); //PACMAN;
+	vectorMapa[1] = load_bitmap("Bloques_7.bmp", NULL); //BLOQUE
+	vectorMapa[2] = load_bitmap("PuntosChicos.bmp", NULL); // Puntos chicos
+	
+	
 	for (i=0; i<=19; i++){
 		for (j=0; j<=29; j++){
-			printf("%d", matrizjuego[i][j]);
+			if(matrizjuego[i][j] == 1){ //BLOQUE
+				draw_sprite(buffer,vectorMapa[1],j*30,i*30+35);
+			}
+			else if(matrizjuego[i][j] == 0){ //PACMAN
+				draw_sprite(buffer,vectorMapa[0],j*30,i*30+35);
+			}
+			else if (matrizjuego[i][j] == 4) {
+				draw_sprite(buffer, vectorMapa[2], j*30, i*30+35);
+			}
 		}
-		printf("\n");
+		//printf("\n");
 	}
 	
 }
 
 void movimientopacman(int matrizjuego[20][30], int posicionpacman[2]){
 	char tecla;
-	tecla=getch();
+	tecla='w';
+/*	tecla=getch();*/
 
 	
 	// si se pone w es que el pacman va hacia arriba
@@ -119,12 +137,26 @@ void movimientopacman(int matrizjuego[20][30], int posicionpacman[2]){
 	}
 }	
 	
-void OcultaCursor() { // Oculta la flechita el cuadro que parpadea en el ejecutable y se pone antes de la generacion de cualquier cosa.
-	
-	CONSOLE_CURSOR_INFO cci = {100, FALSE};
-	SetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &cci);
-}
 
+void init (){
+	
+	int depth, res,cancion;
+	allegro_init();
+	depth = desktop_color_depth();
+	if (depth == 0) depth = 32;
+	set_color_depth(depth);
+	res = set_gfx_mode(GFX_AUTODETECT_WINDOWED, 900, 635, 0, 0);
+	if (res != 0) {
+		allegro_message(allegro_error);
+		exit(-1);
+	}
+	set_window_title("Pac_Man Game");
+
+	install_timer();
+	install_keyboard();
+	install_mouse();
+	show_mouse(screen);
+} 
 
 
 
