@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include <allegro.h>
 
+#define VELOCIDAD 220 //Importante no usar valores negativos
+
 //Crear tres mapas
 // Primero las funciones que carguen cada mapa
 
@@ -79,6 +81,8 @@ void motordejuego(){
 		//system ("pause");
 		//system ("cls");
 		blit(buffer,screen,0,0,0,0,960,660);
+		clear(buffer);//Borramos el buffer
+		rest(VELOCIDAD);//Maneja la velocidad del juego. Entre más alto el parámetro, más lento el juego
 	}while(true);
 }
 
@@ -88,7 +92,7 @@ void pintarmapa(int matrizjuego[20][30], BITMAP *buffer){
 	vectorMapa[0] = load_bitmap("CuerpoPacman_II.bmp", NULL); //PACMAN;
 	vectorMapa[1] = load_bitmap("Bloques_7.bmp", NULL); //BLOQUE
 	vectorMapa[2] = load_bitmap("PuntosChicos.bmp", NULL); // Puntos chicos
-	
+	vectorMapa[3] = load_bitmap("Espacio.bmp", NULL);
 	
 	for (i=0; i<=19; i++){
 		for (j=0; j<=29; j++){
@@ -100,6 +104,9 @@ void pintarmapa(int matrizjuego[20][30], BITMAP *buffer){
 			}
 			else if (matrizjuego[i][j] == 4) {
 				draw_sprite(buffer, vectorMapa[2], j*30, i*30+35);
+			}
+			else if (matrizjuego[i][j]== 2){
+				draw_sprite(buffer, vectorMapa[3], j*30, i*30+35);
 			}
 		}
 		//printf("\n");
