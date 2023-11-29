@@ -75,7 +75,7 @@ void motordejuego(){
 	cargarmapa1(matrizjuego);
 	do{
 		pintarmapa(matrizjuego,buffer);
-		//movimientopacman(matrizjuego, posicionpacman);
+		movimientopacman(matrizjuego, posicionpacman);
 		//system ("pause");
 		//system ("cls");
 		blit(buffer,screen,0,0,0,0,960,660);
@@ -108,36 +108,34 @@ void pintarmapa(int matrizjuego[20][30], BITMAP *buffer){
 }
 
 void movimientopacman(int matrizjuego[20][30], int posicionpacman[2]){
-	char tecla;
-	tecla='w';
-/*	tecla=getch();*/
+
 
 	
 	// si se pone w es que el pacman va hacia arriba
-	if (tecla=='w'){
+	
+	if (key[KEY_W]){
 		matrizjuego[posicionpacman[0]][posicionpacman[1]]=2;
 		posicionpacman[0]=posicionpacman[0]-1;
 		matrizjuego[posicionpacman[0]][posicionpacman[1]]=0;
 	}
 	// si se pone s es que el pacman va hacia abajo
-	else if (tecla=='s'){
+	else if (key[KEY_S]){
 		matrizjuego[posicionpacman[0]][posicionpacman[1]]=2;
 		posicionpacman[0]=posicionpacman[0]+1;
 		matrizjuego[posicionpacman[0]][posicionpacman[1]]=0;
 	}
-	else if (tecla=='d'){
+	else if (key[KEY_D]){
 		matrizjuego[posicionpacman[0]][posicionpacman[1]]=2;
 		posicionpacman[1]=posicionpacman[1]+1;
 		matrizjuego[posicionpacman[0]][posicionpacman[1]]=0;
 	}
-	else if (tecla=='a'){
+	else if (key[KEY_A]){
 		matrizjuego[posicionpacman[0]][posicionpacman[1]]=2;
 		posicionpacman[1]=posicionpacman[1]-2;
 		matrizjuego[posicionpacman[0]][posicionpacman[1]]=0;
 	}
 }	
 	
-
 void init (){
 	
 	int depth, res,cancion;
