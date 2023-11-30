@@ -114,35 +114,42 @@ void pintarmapa(int matrizjuego[20][30], BITMAP *buffer){
 	
 }
 
-void movimientopacman(int matrizjuego[20][30], int posicionpacman[2]){
-
-
-	
+void movimientopacman(int matrizjuego[20][30], int posicionpacman[2]){	
 	// si se pone w es que el pacman va hacia arriba
 	
-	if (key[KEY_W]){
-		matrizjuego[posicionpacman[0]][posicionpacman[1]]=2;
-		posicionpacman[0]=posicionpacman[0]-1;
-		matrizjuego[posicionpacman[0]][posicionpacman[1]]=0;
+	if (key[KEY_W]){	
+		if (matrizjuego [  posicionpacman[0]-1 ] [posicionpacman[1]] !=1){	
+			matrizjuego[posicionpacman[0]][posicionpacman[1]]=2;
+			posicionpacman[0]=posicionpacman[0]-1;
+			matrizjuego[posicionpacman[0]][posicionpacman[1]]=0;
+		}
 	}
+	
 	// si se pone s es que el pacman va hacia abajo
 	else if (key[KEY_S]){
-		matrizjuego[posicionpacman[0]][posicionpacman[1]]=2;
-		posicionpacman[0]=posicionpacman[0]+1;
-		matrizjuego[posicionpacman[0]][posicionpacman[1]]=0;
+		
+		if (matrizjuego [ posicionpacman[0]+1 ] [posicionpacman[1]] !=1){
+			matrizjuego[posicionpacman[0]][posicionpacman[1]]=2;
+			posicionpacman[0]=posicionpacman[0]+1;
+			matrizjuego[posicionpacman[0]][posicionpacman[1]]=0;
+		}
 	}
 	else if (key[KEY_D]){
-		matrizjuego[posicionpacman[0]][posicionpacman[1]]=2;
-		posicionpacman[1]=posicionpacman[1]+1;
-		matrizjuego[posicionpacman[0]][posicionpacman[1]]=0;
+		if (matrizjuego [ posicionpacman[0]] [posicionpacman[1]+1] !=1){
+			matrizjuego[posicionpacman[0]][posicionpacman[1]]=2;
+			posicionpacman[1]=posicionpacman[1]+1;
+			matrizjuego[posicionpacman[0]][posicionpacman[1]]=0;
+		}
 	}
 	else if (key[KEY_A]){
-		matrizjuego[posicionpacman[0]][posicionpacman[1]]=2;
-		posicionpacman[1]=posicionpacman[1]-2;
-		matrizjuego[posicionpacman[0]][posicionpacman[1]]=0;
+		
+		if (matrizjuego[ posicionpacman[0]] [posicionpacman[1]-1] !=1){
+			matrizjuego[posicionpacman[0]][posicionpacman[1]]=2;
+			posicionpacman[1]=posicionpacman[1]-1;
+			matrizjuego[posicionpacman[0]][posicionpacman[1]]=0;
+			}
 	}
-}	
-	
+}
 void init (){
 	
 	int depth, res,cancion;
