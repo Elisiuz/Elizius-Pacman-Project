@@ -139,6 +139,7 @@ void movimientopacman(int matrizjuego[20][30], int posicionpacman[2]){
 			matrizjuego[posicionpacman[0]][posicionpacman[1]]=2;
 			posicionpacman[1]=posicionpacman[1]+1;
 			matrizjuego[posicionpacman[0]][posicionpacman[1]]=0;
+			if (posicionpacman[0]== posicionpacman[1] ) zzz
 		}
 	}
 	else if (key[KEY_A]){
@@ -147,10 +148,16 @@ void movimientopacman(int matrizjuego[20][30], int posicionpacman[2]){
 			matrizjuego[posicionpacman[0]][posicionpacman[1]]=2;
 			posicionpacman[1]=posicionpacman[1]-1;
 			matrizjuego[posicionpacman[0]][posicionpacman[1]]=0;
+			if (posicionpacman[0]==7 && posicionpacman[1]==0){
+				posicionpacman[0]=7;
+				posicionpacman[1]=29;
+				matrizjuego [posicionpacman[0]] [posicionpacman[1]]=0;
 			}
+		}
 	}
 }
-void init (){
+
+void init () {
 	
 	int depth, res,cancion;
 	allegro_init();
