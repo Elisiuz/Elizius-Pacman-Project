@@ -15,11 +15,18 @@ void motordejuego();
 void pintarmapa(int matrizjuego[20][30], BITMAP *buffer);
 void movimientopacman(int matrizjuego[20][30], int posicionpacman[2]);
 void init();
+void submenuJugar();
+void Nuevojuego();
+void continuarjuego();
+void regresar();
+
+
 
 int main() {
-	
-	init();
-	motordejuego();
+		
+//	init();
+//	motordejuego();
+	menu();
 	
 	return 0; 	
 }
@@ -62,7 +69,65 @@ void cargarmapa1(int matrizjuego[20][30]){
 		
 }
 
+void submenuJugar(){
+	int nuevaopcion;
+	printf("1. Nuevo juego\n");
+	printf("2. Continuar juego \n");
+	printf("3. Regresar \n");
+	scanf ("%i", &nuevaopcion);
+	
+	switch (nuevaopcion){
+		case 1:
+			Nuevojuego();
+			break;
+		case 2: 
+			continuarjuego();
+			break;
+		case 3: 
+			regresar();
+			break;
+	}
+}
+
+void Nuevojuego(){
+
+	char usuario[20];
+	char password[20];
+	
+	printf ("Ingrese usuario");
+	scanf("%s", usuario);
+	printf ("Ingrese password");
+	scanf ("%s", password);
+	
+}
+
+void continuarjuego(){
+
+}
+
+void regresar(){
+	
+}
+
 void menu(){
+	int opcion; 
+	printf("1. Jugar\n");
+	printf("2. Puntuaciones\n");
+	printf("3. Ayuda \n");
+	printf ("4. Salir \n");
+	scanf ("%i", &opcion);
+	
+	switch (opcion){
+		case 1:
+			submenuJugar();
+			break;
+		case 2: 
+			break;
+		case 3:
+			break;
+		case 4:
+			break;
+	}
 	
 }
 
