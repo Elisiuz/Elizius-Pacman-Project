@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <allegro.h>
+#include <string.h>
 
 #define VELOCIDAD 220 //Importante no usar valores negativos
 
@@ -19,6 +20,7 @@ void submenuJugar();
 void Nuevojuego();
 void continuarjuego();
 void regresar();
+void verificarUsuario(char Usuario);
 
 
 
@@ -99,7 +101,36 @@ void Nuevojuego(){
 	printf ("Ingrese password");
 	scanf ("%s", password);
 	
+	verificarUsuario(usuario);	
+	
+	}
+
+void verificarUsuario (char usuario[]){
+	
+	FILE *arch;
+	arch=fopen("Usuario.txt", "r");
+	char usuario[20];
+	char ;
+	char linea[20];
+	
+	while (fgets(linea, 20, arch) !NULL {
+		if (strcmp(usuario,linea)==0){
+			printf("El usuario ya está ocupado");
+		else if (strcmp(usuario, linea)==1){
+			
+		}
+			
+		}
+	
+	}
+	
+	
+	while (!feof(arch)){
+		fgets (linea, 100, arch);
+		if (strcmp usuario,  )
+		
 }
+
 
 void continuarjuego(){
 
@@ -128,7 +159,7 @@ void menu(){
 		case 4:
 			break;
 	}
-	
+
 }
 
 void motordejuego(){
