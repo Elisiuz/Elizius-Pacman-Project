@@ -20,9 +20,8 @@ void submenuJugar();
 void Nuevojuego();
 void continuarjuego();
 void regresar();
-void verificarUsuario(char Usuario);
-
-
+int verificarUsuario(char usuario[]);
+void IngresarUsuario (char usuario[], char password[]);
 
 int main() {
 		
@@ -96,39 +95,50 @@ void Nuevojuego(){
 	char usuario[20];
 	char password[20];
 	
-	printf ("Ingrese usuario");
-	scanf("%s", usuario);
-	printf ("Ingrese password");
-	scanf ("%s", password);
-	
-	verificarUsuario(usuario);	
-	
+	do {
+		printf ("Ingrese nombre de  usuario \n");
+		fflush(stdin);
+		gets(usuario);
+		printf ("Ingrese password \n");
+		fflush(stdin);
+		gets(password);
 	}
+	while (verificarUsuario(usuario)==1);
+	
+	if (verificarUsuario(usuario)==0){
+		IngresarUsuario(usuario, password);
+	}else{
+		printf("El Usuario no está disponible elija otro\n");
+	}	
+}
 
-void verificarUsuario (char usuario[]){
+void IngresarUsuario (char usuario[], char password[]){
 	
 	FILE *arch;
-	arch=fopen("Usuario.txt", "r");
-	char usuario[20];
-	char ;
+	arch=fopen("usuarios.txt", "a");
+	
 	char linea[20];
 	
-	while (fgets(linea, 20, arch) !NULL {
+	fprintf(arch,"%s , %s ", usuario, password);
+
+	fclose (arch);
+}
+
+
+int verificarUsuario(char usuario[]){
+	
+	FILE *arch;
+	arch=fopen("usuarios.txt", "r");
+	char linea[20];
+	
+	while (fgets(linea, 20, arch) != NULL){
 		if (strcmp(usuario,linea)==0){
-			printf("El usuario ya está ocupado");
-		else if (strcmp(usuario, linea)==1){
-			
+			fclose(arch);
+			return 1; // Esto significa que el usuario no está disponible. 
 		}
-			
-		}
-	
 	}
-	
-	
-	while (!feof(arch)){
-		fgets (linea, 100, arch);
-		if (strcmp usuario,  )
-		
+	fclose(arch);
+	return 0;
 }
 
 
