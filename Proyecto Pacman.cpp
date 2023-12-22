@@ -102,14 +102,14 @@ void Nuevojuego(){
 		printf ("Ingrese password \n");
 		fflush(stdin);
 		fgets(password, 20, stdin);
+		if (verificarUsuario(usuario)==0){
+			IngresarUsuario(usuario, password);
+		}
+		else{
+			printf("El Usuario no está disponible elija otro\n");
+		}	
 	}
 	while (verificarUsuario(usuario)==1);
-	
-	if (verificarUsuario(usuario)==0){
-		IngresarUsuario(usuario, password);
-	}else{
-		printf("El Usuario no está disponible elija otro\n");
-	}	
 }
 
 void IngresarUsuario (char usuario[], char password[]){
@@ -131,7 +131,6 @@ int verificarUsuario(char usuario[]){
 	char linea[20];
 	
 	while (fgets(linea, 20, arch) != NULL){
-		printf ("%s, %s\n", usuario, linea);
 		if (strcmp(usuario, linea)==0){
 			fclose(arch);
 			return 1; // Esto significa que el usuario no está disponible. 
