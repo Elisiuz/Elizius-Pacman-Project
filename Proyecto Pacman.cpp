@@ -94,6 +94,7 @@ void Nuevojuego(){
 
 	char usuario[20];
 	char password[20];
+	int ocupado=1;
 	
 	do {
 		printf ("Ingrese nombre de  usuario \n");
@@ -102,14 +103,17 @@ void Nuevojuego(){
 		printf ("Ingrese password \n");
 		fflush(stdin);
 		fgets(password, 20, stdin);
-		if (verificarUsuario(usuario)==0){
+		ocupado=verificarUsuario(usuario);
+		if (ocupado==0){
 			IngresarUsuario(usuario, password);
 		}
 		else{
 			printf("El Usuario no está disponible elija otro\n");
 		}	
 	}
-	while (verificarUsuario(usuario)==1);
+	while (ocupado==1); 
+	
+	//TAREA: PONER QUE A LOS TRES INTENTOS YA SE TERMINE EL PROGRAMA
 }
 
 void IngresarUsuario (char usuario[], char password[]){
