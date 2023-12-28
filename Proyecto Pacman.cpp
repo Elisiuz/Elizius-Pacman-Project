@@ -95,6 +95,7 @@ void Nuevojuego(){
 	char usuario[20];
 	char password[20];
 	int ocupado=1;
+	int intentos=0;
 	
 	do {
 		printf ("Ingrese nombre de  usuario \n");
@@ -109,11 +110,10 @@ void Nuevojuego(){
 		}
 		else{
 			printf("El Usuario no está disponible elija otro\n");
-		}	
+		}
+		intentos++;	
 	}
-	while (ocupado==1); 
-	
-	//TAREA: PONER QUE A LOS TRES INTENTOS YA SE TERMINE EL PROGRAMA
+	while (ocupado==1 && intentos<3);
 }
 
 void IngresarUsuario (char usuario[], char password[]){
@@ -146,6 +146,35 @@ int verificarUsuario(char usuario[]){
 
 
 void continuarjuego(){
+	char usuario[20];
+	char password[20];
+	
+	printf("Ingrese el nombre del usuario\n");
+	fflush(stdin);
+	fgets (usuario, 20, stdin);
+	printf("Ingrese el password\n");
+	fgets (usuario, 20, stdin);
+	
+	FILE *arch;
+	arch=fopen ("usuarios.txt", "r");
+	char linea[20];
+	
+	while(fgets(linea,20,arch) !=NULL){
+		if (strcmp(usuario, linea)==0){
+			fgets (linea,20,arch);
+			printf ("La contrasena es %s\n", linea);
+			break;
+		}
+		
+
+			
+		}
+		
+		
+		
+	
+	
+	
 
 }
 
