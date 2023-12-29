@@ -18,7 +18,7 @@ void movimientopacman(int matrizjuego[20][30], int posicionpacman[2]);
 void init();
 void submenuJugar();
 void Nuevojuego();
-void continuarjuego();
+int continuarjuego();
 void regresar();
 int verificarUsuario(char usuario[]);
 void IngresarUsuario (char usuario[], char password[]);
@@ -82,7 +82,9 @@ void submenuJugar(){
 			Nuevojuego();
 			break;
 		case 2: 
-			continuarjuego();
+			if (continuarjuego()==1){
+				printf("Usuario o contrasena incorrectos\n");
+			}
 			break;
 		case 3: 
 			regresar();
@@ -145,7 +147,7 @@ int verificarUsuario(char usuario[]){
 }
 
 
-void continuarjuego(){
+int continuarjuego(){
 	char usuario[20];
 	char password[20];
 	
@@ -153,7 +155,8 @@ void continuarjuego(){
 	fflush(stdin);
 	fgets (usuario, 20, stdin);
 	printf("Ingrese el password\n");
-	fgets (usuario, 20, stdin);
+	fflush(stdin);
+	fgets (password, 20, stdin);
 	
 	FILE *arch;
 	arch=fopen ("usuarios.txt", "r");
@@ -162,20 +165,15 @@ void continuarjuego(){
 	while(fgets(linea,20,arch) !=NULL){
 		if (strcmp(usuario, linea)==0){
 			fgets (linea,20,arch);
-			printf ("La contrasena es %s\n", linea);
+			if (strcmp(password, linea)==0){
+				return 1; // Esto significa que el usuario y la contraseña son correctos.  
+			//	printf("Usuario y contraseña correctos");
+				}				
 			break;
 		}
-		
-
 			
 		}
-		
-		
-		
-	
-	
-	
-
+	return 0; 
 }
 
 void regresar(){
