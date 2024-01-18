@@ -3,7 +3,7 @@
 #include <allegro.h>
 #include <string.h>
 
-#define VELOCIDAD 220 //Importante no usar valores negativos
+#define VELOCIDAD 50 //Importante no usar valores negativos
 
 //Crear tres mapas
 // Primero las funciones que carguen cada mapa
@@ -25,9 +25,9 @@ void IngresarUsuario (char usuario[], char password[]);
 
 int main() {
 		
-//	init();
-//	motordejuego();
-	menu();
+	init();
+	motordejuego();
+//	menu();
 	
 	return 0; 	
 }
@@ -230,6 +230,10 @@ void pintarmapa(int matrizjuego[20][30], BITMAP *buffer){
 	vectorMapa[1] = load_bitmap("Bloques_7.bmp", NULL); //BLOQUE
 	vectorMapa[2] = load_bitmap("PuntosChicos.bmp", NULL); // Puntos chicos
 	vectorMapa[3] = load_bitmap("Espacio.bmp", NULL);
+	vectorMapa[6] = load_bitmap("FantasmaBlinky_Abajo.bmp", NULL);
+	vectorMapa[8] = load_bitmap("FantasmaInky_D.bmp", NULL);
+	vectorMapa[9] = load_bitmap("FantasmaClyde_Arriba.bmp", NULL);
+	vectorMapa[7] = load_bitmap("FantasmaPinky_I.bmp", NULL);
 	
 	for (i=0; i<=19; i++){
 		for (j=0; j<=29; j++){
@@ -244,6 +248,18 @@ void pintarmapa(int matrizjuego[20][30], BITMAP *buffer){
 			}
 			else if (matrizjuego[i][j]== 2){
 				draw_sprite(buffer, vectorMapa[3], j*30, i*30+35);
+			}
+			else if (matrizjuego[i][j]==6){
+				draw_sprite(buffer, vectorMapa[6], j*30, i*30+35);
+			}
+			else if (matrizjuego[i][j]==8){
+				draw_sprite(buffer, vectorMapa[8], j*30, i*30+35);
+			}
+			else if (matrizjuego[i][j]==9){
+				draw_sprite(buffer, vectorMapa[9], j*30, i*30+35);
+			}
+			else if (matrizjuego[i][j]==7){
+				draw_sprite(buffer, vectorMapa[7], j*30, i*30+35);
 			}
 		}
 		//printf("\n");
