@@ -83,6 +83,8 @@ void submenuJugar(){
 			break;
 		case 2: 
 			if (continuarjuego()==1){
+				printf("Usuario o contrasena correctos\n");
+			}else{
 				printf("Usuario o contrasena incorrectos\n");
 			}
 			break;
@@ -102,10 +104,10 @@ void Nuevojuego(){
 	do {
 		printf ("Ingrese nombre de  usuario \n");
 		fflush(stdin);
-		fgets(usuario, 20, stdin);
+		gets(usuario);
 		printf ("Ingrese password \n");
 		fflush(stdin);
-		fgets(password, 20, stdin);
+		gets(password);
 		ocupado=verificarUsuario(usuario);
 		if (ocupado==0){
 			IngresarUsuario(usuario, password);
@@ -167,8 +169,7 @@ int continuarjuego(){
 			fgets (linea,20,arch);
 			if (strcmp(password, linea)==0){
 				return 1; // Esto significa que el usuario y la contraseña son correctos.  
-			//	printf("Usuario y contraseña correctos");
-				}				
+			}				
 			break;
 		}
 			
