@@ -22,6 +22,7 @@ int continuarjuego();
 void regresar();
 int verificarUsuario(char usuario[]);
 void IngresarUsuario (char usuario[], char password[]);
+void FantasmaNaranja() //es el que se mueve aleatoriamente
 
 int main() {
 		
@@ -314,6 +315,17 @@ void movimientopacman(int matrizjuego[20][30], int posicionpacman[2]){
 			}
 		}
 	}
+}
+
+void FantasmaNaranja (int matrizjuego[20][30]), int posicionnaranja[2]{
+	srand(time(NULL));
+	int posicion= rand() %4; // Genera numeros aleatorios para moverse en las cuatro direcciones 
+	
+	if (posicion == 0){
+		matrizjuego[posicionnaranja[0][posicionnaranja[1]]-1] !=1
+	} 
+
+//Ojo: el fantasma sale del corral al principio y cuando te lo comes regresa, sería conveniente la función "sacar y meter fantasmas".
 }
 
 void init () {
