@@ -22,7 +22,7 @@ int continuarjuego();
 void regresar();
 int verificarUsuario(char usuario[]);
 void IngresarUsuario (char usuario[], char password[]);
-void FantasmaNaranja() //es el que se mueve aleatoriamente
+void FantasmaNaranja(int matrizjuego[20][30], int posicionnaranja[2]); //es el que se mueve aleatoriamente
 
 int main() {
 		
@@ -37,7 +37,7 @@ END_OF_MAIN();
 void cargarmapa1(int matrizjuego[20][30]){
 	
 	int mapa[20][30]={
-		
+	//	 1 2 3 4 5 6 7 8 9 101112131415                   
 		{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
 		{1,5,4,4,4,4,4,4,4,4,4,4,4,4,4,1,1,4,4,4,4,4,4,4,4,4,4,5,4,1},
 		{1,4,1,4,1,1,4,1,1,1,1,4,1,4,4,1,1,4,1,4,4,4,1,1,1,4,4,4,4,1},
@@ -47,7 +47,7 @@ void cargarmapa1(int matrizjuego[20][30]){
 		{1,4,4,4,4,4,4,4,4,4,4,4,1,4,4,4,4,1,1,4,4,4,4,1,4,4,4,1,4,1},
 		{4,4,1,1,1,1,1,4,4,4,4,4,1,1,1,1,4,4,4,1,4,4,4,1,4,4,4,1,4,4},
 		{1,4,4,4,4,4,1,4,4,4,4,4,1,6,7,1,4,4,4,1,4,4,4,1,4,4,4,1,4,1},
-		{1,4,4,4,4,4,1,4,4,4,4,4,1,8,9,1,4,4,4,1,4,4,4,1,4,4,4,4,4,1},
+		{1,4,4,4,4,4,1,4,4,4,4,4,1,8,9,1,4,4,4,1,4,4,4,1,4,4,4,4,4,1}, // 10
 		{1,4,4,4,1,1,1,4,4,4,4,4,1,1,1,1,4,4,4,1,4,4,4,1,1,1,1,4,4,1},
 		{1,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,1},
 		{1,4,4,4,4,4,4,4,1,4,4,4,1,1,1,1,4,4,4,4,1,4,4,4,4,4,4,4,4,1},
@@ -210,12 +210,17 @@ void motordejuego(){
 	int posicionpacman[2];
 	posicionpacman[0]=13;
 	posicionpacman[1]=13;
+	int posicionnaranja[2];
+	posicionnaranja[0]=10;
+	posicionnaranja[1]=15;
+	
 	BITMAP *buffer = create_bitmap(960,660);
 		
 	cargarmapa1(matrizjuego);
 	do{
 		pintarmapa(matrizjuego,buffer);
 		movimientopacman(matrizjuego, posicionpacman);
+		FantasmaNaranja(matrizjuego, posicionnaranja);
 		//system ("pause");
 		//system ("cls");
 		blit(buffer,screen,0,0,0,0,960,660);
@@ -317,12 +322,21 @@ void movimientopacman(int matrizjuego[20][30], int posicionpacman[2]){
 	}
 }
 
-void FantasmaNaranja (int matrizjuego[20][30]), int posicionnaranja[2]{
+void FantasmaNaranja (int matrizjuego[20][30], int posicionnaranja[2]){
 	srand(time(NULL));
 	int posicion= rand() %4; // Genera numeros aleatorios para moverse en las cuatro direcciones 
+	posicion=0;
 	
-	if (posicion == 0){
-		matrizjuego[posicionnaranja[0][posicionnaranja[1]]-1] !=1
+	switch (posicion){
+		case 0:
+			matrizjuego[posicionnaranja[0]][posicionnaranja[1]]=2;
+			posicionnaranja[1]=posicionnaranja[1]-1;
+			matrizjuego[posicionnaranja[0]][posicionnaranja[1]]=9;
+		
+		break;
+			
+			
+		
 	} 
 
 //Ojo: el fantasma sale del corral al principio y cuando te lo comes regresa, sería conveniente la función "sacar y meter fantasmas".
