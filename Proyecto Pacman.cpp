@@ -3,7 +3,7 @@
 #include <allegro.h>
 #include <string.h>
 
-#define VELOCIDAD 50 //Importante no usar valores negativos
+#define VELOCIDAD 200 //Importante no usar valores negativos
 
 //Crear tres mapas
 // Primero las funciones que carguen cada mapa
@@ -25,7 +25,7 @@ void IngresarUsuario (char usuario[], char password[]);
 void FantasmaNaranja(int matrizjuego[20][30], int posicionnaranja[2]); //es el que se mueve aleatoriamente
 
 int main() {
-		
+	srand(time(NULL));
 	init();
 	motordejuego();
 //	menu();
@@ -148,7 +148,6 @@ int verificarUsuario(char usuario[]){
 	fclose(arch);
 	return 0;
 }
-
 
 int continuarjuego(){
 	char usuario[20];
@@ -323,22 +322,35 @@ void movimientopacman(int matrizjuego[20][30], int posicionpacman[2]){
 }
 
 void FantasmaNaranja (int matrizjuego[20][30], int posicionnaranja[2]){
-	srand(time(NULL));
 	int posicion= rand() %4; // Genera numeros aleatorios para moverse en las cuatro direcciones 
-	posicion=0;
 	
 	switch (posicion){
 		case 0:
-			matrizjuego[posicionnaranja[0]][posicionnaranja[1]]=2;
-			posicionnaranja[1]=posicionnaranja[1]-1;
-			matrizjuego[posicionnaranja[0]][posicionnaranja[1]]=9;
-		
+			if(matrizjuego[posicionnaranja[0]][posicionnaranja[1]-1] !=1){
+				matrizjuego[posicionnaranja[0]][posicionnaranja[1]]=2;
+				posicionnaranja[1]=posicionnaranja[1]-1;
+			}
 		break;
-			
-			
-		
+		case 1:
+			if(matrizjuego[posicionnaranja[0]][posicionnaranja[1]+1] !=1){
+				matrizjuego[posicionnaranja[0]][posicionnaranja[1]]=2;
+				posicionnaranja[1]=posicionnaranja[1]+1;
+			}
+		break;
+		case 3:
+			if(matrizjuego[posicionnaranja[0]-1][posicionnaranja[1]] !=1){
+				matrizjuego[posicionnaranja[0]][posicionnaranja[1]]=2;
+				posicionnaranja[0]=posicionnaranja[1]-1;
+			}
+		break;
+		case 4:
+			if(matrizjuego[posicionnaranja[0]+1][posicionnaranja[1]] !=1){
+				matrizjuego[posicionnaranja[0]][posicionnaranja[1]]=2;
+				posicionnaranja[0]=posicionnaranja[1]+1;
+			}
 	} 
-
+	matrizjuego[posicionnaranja[0]][posicionnaranja[1]]=9;
+	
 //Ojo: el fantasma sale del corral al principio y cuando te lo comes regresa, sería conveniente la función "sacar y meter fantasmas".
 }
 
