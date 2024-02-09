@@ -45,7 +45,7 @@ void cargarmapa1(int matrizjuego[20][30]){
 		{1,4,1,4,1,1,4,1,1,4,4,4,4,4,4,4,4,4,1,1,4,4,1,4,4,4,4,4,4,1},
 		{1,4,4,4,4,4,4,4,4,4,4,4,1,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,1},
 		{1,4,4,4,4,4,4,4,4,4,4,4,1,4,4,4,4,1,1,4,4,4,4,1,4,4,4,1,4,1},
-		{4,4,1,1,1,1,1,4,4,4,4,4,1,1,1,1,4,4,4,1,4,4,4,1,4,4,4,1,4,4},
+		{4,4,1,1,1,1,1,4,4,4,4,4,1,1,1,1,4,4,4,1,4,4,4,1,4,4,4,4,9,4},
 		{1,4,4,4,4,4,1,4,4,4,4,4,1,6,7,1,4,4,4,1,4,4,4,1,4,4,4,1,4,1},
 		{1,4,4,4,4,4,1,4,4,4,4,4,1,8,9,1,4,4,4,1,4,4,4,1,4,4,4,4,4,1}, // 10
 		{1,4,4,4,1,1,1,4,4,4,4,4,1,1,1,1,4,4,4,1,4,4,4,1,1,1,1,4,4,1},
@@ -210,8 +210,10 @@ void motordejuego(){
 	posicionpacman[0]=13;
 	posicionpacman[1]=13;
 	int posicionnaranja[2];
-	posicionnaranja[0]=10;
-	posicionnaranja[1]=15;
+//	posicionnaranja[0]=10;
+//	posicionnaranja[1]=15;
+	posicionnaranja[0]=8;
+	posicionnaranja[1]=28;
 	
 	BITMAP *buffer = create_bitmap(960,660);
 		
@@ -322,19 +324,33 @@ void movimientopacman(int matrizjuego[20][30], int posicionpacman[2]){
 }
 
 void FantasmaNaranja (int matrizjuego[20][30], int posicionnaranja[2]){
-	int posicion= rand() %4; // Genera numeros aleatorios para moverse en las cuatro direcciones 
+	int posicion=rand() %4; // Genera numeros aleatorios para moverse en las cuatro direcciones 
+	posicion=0;
 	
 	switch (posicion){
 		case 0:
 			if(matrizjuego[posicionnaranja[0]][posicionnaranja[1]-1] !=1){
 				matrizjuego[posicionnaranja[0]][posicionnaranja[1]]=2;
 				posicionnaranja[1]=posicionnaranja[1]-1;
+				matrizjuego[posicionnaranja[0]][posicionnaranja[1]]=0;
+	/*			if (posicionnaranja[0]==7 && posicionnaranja[1]==0){
+					posicionnaranja[0]=7;
+					posicionnaranja[1]=29;
+					matrizjuego[posicionnaranja[0]][posicionnaranja[1]]=9;
+					matrizjuego[7][29]=2;
+				}*/
 			}
 		break;
 		case 1:
 			if(matrizjuego[posicionnaranja[0]][posicionnaranja[1]+1] !=1){
 				matrizjuego[posicionnaranja[0]][posicionnaranja[1]]=2;
 				posicionnaranja[1]=posicionnaranja[1]+1;
+			/*	if (posicionnaranja[0]==7 && posicionnaranja[1]==29){
+					posicionnaranja[0]=7;
+					posicionnaranja[1]=0;
+					matrizjuego[posicionnaranja[0]] [posicionnaranja[1]]=9;
+					matrizjuego[7][0]=2;
+				} */
 			}
 		break;
 		case 3:
