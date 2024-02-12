@@ -45,7 +45,7 @@ void cargarmapa1(int matrizjuego[20][30]){
 		{1,4,1,4,1,1,4,1,1,4,4,4,4,4,4,4,4,4,1,1,4,4,1,4,4,4,4,4,4,1},
 		{1,4,4,4,4,4,4,4,4,4,4,4,1,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,1},
 		{1,4,4,4,4,4,4,4,4,4,4,4,1,4,4,4,4,1,1,4,4,4,4,1,4,4,4,1,4,1},
-		{4,4,1,1,1,1,1,4,4,4,4,4,1,1,1,1,4,4,4,1,4,4,4,1,4,4,4,4,9,4},
+		{4,9,1,1,1,1,1,4,4,4,4,4,1,1,1,1,4,4,4,1,4,4,4,1,4,4,4,4,4,4},
 		{1,4,4,4,4,4,1,4,4,4,4,4,1,6,7,1,4,4,4,1,4,4,4,1,4,4,4,1,4,1},
 		{1,4,4,4,4,4,1,4,4,4,4,4,1,8,9,1,4,4,4,1,4,4,4,1,4,4,4,4,4,1}, // 10
 		{1,4,4,4,1,1,1,4,4,4,4,4,1,1,1,1,4,4,4,1,4,4,4,1,1,1,1,4,4,1},
@@ -213,7 +213,7 @@ void motordejuego(){
 //	posicionnaranja[0]=10;
 //	posicionnaranja[1]=15;
 	posicionnaranja[0]=8;
-	posicionnaranja[1]=28;
+	posicionnaranja[1]=2;
 	
 	BITMAP *buffer = create_bitmap(960,660);
 		
@@ -328,44 +328,45 @@ void FantasmaNaranja (int matrizjuego[20][30], int posicionnaranja[2]){
 	posicion=0;
 	
 	switch (posicion){
-		case 0:
+		case 0: //Izquierda
 			if(matrizjuego[posicionnaranja[0]][posicionnaranja[1]-1] !=1){
 				matrizjuego[posicionnaranja[0]][posicionnaranja[1]]=2;
 				posicionnaranja[1]=posicionnaranja[1]-1;
-				matrizjuego[posicionnaranja[0]][posicionnaranja[1]]=0;
-	/*			if (posicionnaranja[0]==7 && posicionnaranja[1]==0){
-					posicionnaranja[0]=7;
-					posicionnaranja[1]=29;
+				matrizjuego[posicionnaranja[0]][posicionnaranja[1]]=9;
+				if (posicionnaranja[0]==8 && posicionnaranja[1]==2){
+					posicionnaranja[0]=8;
+					posicionnaranja[1]=2;
 					matrizjuego[posicionnaranja[0]][posicionnaranja[1]]=9;
-					matrizjuego[7][29]=2;
-				}*/
+					matrizjuego[8][2]=2;
+				}
 			}
 		break;
-		case 1:
+		case 1: //Derecha
 			if(matrizjuego[posicionnaranja[0]][posicionnaranja[1]+1] !=1){
 				matrizjuego[posicionnaranja[0]][posicionnaranja[1]]=2;
 				posicionnaranja[1]=posicionnaranja[1]+1;
-			/*	if (posicionnaranja[0]==7 && posicionnaranja[1]==29){
+				matrizjuego[posicionnaranja[0]][posicionnaranja[1]]=9;
+				if (posicionnaranja[0]==7 && posicionnaranja[1]==29){
 					posicionnaranja[0]=7;
 					posicionnaranja[1]=0;
 					matrizjuego[posicionnaranja[0]] [posicionnaranja[1]]=9;
-					matrizjuego[7][0]=2;
-				} */
+					matrizjuego[7][29]=2;
+				} 
 			}
 		break;
-		case 3:
+		case 2:
 			if(matrizjuego[posicionnaranja[0]-1][posicionnaranja[1]] !=1){
 				matrizjuego[posicionnaranja[0]][posicionnaranja[1]]=2;
 				posicionnaranja[0]=posicionnaranja[1]-1;
 			}
 		break;
-		case 4:
+		case 3:
 			if(matrizjuego[posicionnaranja[0]+1][posicionnaranja[1]] !=1){
 				matrizjuego[posicionnaranja[0]][posicionnaranja[1]]=2;
 				posicionnaranja[0]=posicionnaranja[1]+1;
 			}
 	} 
-	matrizjuego[posicionnaranja[0]][posicionnaranja[1]]=9;
+//	matrizjuego[posicionnaranja[0]][posicionnaranja[1]]=9;
 	
 //Ojo: el fantasma sale del corral al principio y cuando te lo comes regresa, sería conveniente la función "sacar y meter fantasmas".
 }
