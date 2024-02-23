@@ -29,6 +29,7 @@ int main() {
 	srand(time(NULL));
 	init();
 	motordejuego();
+
 //	menu();
 	
 	return 0; 	
@@ -40,12 +41,12 @@ void cargarmapa1(int matrizjuego[20][30]){
 	int mapa[20][30]={
 	//	 0 1 3 4 5                   
 		{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
-		{1,5,4,4,4,4,4,4,4,4,4,4,4,4,4,1,1,4,4,4,4,4,4,4,4,4,4,5,4,1},
-		{1,4,1,4,1,1,4,1,1,1,1,4,1,4,4,1,1,4,1,4,4,4,1,1,1,4,4,4,4,1},
-		{1,4,1,4,1,1,4,1,1,4,4,4,1,4,4,4,4,4,1,1,4,4,1,1,1,4,4,4,4,1},
-		{1,4,1,4,1,1,4,1,1,4,4,4,4,4,4,4,4,4,1,1,4,4,1,4,4,4,4,4,4,1},
-		{1,4,4,4,4,4,4,4,4,4,4,4,1,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,1},
-		{1,4,4,4,4,4,4,4,4,4,4,4,1,4,4,4,4,1,1,4,4,4,4,1,4,4,4,1,4,1},
+		{1,5,4,4,4,4,4,4,4,4,4,4,1,4,4,1,4,4,4,4,4,4,4,4,4,4,4,5,4,1},
+		{1,4,4,4,1,1,4,1,1,1,1,4,4,1,4,1,1,4,1,4,4,4,1,1,1,4,4,4,4,1},
+		{1,4,1,4,1,1,4,1,1,4,4,4,1,1,1,1,4,4,1,1,4,4,1,1,1,4,4,4,4,1},
+		{1,4,1,4,1,1,4,1,1,4,4,4,4,4,4,4,4,4,1,1,4,4,1,1,4,4,4,4,4,1},
+		{1,4,4,4,4,4,4,4,4,4,4,4,1,1,1,1,4,4,4,4,4,4,4,4,4,4,4,4,4,1},
+		{1,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,1,1,4,4,4,4,1,4,4,4,1,4,1},
 		{4,4,1,1,1,1,1,4,4,4,4,4,1,1,1,1,4,4,4,1,4,4,4,1,4,4,4,4,4,4},
 		{1,4,4,4,4,4,1,4,4,4,4,4,1,6,7,1,4,4,4,1,4,4,4,1,4,4,4,1,4,1},
 		{1,4,4,4,4,4,1,4,4,4,4,4,1,8,9,1,4,4,4,1,4,4,4,1,4,4,4,4,4,1}, // 10
@@ -211,12 +212,11 @@ void motordejuego(){
 	posicionpacman[0]=13;
 	posicionpacman[1]=13;
 	int posicionnaranja[2];
-	posicionnaranja[0]=10;
+	posicionnaranja[0]=9;
 	posicionnaranja[1]=15;
-	
-	SacarFantasma; 
+	SacarFantasma(matrizjuego, posicionnaranja);
 
-	
+
 	BITMAP *buffer = create_bitmap(960,660);
 		
 	cargarmapa1(matrizjuego);
@@ -325,6 +325,7 @@ void movimientopacman(int matrizjuego[20][30], int posicionpacman[2]){
 
 void FantasmaNaranja (int matrizjuego[20][30], int posicionnaranja[2]){
 	int posicion=rand() %4; // Genera numeros aleatorios para moverse en las cuatro direcciones 
+
 //	posicion=1;
 	
 	switch (posicion){
@@ -374,16 +375,12 @@ void FantasmaNaranja (int matrizjuego[20][30], int posicionnaranja[2]){
 //Ojo: el fantasma sale del corral al principio y cuando te lo comes regresa, sería conveniente la función "sacar y meter fantasmas".
 }
 
-void SacarFantasma (int matrizjuego[29][30], int posicionnaranja[2]){
-	/* int posicionsalida[2];
-	posicionsalida[0]=6;
-	posicionsalida[1]=11;*/ 
+void SacarFantasma (int matrizjuego[20][30], int posicionnaranja[2]){
 	
 	matrizjuego[posicionnaranja[0]][posicionnaranja[1]]=2;
-	posicionnaranja[0]=8;
-	posicionnaranja[1]=12;
+	posicionnaranja[0]=7;
+	posicionnaranja[1]=11;
 	matrizjuego[posicionnaranja[0]][posicionnaranja[1]]=9;
-	matrizjuego[14][9]=2; 
 }
 
 
