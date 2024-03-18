@@ -24,6 +24,7 @@ int verificarUsuario(char usuario[]);
 void IngresarUsuario (char usuario[], char password[]);
 void FantasmaNaranja(int matrizjuego[20][30], int posicionnaranja[2]); //es el que se mueve aleatoriamente
 void SacarFantasma (int matrizjuego[29][30], int posicionnaranja[2]);
+void MostrarFruta (int matrizjuebo[29][30] );
 
 int main() {
 	srand(time(NULL));
@@ -39,14 +40,14 @@ END_OF_MAIN();
 void cargarmapa1(int matrizjuego[20][30]){
 	
 	int mapa[20][30]={
-	//	 0 1 3 4 5                   
+	//	 0 1 3 4 5                   14  
 		{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
-		{1,5,4,4,4,4,4,4,4,4,4,4,1,4,4,1,4,4,4,4,4,4,4,4,4,4,4,5,4,1},
-		{1,4,4,4,1,1,4,1,1,1,1,4,4,4,4,4,4,4,4,4,4,4,1,1,1,4,4,4,4,1},
+		{1,4,4,4,4,4,4,4,4,4,4,4,1,4,4,1,4,4,4,4,4,4,4,4,4,4,4,5,4,1},
+		{1,4,4,5,1,1,4,1,1,1,1,4,4,4,4,4,4,4,4,4,4,4,1,1,1,4,4,4,4,1},
 		{1,4,1,4,1,1,4,1,1,4,4,4,1,1,1,1,4,4,1,1,4,4,1,1,1,4,4,4,4,1},
 		{1,4,1,4,1,1,4,1,1,4,4,4,4,4,4,4,4,4,1,1,4,4,1,1,4,4,4,4,4,1},
 		{1,4,4,4,4,4,4,4,4,4,4,4,1,1,1,1,4,4,4,4,4,4,4,4,4,4,4,4,4,1},
-		{1,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,1,4,4,4,1,4,1},
+		{1,4,4,4,3,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,1,4,4,4,1,4,1},
 		{4,4,1,1,1,1,1,4,4,1,4,4,1,1,1,1,4,4,4,1,4,4,4,1,4,4,4,4,4,4},
 		{1,4,4,4,4,4,1,4,4,1,4,4,1,6,7,1,4,4,4,1,4,4,4,1,4,4,4,1,4,1},
 		{1,4,4,4,4,4,1,4,4,1,4,4,1,8,9,1,4,4,4,1,4,4,4,1,4,4,4,4,4,1}, // 10
@@ -213,7 +214,7 @@ void motordejuego(){
 	posicionpacman[1]=13;
 	int posicionnaranja[2];
 	posicionnaranja[0]=10;
-	posicionnaranja[1]=15;
+	posicionnaranja[1]=14;
 	SacarFantasma(matrizjuego, posicionnaranja);
 
 
@@ -237,12 +238,16 @@ void pintarmapa(int matrizjuego[20][30], BITMAP *buffer){
 	BITMAP *vectorMapa[10];
 	vectorMapa[0] = load_bitmap("CuerpoPacman_II.bmp", NULL); //PACMAN;
 	vectorMapa[1] = load_bitmap("Bloques_7.bmp", NULL); //BLOQUE
-	vectorMapa[2] = load_bitmap("PuntosChicos.bmp", NULL); // Puntos chicos
-	vectorMapa[3] = load_bitmap("Espacio.bmp", NULL);
+	vectorMapa[4] = load_bitmap("PuntosChicos.bmp", NULL); // Puntos chicos
+	vectorMapa[2] = load_bitmap("Espacio.bmp", NULL);
+	vectorMapa[5] = load_bitmap("PuntosGrandes.bmp", NULL);
 	vectorMapa[6] = load_bitmap("FantasmaBlinky_Abajo.bmp", NULL);
+	vectorMapa[7] = load_bitmap("FantasmaPinky_I.bmp", NULL);
 	vectorMapa[8] = load_bitmap("FantasmaInky_D.bmp", NULL);
 	vectorMapa[9] = load_bitmap("FantasmaClyde_Arriba.bmp", NULL);
-	vectorMapa[7] = load_bitmap("FantasmaPinky_I.bmp", NULL);
+	vectorMapa[3]= load_bitmap ("Fruta 1.bmp", NULL);
+
+
 	
 	for (i=0; i<=19; i++){
 		for (j=0; j<=29; j++){
@@ -253,10 +258,10 @@ void pintarmapa(int matrizjuego[20][30], BITMAP *buffer){
 				draw_sprite(buffer,vectorMapa[0],j*30,i*30+35);
 			}
 			else if (matrizjuego[i][j] == 4) {
-				draw_sprite(buffer, vectorMapa[2], j*30, i*30+35);
+				draw_sprite(buffer, vectorMapa[4], j*30, i*30+35);
 			}
 			else if (matrizjuego[i][j]== 2){
-				draw_sprite(buffer, vectorMapa[3], j*30, i*30+35);
+				draw_sprite(buffer, vectorMapa[2], j*30, i*30+35);
 			}
 			else if (matrizjuego[i][j]==6){
 				draw_sprite(buffer, vectorMapa[6], j*30, i*30+35);
@@ -269,6 +274,12 @@ void pintarmapa(int matrizjuego[20][30], BITMAP *buffer){
 			}
 			else if (matrizjuego[i][j]==7){
 				draw_sprite(buffer, vectorMapa[7], j*30, i*30+35);
+			}
+			else if (matrizjuego[i][j]==5){
+				draw_sprite(buffer, vectorMapa[5], j*30, i*30+35);
+			}
+			else if (matrizjuego[i][j]==3){
+				draw_sprite (buffer, vectorMapa[3], j*30, i*30+35);
 			}
 		}
 		//printf("\n");
@@ -377,11 +388,19 @@ void FantasmaNaranja (int matrizjuego[20][30], int posicionnaranja[2]){
 
 void SacarFantasma (int matrizjuego[20][30], int posicionnaranja[2]){
 	
-	matrizjuego[posicionnaranja[0]][posicionnaranja[1]]=2;
+	matrizjuego[posicionnaranja[0]][posicionnaranja[1]]=3;
+	printf("entra %i, %i", posicionnaranja[0], posicionnaranja[1]);
 	posicionnaranja[0]=7;
 	posicionnaranja[1]=11;
 	matrizjuego[posicionnaranja[0]][posicionnaranja[1]]=9;
+	
+	//Completar
 }
+
+/*void MostrarFruta (int matrizjuego[20][30], vectorMapa[5]){
+	
+	
+}*/
 
 
 void init () {
