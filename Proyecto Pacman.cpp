@@ -213,14 +213,15 @@ void motordejuego(){
 	posicionpacman[0]=13;
 	posicionpacman[1]=13;
 	int posicionnaranja[2];
-	posicionnaranja[0]=10;
+	posicionnaranja[0]=9;
 	posicionnaranja[1]=14;
-	SacarFantasma(matrizjuego, posicionnaranja);
-
 
 	BITMAP *buffer = create_bitmap(960,660);
 		
 	cargarmapa1(matrizjuego);
+	
+	SacarFantasma(matrizjuego, posicionnaranja);
+
 	do{
 		pintarmapa(matrizjuego,buffer);
 		movimientopacman(matrizjuego, posicionpacman);
@@ -231,6 +232,8 @@ void motordejuego(){
 		clear(buffer);//Borramos el buffer
 		rest(VELOCIDAD);//Maneja la velocidad del juego. Entre más alto el parámetro, más lento el juego
 	}while(true);
+	
+
 }
 
 void pintarmapa(int matrizjuego[20][30], BITMAP *buffer){
@@ -388,8 +391,7 @@ void FantasmaNaranja (int matrizjuego[20][30], int posicionnaranja[2]){
 
 void SacarFantasma (int matrizjuego[20][30], int posicionnaranja[2]){
 	
-	matrizjuego[posicionnaranja[0]][posicionnaranja[1]]=3;
-	printf("entra %i, %i", posicionnaranja[0], posicionnaranja[1]);
+	matrizjuego[posicionnaranja[0]][posicionnaranja[1]]=2;
 	posicionnaranja[0]=7;
 	posicionnaranja[1]=11;
 	matrizjuego[posicionnaranja[0]][posicionnaranja[1]]=9;
