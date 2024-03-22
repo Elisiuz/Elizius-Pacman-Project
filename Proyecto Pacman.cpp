@@ -24,7 +24,8 @@ int verificarUsuario(char usuario[]);
 void IngresarUsuario (char usuario[], char password[]);
 void FantasmaNaranja(int matrizjuego[20][30], int posicionnaranja[2]); //es el que se mueve aleatoriamente
 void SacarFantasma (int matrizjuego[29][30], int posicionnaranja[2]);
-void MostrarFruta (int matrizjuebo[29][30] );
+void MostrarFruta (int matrizjuebo[29][30]);
+
 
 int main() {
 	srand(time(NULL));
@@ -215,17 +216,23 @@ void motordejuego(){
 	int posicionnaranja[2];
 	posicionnaranja[0]=9;
 	posicionnaranja[1]=14;
-
+	int TiempoSalida = 0;
+	
 	BITMAP *buffer = create_bitmap(960,660);
 		
 	cargarmapa1(matrizjuego);
 	
-	SacarFantasma(matrizjuego, posicionnaranja);
-
-	do{
+	
+	do{ 
 		pintarmapa(matrizjuego,buffer);
 		movimientopacman(matrizjuego, posicionpacman);
-		FantasmaNaranja(matrizjuego, posicionnaranja);
+		TiempoSalida++;
+		if (TiempoSalida==10){
+			SacarFantasma(matrizjuego, posicionnaranja);
+		}
+		if (TiempoSalida>10){
+			FantasmaNaranja(matrizjuego, posicionnaranja);
+		}
 		//system ("pause");
 		//system ("cls");
 		blit(buffer,screen,0,0,0,0,960,660);
