@@ -24,7 +24,8 @@ int verificarUsuario(char usuario[]);
 void IngresarUsuario (char usuario[], char password[]);
 void FantasmaNaranja(int matrizjuego[20][30], int posicionnaranja[2]); //es el que se mueve aleatoriamente
 void SacarFantasma (int matrizjuego[29][30], int posicionnaranja[2]);
-void MostrarFruta (int matrizjuebo[29][30]);
+void MostrarFruta (int matrizjuego[29][30]);
+
 
 
 int main() {
@@ -44,11 +45,11 @@ void cargarmapa1(int matrizjuego[20][30]){
 	//	 0 1 3 4 5                   14  
 		{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
 		{1,4,4,4,4,4,4,4,4,4,4,4,1,4,4,1,4,4,4,4,4,4,4,4,4,4,4,5,4,1},
-		{1,4,4,5,1,1,4,1,1,1,1,4,4,4,4,4,4,4,4,4,4,4,1,1,1,4,4,4,4,1},
+		{1,4,4,4,1,1,4,1,1,1,1,4,4,4,4,4,4,4,4,4,4,4,1,1,1,4,4,4,4,1},
 		{1,4,1,4,1,1,4,1,1,4,4,4,1,1,1,1,4,4,1,1,4,4,1,1,1,4,4,4,4,1},
 		{1,4,1,4,1,1,4,1,1,4,4,4,4,4,4,4,4,4,1,1,4,4,1,1,4,4,4,4,4,1},
 		{1,4,4,4,4,4,4,4,4,4,4,4,1,1,1,1,4,4,4,4,4,4,4,4,4,4,4,4,4,1},
-		{1,4,4,4,3,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,1,4,4,4,1,4,1},
+		{1,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,1,4,4,4,1,4,1},
 		{4,4,1,1,1,1,1,4,4,1,4,4,1,1,1,1,4,4,4,1,4,4,4,1,4,4,4,4,4,4},
 		{1,4,4,4,4,4,1,4,4,1,4,4,1,6,7,1,4,4,4,1,4,4,4,1,4,4,4,1,4,1},
 		{1,4,4,4,4,4,1,4,4,1,4,4,1,8,9,1,4,4,4,1,4,4,4,1,4,4,4,4,4,1}, // 10
@@ -217,12 +218,12 @@ void motordejuego(){
 	posicionnaranja[0]=9;
 	posicionnaranja[1]=14;
 	int TiempoSalida = 0;
+
 	
 	BITMAP *buffer = create_bitmap(960,660);
 		
 	cargarmapa1(matrizjuego);
-	
-	
+	MostrarFruta(matrizjuego);
 	do{ 
 		pintarmapa(matrizjuego,buffer);
 		movimientopacman(matrizjuego, posicionpacman);
@@ -239,7 +240,7 @@ void motordejuego(){
 		clear(buffer);//Borramos el buffer
 		rest(VELOCIDAD);//Maneja la velocidad del juego. Entre más alto el parámetro, más lento el juego
 	}while(true);
-	
+
 
 }
 
@@ -403,13 +404,19 @@ void SacarFantasma (int matrizjuego[20][30], int posicionnaranja[2]){
 	posicionnaranja[1]=11;
 	matrizjuego[posicionnaranja[0]][posicionnaranja[1]]=9;
 	
-	//Completar
 }
 
-/*void MostrarFruta (int matrizjuego[20][30], vectorMapa[5]){
+ void MostrarFruta (int matrizjuego[20][30]){
+	int posicionfruta[2];
+
+	do {
+		posicionfruta[0]=rand()%20;
+		posicionfruta[1]=rand()%30;
+		
+	} while (matrizjuego[posicionfruta[0]] [posicionfruta[1]]==1);
 	
-	
-}*/
+	matrizjuego[posicionfruta[0]][posicionfruta[1]]=3;
+}
 
 
 void init () {
