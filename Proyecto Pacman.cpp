@@ -413,11 +413,10 @@ void SacarFantasma (int matrizjuego[20][30], int posicionnaranja[2]){
 		posicionfruta[0]=rand()%20;
 		posicionfruta[1]=rand()%30;
 		
-	} while (matrizjuego[posicionfruta[0]] [posicionfruta[1]]==1);
+	} while (matrizjuego[posicionfruta[0]] [posicionfruta[1]]==1 || matrizjuego[posicionfruta[0]] [posicionfruta[1]]==0 || matrizjuego[posicionfruta[0]] [posicionfruta[1]]==7 || matrizjuego[posicionfruta[0]] [posicionfruta[1]]==8 || matrizjuego[posicionfruta[0]] [posicionfruta[1]]==9);
 	
 	matrizjuego[posicionfruta[0]][posicionfruta[1]]=3;
 }
-
 
 void init () {
 	
