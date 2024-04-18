@@ -345,16 +345,17 @@ void movimientopacman(int matrizjuego[20][30], int posicionpacman[2]){
 	}
 }
 
-void FantasmaNaranja (int matrizjuego[20][30], int posicionnaranja[2]){
+void FantasmaNaranja (int matrizjuego[20][30], int posicionnaranja[2] int posicion_guardada){
 	int posicion=rand() %4; // Genera numeros aleatorios para moverse en las cuatro direcciones 
 
-//	posicion=1;
+	int posicion_guardada;
 	
 	switch (posicion){
 		case 0: //Izquierda
 			if(matrizjuego[posicionnaranja[0]][posicionnaranja[1]-1] !=1){
-				matrizjuego[posicionnaranja[0]][posicionnaranja[1]]=2;
+				matrizjuego[posicionnaranja[0]][posicionnaranja[1]]=posicion_guardada;
 				posicionnaranja[1]=posicionnaranja[1]-1;
+				posicion_guardada=matrizjuego[posicionnaranja[0]][posicionnaranja[1]]; 
 				matrizjuego[posicionnaranja[0]][posicionnaranja[1]]=9;
 				if (posicionnaranja[0]==7 && posicionnaranja[1]==0){
 					posicionnaranja[0]=7;
