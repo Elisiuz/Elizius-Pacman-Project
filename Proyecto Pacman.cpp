@@ -26,8 +26,6 @@ void FantasmaNaranja(int matrizjuego[20][30], int posicionnaranja[2], int *posic
 void SacarFantasma (int matrizjuego[29][30], int posicionnaranja[2]);
 void MostrarFruta (int matrizjuego[29][30]);
 
-
-
 int main() {
 	srand(time(NULL));
 	init();
@@ -244,19 +242,17 @@ void motordejuego(){
 
 void pintarmapa(int matrizjuego[20][30], BITMAP *buffer){
 	int i,j; 
-	BITMAP *vectorMapa[10];
+	BITMAP *vectorMapa[15];
 	vectorMapa[0] = load_bitmap("CuerpoPacman_II.bmp", NULL); //PACMAN;
 	vectorMapa[1] = load_bitmap("Bloques_7.bmp", NULL); //BLOQUE
-	vectorMapa[4] = load_bitmap("PuntosChicos.bmp", NULL); // Puntos chicos
 	vectorMapa[2] = load_bitmap("Espacio.bmp", NULL);
+	vectorMapa[3]= load_bitmap ("Fruta 1.bmp", NULL);
+	vectorMapa[4] = load_bitmap("PuntosChicos.bmp", NULL); // Puntos chicos
 	vectorMapa[5] = load_bitmap("PuntosGrandes.bmp", NULL);
 	vectorMapa[6] = load_bitmap("FantasmaBlinky_Abajo.bmp", NULL);
 	vectorMapa[7] = load_bitmap("FantasmaPinky_I.bmp", NULL);
 	vectorMapa[8] = load_bitmap("FantasmaInky_D.bmp", NULL);
 	vectorMapa[9] = load_bitmap("FantasmaClyde_Arriba.bmp", NULL);
-	vectorMapa[3]= load_bitmap ("Fruta 1.bmp", NULL);
-
-
 	
 	for (i=0; i<=19; i++){
 		for (j=0; j<=29; j++){
@@ -299,11 +295,11 @@ void movimientopacman(int matrizjuego[20][30], int posicionpacman[2]){
 	// si se pone w es que el pacman va hacia arriba
 	
 	if (key[KEY_W]){	
-		if (matrizjuego [  posicionpacman[0]-1 ] [posicionpacman[1]] !=1){	
+		if (matrizjuego [posicionpacman[0]-1 ] [posicionpacman[1]] !=1){	
 			matrizjuego[posicionpacman[0]][posicionpacman[1]]=2;
 			posicionpacman[0]=posicionpacman[0]-1;
 			matrizjuego[posicionpacman[0]][posicionpacman[1]]=0;
-		}
+		}3
 	}
 	// si se pone s es que el pacman va hacia abajo
 	else if (key[KEY_S]){
