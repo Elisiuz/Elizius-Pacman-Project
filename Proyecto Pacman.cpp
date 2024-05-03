@@ -165,7 +165,7 @@ int continuarjuego(){
 	
 	FILE *arch;
 	arch=fopen ("usuarios.txt", "r");
-	char linea[20];
+	char linea[20]; 
 	
 	while(fgets(linea,20,arch) !=NULL){
 		if (strcmp(usuario, linea)==0){
@@ -299,7 +299,7 @@ void movimientopacman(int matrizjuego[20][30], int posicionpacman[2]){
 			matrizjuego[posicionpacman[0]][posicionpacman[1]]=2;
 			posicionpacman[0]=posicionpacman[0]-1;
 			matrizjuego[posicionpacman[0]][posicionpacman[1]]=0;
-		}3
+		}
 	}
 	// si se pone s es que el pacman va hacia abajo
 	else if (key[KEY_S]){
