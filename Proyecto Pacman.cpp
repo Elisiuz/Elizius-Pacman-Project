@@ -246,7 +246,7 @@ void pintarmapa(int matrizjuego[20][30], BITMAP *buffer){
 	vectorMapa[0] = load_bitmap("CuerpoPacman_II.bmp", NULL); //PACMAN;
 	vectorMapa[1] = load_bitmap("Bloques_7.bmp", NULL); //BLOQUE
 	vectorMapa[2] = load_bitmap("Espacio.bmp", NULL);
-	vectorMapa[3]= load_bitmap ("Fruta 1.bmp", NULL);
+	vectorMapa[3] = load_bitmap ("Fruta 1.bmp", NULL);
 	vectorMapa[4] = load_bitmap("PuntosChicos.bmp", NULL); // Puntos chicos
 	vectorMapa[5] = load_bitmap("PuntosGrandes.bmp", NULL);
 	vectorMapa[6] = load_bitmap("FantasmaBlinky_Abajo.bmp", NULL);
@@ -296,10 +296,13 @@ void movimientopacman(int matrizjuego[20][30], int posicionpacman[2]){
 	
 	if (key[KEY_W]){	
 		if (matrizjuego [posicionpacman[0]-1 ] [posicionpacman[1]] !=1){	
+			if (matrizjuego [posicionpacman[0]-1 ] [posicionpacman[1]]==5){
+			} 
 			matrizjuego[posicionpacman[0]][posicionpacman[1]]=2;
 			posicionpacman[0]=posicionpacman[0]-1;
 			matrizjuego[posicionpacman[0]][posicionpacman[1]]=0;
 		}
+		
 	}
 	// si se pone s es que el pacman va hacia abajo
 	else if (key[KEY_S]){
