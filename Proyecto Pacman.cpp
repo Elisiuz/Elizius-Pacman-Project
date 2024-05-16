@@ -13,8 +13,8 @@ void cargarmapa2();
 void cargarmapa3();
 void menu();
 void motordejuego();
-void pintarmapa(int matrizjuego[20][30], BITMAP *buffer);
-void movimientopacman(int matrizjuego[20][30], int posicionpacman[2]);
+void pintarmapa(int matrizjuego[20][30], BITMAP *buffer, int *poderactivo);
+void movimientopacman(int matrizjuego[20][30], int posicionpacman[2], int *poderactivo);
 void init();
 void submenuJugar();
 void Nuevojuego();
@@ -217,14 +217,15 @@ void motordejuego(){
 	posicionnaranja[1]=14;
 	int TiempoSalida = 0;
 	int posicion_guardada=4;
+	int poderactivo=0;
 
 	BITMAP *buffer = create_bitmap(960,660);
 		
 	cargarmapa1(matrizjuego);
 	MostrarFruta(matrizjuego);
 	do{ 
-		pintarmapa(matrizjuego,buffer);
-		movimientopacman(matrizjuego, posicionpacman);
+		pintarmapa(matrizjuego,buffer, &poderactivo);
+		movimientopacman(matrizjuego, posicionpacman, &poderactivo);
 		TiempoSalida++;
 		if (TiempoSalida==10){
 			SacarFantasma(matrizjuego, posicionnaranja);
@@ -240,7 +241,7 @@ void motordejuego(){
 	}while(true);
 }
 
-void pintarmapa(int matrizjuego[20][30], BITMAP *buffer){
+void pintarmapa(int matrizjuego[20][30], BITMAP *buffer, int *poderactivo){
 	int i,j; 
 	BITMAP *vectorMapa[15];
 	vectorMapa[0] = load_bitmap("CuerpoPacman_II.bmp", NULL); //PACMAN;
@@ -253,6 +254,10 @@ void pintarmapa(int matrizjuego[20][30], BITMAP *buffer){
 	vectorMapa[7] = load_bitmap("FantasmaPinky_I.bmp", NULL);
 	vectorMapa[8] = load_bitmap("FantasmaInky_D.bmp", NULL);
 	vectorMapa[9] = load_bitmap("FantasmaClyde_Arriba.bmp", NULL);
+	
+	if (*poderactivo=1){
+		vectorMapa[6]=load_bitmap("Fantasmas_Asustados.bmp", NULL);
+	}
 	
 	for (i=0; i<=19; i++){
 		for (j=0; j<=29; j++){
@@ -287,27 +292,31 @@ void pintarmapa(int matrizjuego[20][30], BITMAP *buffer){
 				draw_sprite (buffer, vectorMapa[3], j*30, i*30+35);
 			}
 		}
+		
+		
 		//printf("\n");
 	}
 }
 
-void movimientopacman(int matrizjuego[20][30], int posicionpacman[2]){	
+void movimientopacman(int matrizjuego[20][30], int posicionpacman[2], int *poderactivo){	
 	// si se pone w es que el pacman va hacia arriba
 	
 	if (key[KEY_W]){	
 		if (matrizjuego [posicionpacman[0]-1 ] [posicionpacman[1]] !=1){	
-			if (matrizjuego [posicionpacman[0]-1 ] [posicionpacman[1]]==5){
-			} 
+			if (matrizjuego[posicionpacman[0]-1 ] [posicionpacman[1]]==5){
+				*poderactivo=1;
+			}
 			matrizjuego[posicionpacman[0]][posicionpacman[1]]=2;
 			posicionpacman[0]=posicionpacman[0]-1;
 			matrizjuego[posicionpacman[0]][posicionpacman[1]]=0;
 		}
-		
 	}
 	// si se pone s es que el pacman va hacia abajo
 	else if (key[KEY_S]){
 		
 		if (matrizjuego [ posicionpacman[0]+1 ] [posicionpacman[1]] !=1){
+				*poderactivo=1;
+			}
 			matrizjuego[posicionpacman[0]][posicionpacman[1]]=2;
 			posicionpacman[0]=posicionpacman[0]+1;
 			matrizjuego[posicionpacman[0]][posicionpacman[1]]=0;
@@ -315,6 +324,8 @@ void movimientopacman(int matrizjuego[20][30], int posicionpacman[2]){
 	}
 	else if (key[KEY_D]){
 		if (matrizjuego [ posicionpacman[0]] [posicionpacman[1]+1] !=1){
+				*poderactivo=1
+			}
 			matrizjuego[posicionpacman[0]][posicionpacman[1]]=2;
 			posicionpacman[1]=posicionpacman[1]+1;
 			matrizjuego[posicionpacman[0]][posicionpacman[1]]=0;
@@ -340,6 +351,7 @@ void movimientopacman(int matrizjuego[20][30], int posicionpacman[2]){
 			}
 		} 
 	}
+	
 }
 
 void FantasmaNaranja (int matrizjuego[20][30], int posicionnaranja[2], int *posicion_guardada){
@@ -358,8 +370,9 @@ void FantasmaNaranja (int matrizjuego[20][30], int posicionnaranja[2], int *posi
 					posicionnaranja[1]=29;
 					matrizjuego[posicionnaranja[0]][posicionnaranja[1]]=9;
 					matrizjuego[7][0]=2;
-				}
+				} 
 			}
+			
 		break;
 		case 1: //Derecha
 			if(matrizjuego[posicionnaranja[0]][posicionnaranja[1]+1] !=1){
