@@ -255,8 +255,8 @@ void pintarmapa(int matrizjuego[20][30], BITMAP *buffer, int *poderactivo){
 	vectorMapa[8] = load_bitmap("FantasmaInky_D.bmp", NULL);
 	vectorMapa[9] = load_bitmap("FantasmaClyde_Arriba.bmp", NULL);
 	
-	if (*poderactivo=1){
-		vectorMapa[6]=load_bitmap("Fantasmas_Asustados.bmp", NULL);
+	if (*poderactivo==1){
+		vectorMapa[9]=load_bitmap("Fantasmas_Asustados.bmp", NULL);
 	}
 	
 	for (i=0; i<=19; i++){
@@ -303,7 +303,7 @@ void movimientopacman(int matrizjuego[20][30], int posicionpacman[2], int *poder
 	
 	if (key[KEY_W]){	
 		if (matrizjuego [posicionpacman[0]-1 ] [posicionpacman[1]] !=1){	
-			if (matrizjuego[posicionpacman[0]-1 ] [posicionpacman[1]]==5){
+			if (matrizjuego[posicionpacman[0]-1 ] [posicionpacman[1]]==5){	
 				*poderactivo=1;
 			}
 			matrizjuego[posicionpacman[0]][posicionpacman[1]]=2;
@@ -313,18 +313,20 @@ void movimientopacman(int matrizjuego[20][30], int posicionpacman[2], int *poder
 	}
 	// si se pone s es que el pacman va hacia abajo
 	else if (key[KEY_S]){
-		
-		if (matrizjuego [ posicionpacman[0]+1 ] [posicionpacman[1]] !=1){
+		if (matrizjuego [posicionpacman[0]+1] [posicionpacman[1]] !=1){
+			if (matrizjuego[posicionpacman[0]+1] [posicionpacman[1]]==5){
 				*poderactivo=1;
 			}
 			matrizjuego[posicionpacman[0]][posicionpacman[1]]=2;
 			posicionpacman[0]=posicionpacman[0]+1;
 			matrizjuego[posicionpacman[0]][posicionpacman[1]]=0;
 		}
+		
 	}
 	else if (key[KEY_D]){
-		if (matrizjuego [ posicionpacman[0]] [posicionpacman[1]+1] !=1){
-				*poderactivo=1
+		if (matrizjuego [posicionpacman[0]] [posicionpacman[1]+1] !=1){
+			if (matrizjuego[posicionpacman[0]] [posicionpacman[1]+1]==5){
+				*poderactivo=1;
 			}
 			matrizjuego[posicionpacman[0]][posicionpacman[1]]=2;
 			posicionpacman[1]=posicionpacman[1]+1;
@@ -334,12 +336,15 @@ void movimientopacman(int matrizjuego[20][30], int posicionpacman[2], int *poder
 				posicionpacman[1]=0;
 				matrizjuego [posicionpacman[0]] [posicionpacman[1]]=0;
 				matrizjuego[7][29]=2;
-				}
+			}
 		}
 	}
+	
 	else if (key[KEY_A]){
-		
 		if (matrizjuego[ posicionpacman[0]] [posicionpacman[1]-1] !=1){
+			if (matrizjuego[posicionpacman[0]] [posicionpacman[1]-1]==5){
+				*poderactivo=1;
+				}
 			matrizjuego[posicionpacman[0]][posicionpacman[1]]=2;
 			posicionpacman[1]=posicionpacman[1]-1;
 			matrizjuego[posicionpacman[0]][posicionpacman[1]]=0;
@@ -349,9 +354,8 @@ void movimientopacman(int matrizjuego[20][30], int posicionpacman[2], int *poder
 				matrizjuego [posicionpacman[0]] [posicionpacman[1]]=0;
 				matrizjuego[7][0]=2;
 			}
-		} 
+		}
 	}
-	
 }
 
 void FantasmaNaranja (int matrizjuego[20][30], int posicionnaranja[2], int *posicion_guardada){
