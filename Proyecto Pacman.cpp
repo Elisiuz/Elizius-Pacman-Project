@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include <stdlib.h>
+#include <stdlib.h> 
 #include <allegro.h>
 #include <string.h>
 
@@ -218,12 +218,13 @@ void motordejuego(){
 	int TiempoSalida = 0;
 	int posicion_guardada=4;
 	int poderactivo=0;
-
+	int TiempoPoder=0;
+	
 	BITMAP *buffer = create_bitmap(960,660);
 		
 	cargarmapa1(matrizjuego);
 	MostrarFruta(matrizjuego);
-	do{ 
+	do{  
 		pintarmapa(matrizjuego,buffer, &poderactivo);
 		movimientopacman(matrizjuego, posicionpacman, &poderactivo);
 		TiempoSalida++;
@@ -232,6 +233,13 @@ void motordejuego(){
 		}
 		if (TiempoSalida>10){
 			FantasmaNaranja(matrizjuego, posicionnaranja, &posicion_guardada);
+		}
+		if (poderactivo==1){
+			TiempoPoder++;
+		}
+		if (TiempoPoder>30){
+			poderactivo=0;
+			TiempoPoder=0;
 		}
 		//system ("pause");
 		//system ("cls");
@@ -256,6 +264,9 @@ void pintarmapa(int matrizjuego[20][30], BITMAP *buffer, int *poderactivo){
 	vectorMapa[9] = load_bitmap("FantasmaClyde_Arriba.bmp", NULL);
 	
 	if (*poderactivo==1){
+		vectorMapa[6]=load_bitmap("Fantasmas_Asustados.bmp", NULL);
+		vectorMapa[7]=load_bitmap("Fantasmas_Asustados.bmp", NULL);
+		vectorMapa[8]=load_bitmap("Fantasmas_Asustados.bmp", NULL);
 		vectorMapa[9]=load_bitmap("Fantasmas_Asustados.bmp", NULL);
 	}
 	
