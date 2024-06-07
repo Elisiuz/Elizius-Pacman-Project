@@ -40,19 +40,19 @@ END_OF_MAIN();
 void cargarmapa1(int matrizjuego[20][30]){
 	
 	int mapa[20][30]={
-	//	 0 1 3 4 5                   14  
-		{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
-		{1,4,4,4,4,4,4,4,4,4,4,4,1,4,4,1,4,4,4,4,4,4,4,4,4,4,4,5,4,1},
-		{1,4,5,4,1,1,4,1,1,1,1,4,4,4,4,4,4,4,4,4,4,4,1,1,1,4,4,4,4,1},
-		{1,4,1,4,1,1,4,1,1,4,4,4,1,1,1,1,4,4,1,1,4,4,1,1,1,4,4,4,4,1},
-		{1,4,1,4,1,1,4,1,1,4,4,4,4,4,4,4,4,4,1,1,4,4,1,1,4,4,4,4,4,1},
-		{1,4,4,4,4,4,4,4,4,4,4,4,1,1,1,1,4,4,4,4,4,4,4,4,4,4,4,4,4,1},
-		{1,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,1,4,4,4,1,4,1},
-		{4,4,1,1,1,1,1,4,4,4,4,4,1,1,1,1,4,4,4,1,4,4,4,1,4,4,4,4,4,4},
-		{1,4,4,4,4,4,1,4,4,1,4,4,1,6,7,1,4,4,4,1,4,4,4,1,4,4,4,1,4,1},
-		{1,4,4,4,4,4,1,4,4,1,4,4,1,8,9,1,4,4,4,1,4,4,4,1,4,4,4,4,4,1}, // 10
-		{1,4,4,4,1,1,1,4,4,1,4,4,1,1,1,1,4,4,4,1,4,4,4,1,1,1,1,4,4,1},
-		{1,4,4,4,4,4,4,4,4,1,4,4,4,4,4,4,4,4,4,1,4,4,4,4,4,4,4,4,4,1},
+	//	 0 1 3 4 5 6 7 8 9 1011121314             14  
+	0	{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
+	1	{1,4,4,4,4,4,4,4,4,4,4,4,1,4,4,1,4,4,4,4,4,4,4,4,4,4,4,5,4,1},
+	2	{1,4,5,4,1,1,4,1,1,1,1,4,4,4,4,4,4,4,4,4,4,4,1,1,1,4,4,4,4,1},
+	3	{1,4,1,4,1,1,4,1,1,4,4,4,1,1,1,1,4,4,1,1,4,4,1,1,1,4,4,4,4,1},
+	4	{1,4,1,4,1,1,4,1,1,4,4,4,4,4,4,4,4,4,1,1,4,4,1,1,4,4,4,4,4,1},
+	5	{1,4,4,4,4,4,4,4,4,4,4,4,1,1,1,1,4,4,4,4,4,4,4,4,4,4,4,4,4,1},
+	6	{1,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,1,4,4,4,1,4,1},
+	7	{4,4,1,1,1,1,1,4,4,4,4,4,1,1,1,1,4,4,4,1,4,4,4,1,4,4,4,4,4,4},
+	8	{1,4,4,4,4,4,1,4,4,1,4,4,1,6,7,1,4,4,4,1,4,4,4,1,4,4,4,1,4,1},
+	9	{1,4,4,4,4,4,1,4,4,1,4,4,1,8,9,1,4,4,4,1,4,4,4,1,4,4,4,4,4,1}, // 10
+	10	{1,4,4,4,1,1,1,4,4,1,4,4,1,1,1,1,4,4,4,1,4,4,4,1,1,1,1,4,4,1},
+	11	{1,4,4,4,4,4,4,4,4,1,4,4,4,4,4,4,4,4,4,1,4,4,4,4,4,4,4,4,4,1},
 		{1,4,4,4,4,4,4,4,4,4,4,4,1,1,1,1,4,4,4,4,4,4,4,4,4,4,4,4,4,1},
 		{1,4,4,4,1,4,4,4,1,4,4,4,4,0,4,4,4,4,4,4,4,4,4,4,1,4,4,4,4,1},
 		{1,5,1,4,1,4,4,4,1,4,4,4,1,1,1,1,4,4,4,4,4,4,4,4,1,4,4,5,4,1},
@@ -203,7 +203,6 @@ void menu(){
 		case 4:
 			break;
 	}
-
 }
 
 void motordejuego(){
@@ -212,9 +211,25 @@ void motordejuego(){
 	int posicionpacman[2];
 	posicionpacman[0]=13;
 	posicionpacman[1]=13;
+	
+	//posiciones iniciales de los fantasmas
+	
 	int posicionnaranja[2];
 	posicionnaranja[0]=9;
 	posicionnaranja[1]=14;
+	
+	int posicionroja[2];
+	posicionroja[0]=7; 
+	posicionroja[1]=13;
+	
+	int posicionrosa[2]; 
+	posicionrosa[0]=14;
+	posicionrosa[1]=8;
+	
+	int posicionazul[2];
+	posicionazul[0]=13;
+	posicionazul[1]=9;
+	
 	int TiempoSalida = 0;
 	int posicion_guardada=4;
 	int poderactivo=0;
@@ -248,14 +263,14 @@ void motordejuego(){
 		rest(VELOCIDAD);//Maneja la velocidad del juego. Entre más alto el parámetro, más lento el juego
 	}while(true);
 }
-
+ 
 void pintarmapa(int matrizjuego[20][30], BITMAP *buffer, int *poderactivo){
 	int i,j; 
 	BITMAP *vectorMapa[15];
 	vectorMapa[0] = load_bitmap("CuerpoPacman_II.bmp", NULL); //PACMAN;
 	vectorMapa[1] = load_bitmap("Bloques_7.bmp", NULL); //BLOQUE
 	vectorMapa[2] = load_bitmap("Espacio.bmp", NULL);
-	vectorMapa[3] = load_bitmap ("Fruta 1.bmp", NULL);
+	vectorMapa[3] = load_bitmap("Fruta 1.bmp", NULL);
 	vectorMapa[4] = load_bitmap("PuntosChicos.bmp", NULL); // Puntos chicos
 	vectorMapa[5] = load_bitmap("PuntosGrandes.bmp", NULL);
 	vectorMapa[6] = load_bitmap("FantasmaBlinky_Abajo.bmp", NULL);
@@ -425,13 +440,30 @@ void FantasmaNaranja (int matrizjuego[20][30], int posicionnaranja[2], int *posi
 //Ojo: el fantasma sale del corral al principio y cuando te lo comes regresa, sería conveniente la función "sacar y meter fantasmas".
 }
 
-void SacarFantasma (int matrizjuego[20][30], int posicionnaranja[2]){
+void SacarFantasma (int matrizjuego[20][30], int posicionnaranja[2], int posicionroja[2], int posicionrosa[2], int posicionazul[2]){
 	
-	matrizjuego[posicionnaranja[0]][posicionnaranja[1]]=2;
-	posicionnaranja[0]=7;
-	posicionnaranja[1]=11;
-	matrizjuego[posicionnaranja[0]][posicionnaranja[1]]=9;
+	matrizjuego[posicionnaranja[0]][posicionnaranja[1]]=2; // Se actualiza la coordenada como un espacio vacío
+	posicionnaranja[0]=7; // posicion vertical
+	posicionnaranja[1]=11; // posicion horizontal
+	matrizjuego[posicionnaranja[0]][posicionnaranja[1]]=9; // Se actualiza la localización del fantasma en la coordenada de arriba
 	
+// PENDIENTE DE VERIFICAR
+
+	matrizjuego[posicionroja[0]][posicionroja[1]]=2;
+	posicionroja[0]=7;
+	posicionroja[1]=13;
+	matrizjuego[posicionroja[0]][posicionroja[1]]=9; 
+	
+	matrizjuego[posicionrosa[0]][posicionrosa[1]]=2;
+	posicionrosa[0]= 14;
+	posicionrosa[1]= 8;
+	matrizjuego[posicionrosa[0]][posicionrosa[1]]=9; 
+	
+	matrizjuego[posicionazul[0]][posicionazul[1]]=2;
+	posicionrosa[0]=13;
+	posicionrosa[1]=9;
+	matrizjuego[posicionazul[0]][posicionazul[1]]=9; 
+
 }
 
  void MostrarFruta (int matrizjuego[20][30]){
