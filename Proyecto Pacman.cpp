@@ -219,16 +219,16 @@ void motordejuego(){
 	posicionnaranja[1]=14;
 	
 	int posicionroja[2];
-	posicionroja[0]=13; 
-	posicionroja[1]=8;
+	posicionroja[0]=8; 
+	posicionroja[1]=13;
 	
 	int posicionrosa[2]; 
-	posicionrosa[0]=14;
-	posicionrosa[1]=8;
+	posicionrosa[0]=8;
+	posicionrosa[1]=14;
 	
 	int posicionazul[2];
-	posicionazul[0]=13;
-	posicionazul[1]=9;
+	posicionazul[0]=9;
+	posicionazul[1]=13;
 	
 	int TiempoSalida = 0;
 	int posicion_guardada=4;
@@ -448,11 +448,11 @@ void SacarFantasma (int matrizjuego[20][30], int posicionnaranja[2], int posicio
 	matrizjuego[posicionnaranja[0]][posicionnaranja[1]]=9; // Se actualiza la localización del fantasma en la coordenada de arriba
 	
 	matrizjuego[posicionroja[0]][posicionroja[1]]=2;
-	posicionroja[0]=18;
-	posicionroja[1]=15;
+	posicionroja[0]=8;
+	posicionroja[1]=11;
 	matrizjuego[posicionroja[0]][posicionroja[1]]=6; 
 	
-	/*matrizjuego[posicionrosa[0]][posicionrosa[1]]=2;
+	matrizjuego[posicionrosa[0]][posicionrosa[1]]=2;
 	posicionrosa[0]= 12;
 	posicionrosa[1]= 19;
 	matrizjuego[posicionrosa[0]][posicionrosa[1]]=7; 
@@ -460,7 +460,7 @@ void SacarFantasma (int matrizjuego[20][30], int posicionnaranja[2], int posicio
 	matrizjuego[posicionazul[0]][posicionazul[1]]=2;
 	posicionazul[0]=16;
 	posicionazul[1]=10;
-	matrizjuego[posicionazul[0]][posicionazul[1]]=8; */
+	matrizjuego[posicionazul[0]][posicionazul[1]]=8; 
 }
 
  void MostrarFruta (int matrizjuego[20][30]){
