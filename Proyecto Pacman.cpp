@@ -10,7 +10,7 @@
 
 void cargarmapa1(int matrizjuego[20][30]);
 void cargarmapa2();
-void cargarmapa3();
+void cargarmapa3(); 
 void menu();
 void motordejuego();
 void pintarmapa(int matrizjuego[20][30], BITMAP *buffer, int *poderactivo);
@@ -402,7 +402,7 @@ void FantasmaNaranja (int matrizjuego[20][30], int posicionnaranja[2], int *posi
 					matrizjuego[7][0]=2;
 				} 
 			}
-			 
+			
 		break;
 		case 1: //Derecha
 			if(matrizjuego[posicionnaranja[0]][posicionnaranja[1]+1] !=1){
@@ -494,10 +494,6 @@ void init () {
 	install_mouse();
 	show_mouse(screen);
 } 
-
-
-
-
 
 
 
