@@ -23,7 +23,7 @@ void regresar();
 int verificarUsuario(char usuario[]);
 void IngresarUsuario (char usuario[], char password[]);
 void FantasmaNaranja(int matrizjuego[20][30], int posicionnaranja[2], int *posicion_guardada); //es el que se mueve aleatoriamente
-void SacarFantasma (int matrizjuego[29][30], int posicionnaranja[2], int posicionroja[2], int posicionrosa[2], int posicionazul[2]);
+void SacarFantasma (int matrizjuego[29][30], int posicionnaranja[2]);
 void MostrarFruta (int matrizjuego[29][30]);
 
 int main() {
@@ -41,18 +41,18 @@ void cargarmapa1(int matrizjuego[20][30]){
 	
 	int mapa[20][30]={
 	//	 0 1 3 4 5 6 7 8 9 1011121314             14  
-		{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
-		{1,4,4,4,4,4,4,4,4,4,4,4,1,4,4,1,4,4,4,4,4,4,4,4,4,4,4,5,4,1},
-		{1,4,5,4,1,1,4,1,1,1,1,4,4,4,4,4,4,4,4,4,4,4,1,1,1,4,4,4,4,1},
-		{1,4,1,4,1,1,4,1,1,4,4,4,1,1,1,1,4,4,1,1,4,4,1,1,1,4,4,4,4,1},
-		{1,4,1,4,1,1,4,1,1,4,4,4,4,4,4,4,4,4,1,1,4,4,1,1,4,4,4,4,4,1},
-		{1,4,4,4,4,4,4,4,4,4,4,4,1,1,1,1,4,4,4,4,4,4,4,4,4,4,4,4,4,1},
-		{1,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,1,4,4,4,1,4,1},
-		{4,4,1,1,1,1,1,4,4,4,4,4,1,1,1,1,4,4,4,1,4,4,4,1,4,4,4,4,4,4},
-		{1,4,4,4,4,4,1,4,4,1,4,4,1,6,7,1,4,4,4,1,4,4,4,1,4,4,4,1,4,1},
-		{1,4,4,4,4,4,1,4,4,1,4,4,1,8,9,1,4,4,4,1,4,4,4,1,4,4,4,4,4,1}, // 10
-		{1,4,4,4,1,1,1,4,4,1,4,4,1,1,1,1,4,4,4,1,4,4,4,1,1,1,1,4,4,1},
-		{1,4,4,4,4,4,4,4,4,1,4,4,4,4,4,4,4,4,4,1,4,4,4,4,4,4,4,4,4,1},
+	0	{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
+	1	{1,4,4,4,4,4,4,4,4,4,4,4,1,4,4,1,4,4,4,4,4,4,4,4,4,4,4,5,4,1},
+	2	{1,4,5,4,1,1,4,1,1,1,1,4,4,4,4,4,4,4,4,4,4,4,1,1,1,4,4,4,4,1},
+	3	{1,4,1,4,1,1,4,1,1,4,4,4,1,1,1,1,4,4,1,1,4,4,1,1,1,4,4,4,4,1},
+	4	{1,4,1,4,1,1,4,1,1,4,4,4,4,4,4,4,4,4,1,1,4,4,1,1,4,4,4,4,4,1},
+	5	{1,4,4,4,4,4,4,4,4,4,4,4,1,1,1,1,4,4,4,4,4,4,4,4,4,4,4,4,4,1},
+	6	{1,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,1,4,4,4,1,4,1},
+	7	{4,4,1,1,1,1,1,4,4,4,4,4,1,1,1,1,4,4,4,1,4,4,4,1,4,4,4,4,4,4},
+	8	{1,4,4,4,4,4,1,4,4,1,4,4,1,6,7,1,4,4,4,1,4,4,4,1,4,4,4,1,4,1},
+	9	{1,4,4,4,4,4,1,4,4,1,4,4,1,8,9,1,4,4,4,1,4,4,4,1,4,4,4,4,4,1}, // 10
+	10	{1,4,4,4,1,1,1,4,4,1,4,4,1,1,1,1,4,4,4,1,4,4,4,1,1,1,1,4,4,1},
+	11	{1,4,4,4,4,4,4,4,4,1,4,4,4,4,4,4,4,4,4,1,4,4,4,4,4,4,4,4,4,1},
 		{1,4,4,4,4,4,4,4,4,4,4,4,1,1,1,1,4,4,4,4,4,4,4,4,4,4,4,4,4,1},
 		{1,4,4,4,1,4,4,4,1,4,4,4,4,0,4,4,4,4,4,4,4,4,4,4,1,4,4,4,4,1},
 		{1,5,1,4,1,4,4,4,1,4,4,4,1,1,1,1,4,4,4,4,4,4,4,4,1,4,4,5,4,1},
@@ -219,8 +219,8 @@ void motordejuego(){
 	posicionnaranja[1]=14;
 	
 	int posicionroja[2];
-	posicionroja[0]=13; 
-	posicionroja[1]=8;
+	posicionroja[0]=7; 
+	posicionroja[1]=13;
 	
 	int posicionrosa[2]; 
 	posicionrosa[0]=14;
@@ -244,7 +244,7 @@ void motordejuego(){
 		movimientopacman(matrizjuego, posicionpacman, &poderactivo);
 		TiempoSalida++;
 		if (TiempoSalida==10){
-			SacarFantasma(matrizjuego, posicionnaranja, posicionroja, posicionrosa, posicionazul);
+			SacarFantasma(matrizjuego, posicionnaranja);
 		}
 		if (TiempoSalida>10){
 			FantasmaNaranja(matrizjuego, posicionnaranja, &posicion_guardada);
@@ -447,20 +447,23 @@ void SacarFantasma (int matrizjuego[20][30], int posicionnaranja[2], int posicio
 	posicionnaranja[1]=11; // posicion horizontal
 	matrizjuego[posicionnaranja[0]][posicionnaranja[1]]=9; // Se actualiza la localización del fantasma en la coordenada de arriba
 	
+// PENDIENTE DE VERIFICAR
+
 	matrizjuego[posicionroja[0]][posicionroja[1]]=2;
-	posicionroja[0]=18;
-	posicionroja[1]=15;
-	matrizjuego[posicionroja[0]][posicionroja[1]]=6; 
+	posicionroja[0]=7;
+	posicionroja[1]=13;
+	matrizjuego[posicionroja[0]][posicionroja[1]]=9; 
 	
-	/*matrizjuego[posicionrosa[0]][posicionrosa[1]]=2;
-	posicionrosa[0]= 12;
-	posicionrosa[1]= 19;
-	matrizjuego[posicionrosa[0]][posicionrosa[1]]=7; 
+	matrizjuego[posicionrosa[0]][posicionrosa[1]]=2;
+	posicionrosa[0]= 14;
+	posicionrosa[1]= 8;
+	matrizjuego[posicionrosa[0]][posicionrosa[1]]=9; 
 	
 	matrizjuego[posicionazul[0]][posicionazul[1]]=2;
-	posicionazul[0]=16;
-	posicionazul[1]=10;
-	matrizjuego[posicionazul[0]][posicionazul[1]]=8; */
+	posicionrosa[0]=13;
+	posicionrosa[1]=9;
+	matrizjuego[posicionazul[0]][posicionazul[1]]=9; 
+
 }
 
  void MostrarFruta (int matrizjuego[20][30]){
