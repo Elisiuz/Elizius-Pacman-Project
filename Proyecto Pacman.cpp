@@ -439,7 +439,7 @@ void FantasmaNaranja (int matrizjuego[20][30], int posicionnaranja[2], int *posi
 	
 //Ojo: el fantasma sale del corral al principio y cuando te lo comes regresa, sería conveniente la función "sacar y meter fantasmas".
 }
-
+ 
 void SacarFantasma (int matrizjuego[20][30], int posicionnaranja[2], int posicionroja[2], int posicionrosa[2], int posicionazul[2]){
 	
 	matrizjuego[posicionnaranja[0]][posicionnaranja[1]]=2; // Se actualiza la coordenada como un espacio vacío
@@ -453,13 +453,13 @@ void SacarFantasma (int matrizjuego[20][30], int posicionnaranja[2], int posicio
 	matrizjuego[posicionroja[0]][posicionroja[1]]=6; 
 	
 	matrizjuego[posicionrosa[0]][posicionrosa[1]]=2;
-	posicionrosa[0]= 12;
-	posicionrosa[1]= 19;
+	posicionrosa[0]= 8;
+	posicionrosa[1]= 16;
 	matrizjuego[posicionrosa[0]][posicionrosa[1]]=7; 
 	
 	matrizjuego[posicionazul[0]][posicionazul[1]]=2;
-	posicionazul[0]=16;
-	posicionazul[1]=10;
+	posicionazul[0]=10;
+	posicionazul[1]=11;
 	matrizjuego[posicionazul[0]][posicionazul[1]]=8; 
 }
 
