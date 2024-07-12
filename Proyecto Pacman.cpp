@@ -8,7 +8,7 @@
 //Crear tres mapas
 // Primero las funciones que carguen cada mapa
 
-void cargarmapa1(int matrizjuego[20][30]);
+void cargarmapa1(int matrizjuego[20][30]); 
 void cargarmapa2();
 void cargarmapa3(); 
 void menu();
@@ -343,16 +343,23 @@ void movimientopacman(int matrizjuego[20][30], int posicionpacman[2], int *poder
 			if (matrizjuego[posicionpacman[0]-1 ] [posicionpacman[1]]==5){	
 				*poderactivo=1;
 			}
+			if (matrizjuego[posicionpacman[0]-1][posicionpacman[1]]==9){
+			printf ("Pacman toco fantasma");
+			} 
 			matrizjuego[posicionpacman[0]][posicionpacman[1]]=2;
 			posicionpacman[0]=posicionpacman[0]-1;
 			matrizjuego[posicionpacman[0]][posicionpacman[1]]=0;
 		}
+		
 	}
 	// si se pone s es que el pacman va hacia abajo
 	else if (key[KEY_S]){
 		if (matrizjuego [posicionpacman[0]+1] [posicionpacman[1]] !=1){
 			if (matrizjuego[posicionpacman[0]+1] [posicionpacman[1]]==5){
 				*poderactivo=1;
+			}
+			if (matrizjuego[posicionpacman[0]+1][posicionpacman[1]]==9){
+			printf ("Pacman toco fantasma");
 			}
 			matrizjuego[posicionpacman[0]][posicionpacman[1]]=2;
 			posicionpacman[0]=posicionpacman[0]+1;
@@ -364,6 +371,9 @@ void movimientopacman(int matrizjuego[20][30], int posicionpacman[2], int *poder
 		if (matrizjuego [posicionpacman[0]] [posicionpacman[1]+1] !=1){
 			if (matrizjuego[posicionpacman[0]] [posicionpacman[1]+1]==5){
 				*poderactivo=1;
+			}
+			if (matrizjuego[posicionpacman[0]][posicionpacman[1]+1] ==9){
+			printf ("Pacman toco fantasma");
 			}
 			matrizjuego[posicionpacman[0]][posicionpacman[1]]=2;
 			posicionpacman[1]=posicionpacman[1]+1;
@@ -381,7 +391,10 @@ void movimientopacman(int matrizjuego[20][30], int posicionpacman[2], int *poder
 		if (matrizjuego[ posicionpacman[0]] [posicionpacman[1]-1] !=1){
 			if (matrizjuego[posicionpacman[0]] [posicionpacman[1]-1]==5){
 				*poderactivo=1;
-				}
+			}
+			if (matrizjuego[posicionpacman[0]][posicionpacman[1]-1] ==9){
+			printf ("Pacman toco fantasma");
+			}
 			matrizjuego[posicionpacman[0]][posicionpacman[1]]=2;
 			posicionpacman[1]=posicionpacman[1]-1;
 			matrizjuego[posicionpacman[0]][posicionpacman[1]]=0;
@@ -392,7 +405,7 @@ void movimientopacman(int matrizjuego[20][30], int posicionpacman[2], int *poder
 				matrizjuego[7][0]=2;
 			}
 		}
-	}
+	}	
 }
 
 void FantasmaNaranja (int matrizjuego[20][30], int posicionnaranja[2], int *posicion_guardada){
