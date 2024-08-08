@@ -329,8 +329,6 @@ void pintarmapa(int matrizjuego[20][30], BITMAP *buffer, int *poderactivo){
 				draw_sprite (buffer, vectorMapa[3], j*30, i*30+35);
 			}
 		}
-		
-		
 		//printf("\n");
 	}
 }
@@ -344,7 +342,7 @@ void movimientopacman(int matrizjuego[20][30], int posicionpacman[2], int *poder
 				*poderactivo=1;
 			}
 			if (matrizjuego[posicionpacman[0]-1][posicionpacman[1]]==9){
-			printf ("Pacman toco fantasma");
+			printf ("Pacman toco fantasma arriba");
 			} 
 			matrizjuego[posicionpacman[0]][posicionpacman[1]]=2;
 			posicionpacman[0]=posicionpacman[0]-1;
@@ -359,7 +357,7 @@ void movimientopacman(int matrizjuego[20][30], int posicionpacman[2], int *poder
 				*poderactivo=1;
 			}
 			if (matrizjuego[posicionpacman[0]+1][posicionpacman[1]]==9){
-			printf ("Pacman toco fantasma");
+				printf ("Pacman toco fantasma cuando baja");
 			}
 			matrizjuego[posicionpacman[0]][posicionpacman[1]]=2;
 			posicionpacman[0]=posicionpacman[0]+1;
@@ -373,7 +371,7 @@ void movimientopacman(int matrizjuego[20][30], int posicionpacman[2], int *poder
 				*poderactivo=1;
 			}
 			if (matrizjuego[posicionpacman[0]][posicionpacman[1]+1] ==9){
-			printf ("Pacman toco fantasma");
+				printf ("Pacman toco fantasma a la derecha");
 			}
 			matrizjuego[posicionpacman[0]][posicionpacman[1]]=2;
 			posicionpacman[1]=posicionpacman[1]+1;
@@ -393,7 +391,7 @@ void movimientopacman(int matrizjuego[20][30], int posicionpacman[2], int *poder
 				*poderactivo=1;
 			}
 			if (matrizjuego[posicionpacman[0]][posicionpacman[1]-1] ==9){
-			printf ("Pacman toco fantasma");
+				printf ("Pacman toco fantasma a la izquierda");
 			}
 			matrizjuego[posicionpacman[0]][posicionpacman[1]]=2;
 			posicionpacman[1]=posicionpacman[1]-1;
@@ -418,8 +416,11 @@ void FantasmaNaranja (int matrizjuego[20][30], int posicionnaranja[2], int *posi
 				matrizjuego[posicionnaranja[0]][posicionnaranja[1]]=*posicion_guardada;
 				posicionnaranja[1]=posicionnaranja[1]-1;
 				*posicion_guardada=matrizjuego[posicionnaranja[0]][posicionnaranja[1]];
+				if (*posicion_guardada==0){
+					*posicion_guardada=2;
+				}
 				matrizjuego[posicionnaranja[0]][posicionnaranja[1]]=9;				
-				if (posicionnaranja[0]==7 && posicionnaranja[1]==0){
+				if (posicionnaranja[0]==7 && posicionnaranja[1]==0){ // Esto es el teleport de los hoyos de las paredes
 					posicionnaranja[0]=7;
 					posicionnaranja[1]=29;
 					matrizjuego[posicionnaranja[0]][posicionnaranja[1]]=9;
@@ -433,6 +434,9 @@ void FantasmaNaranja (int matrizjuego[20][30], int posicionnaranja[2], int *posi
 				matrizjuego[posicionnaranja[0]][posicionnaranja[1]]=*posicion_guardada;
 				posicionnaranja[1]=posicionnaranja[1]+1;
 				*posicion_guardada=matrizjuego[posicionnaranja[0]][posicionnaranja[1]];
+				if (*posicion_guardada==0){
+					*posicion_guardada=2;
+				}
 				matrizjuego[posicionnaranja[0]][posicionnaranja[1]]=9;
 				if (posicionnaranja[0]==7 && posicionnaranja[1]==29){
 					posicionnaranja[0]=7;
@@ -447,6 +451,9 @@ void FantasmaNaranja (int matrizjuego[20][30], int posicionnaranja[2], int *posi
 				matrizjuego[posicionnaranja[0]][posicionnaranja[1]]=*posicion_guardada;
 				posicionnaranja[0]=posicionnaranja[0]-1;
 				*posicion_guardada=matrizjuego[posicionnaranja[0]][posicionnaranja[1]];
+				if (*posicion_guardada==0){
+					*posicion_guardada=2;
+				}
 				matrizjuego[posicionnaranja[0]][posicionnaranja[1]]=9;
 			}
 		break; //Abajo
@@ -455,6 +462,9 @@ void FantasmaNaranja (int matrizjuego[20][30], int posicionnaranja[2], int *posi
 				matrizjuego[posicionnaranja[0]][posicionnaranja[1]]=*posicion_guardada;
 				posicionnaranja[0]=posicionnaranja[0]+1;
 				*posicion_guardada=matrizjuego[posicionnaranja[0]][posicionnaranja[1]];
+				if(*posicion_guardada==0){
+					*posicion_guardada=2;
+				}
 				matrizjuego[posicionnaranja[0]][posicionnaranja[1]]=9;
 			}
 		break;
