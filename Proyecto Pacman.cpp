@@ -208,12 +208,14 @@ void menu(){
 
 void motordejuego(){
 	
+	// posicion inicial de pacman en el mapa
+	
 	int matrizjuego[20][30];
 	int posicionpacman[2];
 	posicionpacman[0]=13;
 	posicionpacman[1]=13;
 	
-	//posiciones iniciales de los fantasmas
+	//posiciones iniciales de los fantasmas en el mapa
 	
 	int posicionnaranja[2];
 	posicionnaranja[0]=9;
@@ -358,7 +360,7 @@ void movimientopacman(int matrizjuego[20][30], int posicionpacman[2], int *poder
 				*poderactivo=1;
 			}
 			if (matrizjuego[posicionpacman[0]+1][posicionpacman[1]]==9){
-				printf ("Pacman toco fantasma cuando baja");
+				printf ("Pacman toco fantasma cuando baja"); // Esto representa la muerte del pacman. 
 			}
 			matrizjuego[posicionpacman[0]][posicionpacman[1]]=2;
 			posicionpacman[0]=posicionpacman[0]+1;
@@ -518,16 +520,33 @@ void SacarFantasma (int matrizjuego[20][30], int posicionnaranja[2], int posicio
 		
 	} while (matrizjuego[posicionfruta[0]] [posicionfruta[1]]==1 || matrizjuego[posicionfruta[0]] [posicionfruta[1]]==0 || matrizjuego[posicionfruta[0]] [posicionfruta[1]]==7 || matrizjuego[posicionfruta[0]] [posicionfruta[1]]==8 || matrizjuego[posicionfruta[0]] [posicionfruta[1]]==9);
 	
-	matrizjuego[posicionfruta[0]][posicionfruta[1]]=3;
+	matrizjuego[posicionfruta[0]][posicionfruta[1]]=3; 
 }
 
 void Reinicio (int matrizjuego[20][30], int posicionpacman[2],int posicionnaranja[2], int posicionroja[2], int posicionrosa[2], int posicionazul[2]){
+	// Esta funcion es para reiniciar una vez que el pacman se muera al tocar a un fantasma
 	
-	if 	
+	matrizjuego[posicionpacman[0]][posicionpacman[1]]=2;
+	posicionpacman[0]=13;
+	posicionpacman[1]=13;
+	matrizjuego[posicionpacman[0]][posicionpacman[1]]=0;
+
+	
+	matrizjuego[posicionnaranja[0]][posicionnaranja[1]]=2;
+	posicionnaranja[0]=9;
+	posicionnaranja[1]=14;
+	matrizjuego[posicionpacman[0]][posicionpacman[1]]=9;
+	
+	posicionroja[0]=8; 
+	posicionroja[1]=13;
+	
+	posicionrosa[0]=8;
+	posicionrosa[1]=14;
+	
+	posicionazul[0]=9;
+	posicionazul[1]=13;
 	
 }
-)
-
 
 void init () {
 	
