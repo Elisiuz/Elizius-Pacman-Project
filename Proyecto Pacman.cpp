@@ -23,8 +23,9 @@ void regresar();
 int verificarUsuario(char usuario[]);
 void IngresarUsuario (char usuario[], char password[]);
 void FantasmaNaranja(int matrizjuego[20][30], int posicionnaranja[2], int *posicion_guardada); //es el que se mueve aleatoriamente
-void SacarFantasma (int matrizjuego[29][30], int posicionnaranja[2], int posicionroja[2], int posicionrosa[2], int posicionazul[2], int turno);
-void MostrarFruta (int matrizjuego[29][30]);
+void SacarFantasma (int matrizjuego[20][30], int posicionnaranja[2], int posicionroja[2], int posicionrosa[2], int posicionazul[2], int turno);
+void MostrarFruta (int matrizjuego[20][30]);
+void Reinicio (int matrizjuego[20][30], int posicionpacman[2],int posicionnaranja[2], int posicionroja[2], int posicionrosa[2], int posicionazul[2]);
 
 int main() {
 	srand(time(NULL));
@@ -519,6 +520,14 @@ void SacarFantasma (int matrizjuego[20][30], int posicionnaranja[2], int posicio
 	
 	matrizjuego[posicionfruta[0]][posicionfruta[1]]=3;
 }
+
+void Reinicio (int matrizjuego[20][30], int posicionpacman[2],int posicionnaranja[2], int posicionroja[2], int posicionrosa[2], int posicionazul[2]){
+	
+	if 	
+	
+}
+)
+
 
 void init () {
 	
