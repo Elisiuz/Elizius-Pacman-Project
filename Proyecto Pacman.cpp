@@ -14,7 +14,7 @@ void cargarmapa3();
 void menu();
 void motordejuego();
 void pintarmapa(int matrizjuego[20][30], BITMAP *buffer, int *poderactivo);
-void movimientopacman(int matrizjuego[20][30], int posicionpacman[2], int *poderactivo);
+void movimientopacman(int matrizjuego[20][30], int posicionpacman[2], int *poderactivo, int *muertedepacman);
 void init();
 void submenuJugar(); 
 void Nuevojuego();
@@ -240,13 +240,15 @@ void motordejuego(){
 	int poderactivo=0;
 	int TiempoPoder=0;
 	
+	int muertepacman=0;
+	
 	BITMAP *buffer = create_bitmap(960,660);
 		
 	cargarmapa1(matrizjuego);
 	MostrarFruta(matrizjuego);
 	do{  
 		pintarmapa(matrizjuego,buffer, &poderactivo);
-		movimientopacman(matrizjuego, posicionpacman, &poderactivo);
+		movimientopacman(matrizjuego, posicionpacman, &poderactivo, &muertepacman);
 		TiempoSalida++;
 		if (TiempoSalida==10){
 			SacarFantasma(matrizjuego, posicionnaranja, posicionroja, posicionrosa, posicionazul, 0);			
@@ -269,6 +271,11 @@ void motordejuego(){
 		if (TiempoPoder>30){
 			poderactivo=0;
 			TiempoPoder=0;
+		}
+		if (muertepacman==1){
+			Reinicio(matrizjuego, posicionpacman, posicionnaranja, posicionroja, posicionrosa, posicionazul);
+			muertepacman=0;
+			TiempoSalida=0;
 		}
 		//system ("pause");
 		//system ("cls");
@@ -336,7 +343,7 @@ void pintarmapa(int matrizjuego[20][30], BITMAP *buffer, int *poderactivo){
 	}
 }
 
-void movimientopacman(int matrizjuego[20][30], int posicionpacman[2], int *poderactivo){	
+void movimientopacman(int matrizjuego[20][30], int posicionpacman[2], int *poderactivo, int *muertepacman){	
 	// si se pone w es que el pacman va hacia arriba
 	
 	if (key[KEY_W]){	
@@ -345,7 +352,7 @@ void movimientopacman(int matrizjuego[20][30], int posicionpacman[2], int *poder
 				*poderactivo=1;
 			}
 			if (matrizjuego[posicionpacman[0]-1][posicionpacman[1]]==9){
-			printf ("Pacman toco fantasma arriba");
+				*muertepacman=1;
 			} 
 			matrizjuego[posicionpacman[0]][posicionpacman[1]]=2;
 			posicionpacman[0]=posicionpacman[0]-1;
@@ -526,25 +533,24 @@ void SacarFantasma (int matrizjuego[20][30], int posicionnaranja[2], int posicio
 void Reinicio (int matrizjuego[20][30], int posicionpacman[2],int posicionnaranja[2], int posicionroja[2], int posicionrosa[2], int posicionazul[2]){
 	// Esta funcion es para reiniciar una vez que el pacman se muera al tocar a un fantasma
 	
-	matrizjuego[posicionpacman[0]][posicionpacman[1]]=2;
-	posicionpacman[0]=13;
-	posicionpacman[1]=13;
-	matrizjuego[posicionpacman[0]][posicionpacman[1]]=0;
+	matrizjuego[posicionpacman[0]][posicionpacman[1]]=2; // Se pone 2 porque es un espacio vacio
+	posicionpacman[0]=13; //Porque es la posición de origen 
+	posicionpacman[1]=13;  // posicion de origen
+	matrizjuego[posicionpacman[0]][posicionpacman[1]]=0; 
 
-	
-	matrizjuego[posicionnaranja[0]][posicionnaranja[1]]=2;
-	posicionnaranja[0]=9;
+	matrizjuego[posicionnaranja[0]][posicionnaranja[1]]=2; //igual se trata de espacio vacio
+	posicionnaranja[0]=9; 
 	posicionnaranja[1]=14;
-	matrizjuego[posicionpacman[0]][posicionpacman[1]]=9;
+	matrizjuego[posicionnaranja[0]][posicionnaranja[1]]=9;
 	
-	posicionroja[0]=8; 
-	posicionroja[1]=13;
+/*	posicionroja[0]=8;      
+	posicionroja[1]=13;     
 	
-	posicionrosa[0]=8;
-	posicionrosa[1]=14;
+	posicionrosa[0]=8;    
+	posicionrosa[1]=14;   
 	
 	posicionazul[0]=9;
-	posicionazul[1]=13;
+	posicionazul[1]=13; */
 	
 }
 
