@@ -263,7 +263,7 @@ void motordejuego(){
 			SacarFantasma(matrizjuego, posicionnaranja, posicionroja, posicionrosa, posicionazul, 3);			
 		}  
 		if (TiempoSalida>10){
-			FantasmaNaranja(matrizjuego, posicionnaranja, &posicion_guardada);
+			FantasmaNaranja(matrizjuego, posicionnaranja, &posicion_guardada);  
 		}		
 		if (poderactivo==1){
 			TiempoPoder++;
@@ -367,7 +367,7 @@ void movimientopacman(int matrizjuego[20][30], int posicionpacman[2], int *poder
 				*poderactivo=1;
 			}
 			if (matrizjuego[posicionpacman[0]+1][posicionpacman[1]]==9){
-				printf ("Pacman toco fantasma cuando baja"); // Esto representa la muerte del pacman. 
+				*muertepacman=1; // Esto representa la muerte del pacman. 
 			}
 			matrizjuego[posicionpacman[0]][posicionpacman[1]]=2;
 			posicionpacman[0]=posicionpacman[0]+1;
@@ -380,8 +380,8 @@ void movimientopacman(int matrizjuego[20][30], int posicionpacman[2], int *poder
 			if (matrizjuego[posicionpacman[0]] [posicionpacman[1]+1]==5){
 				*poderactivo=1;
 			}
-			if (matrizjuego[posicionpacman[0]][posicionpacman[1]+1] ==9){
-				printf ("Pacman toco fantasma a la derecha");
+			if (matrizjuego[posicionpacman[0]][posicionpacman[1]+1]==9){
+				*muertepacman=1;
 			}
 			matrizjuego[posicionpacman[0]][posicionpacman[1]]=2;
 			posicionpacman[1]=posicionpacman[1]+1;
@@ -401,7 +401,7 @@ void movimientopacman(int matrizjuego[20][30], int posicionpacman[2], int *poder
 				*poderactivo=1;
 			}
 			if (matrizjuego[posicionpacman[0]][posicionpacman[1]-1] ==9){
-				printf ("Pacman toco fantasma a la izquierda");
+				*muertepacman=1;
 			}
 			matrizjuego[posicionpacman[0]][posicionpacman[1]]=2;
 			posicionpacman[1]=posicionpacman[1]-1;
