@@ -261,7 +261,7 @@ void motordejuego(){
 		}
 		if (TiempoSalida==40){
 			SacarFantasma(matrizjuego, posicionnaranja, posicionroja, posicionrosa, posicionazul, 3);			
-		}
+		}  
 		if (TiempoSalida>10){
 			FantasmaNaranja(matrizjuego, posicionnaranja, &posicion_guardada);
 		}		
