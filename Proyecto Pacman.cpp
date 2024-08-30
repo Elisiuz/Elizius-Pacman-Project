@@ -382,6 +382,7 @@ void movimientopacman(int matrizjuego[20][30], int posicionpacman[2], int *poder
 			}
 			if (matrizjuego[posicionpacman[0]][posicionpacman[1]+1]==9){
 				*muertepacman=1;
+				printf("Muere a la derecha");
 			}
 			matrizjuego[posicionpacman[0]][posicionpacman[1]]=2;
 			posicionpacman[1]=posicionpacman[1]+1;
@@ -418,7 +419,7 @@ void movimientopacman(int matrizjuego[20][30], int posicionpacman[2], int *poder
 
 void FantasmaNaranja (int matrizjuego[20][30], int posicionnaranja[2], int *posicion_guardada, int *muertepacman){
 	int posicion=rand() %4; // Genera numeros aleatorios para moverse en las cuatro direcciones 		
-//	posicion=1;
+	posicion=-1;
 	
 	switch (posicion){
 		case 0: //Izquierda
@@ -431,6 +432,7 @@ void FantasmaNaranja (int matrizjuego[20][30], int posicionnaranja[2], int *posi
 				}
 				if (matrizjuego[posicionnaranja[0]] [posicionnaranja[1]-1]==0){
 					*muertepacman=1;
+					printf("Mato");
 				}
 				
 				matrizjuego[posicionnaranja[0]][posicionnaranja[1]]=9;				
@@ -453,6 +455,7 @@ void FantasmaNaranja (int matrizjuego[20][30], int posicionnaranja[2], int *posi
 				}
 				if (matrizjuego[posicionnaranja[0]][posicionnaranja[1]+1]==0){
 					*muertepacman=1;
+					printf("Mato");
 				}
 				matrizjuego[posicionnaranja[0]][posicionnaranja[1]]=9;
 				if (posicionnaranja[0]==7 && posicionnaranja[1]==29){
@@ -473,6 +476,7 @@ void FantasmaNaranja (int matrizjuego[20][30], int posicionnaranja[2], int *posi
 				}
 				if (matrizjuego[posicionnaranja[0]-1][posicionnaranja[1]]==0){
 					*muertepacman=1;
+					printf("Mato");
 				}
 				matrizjuego[posicionnaranja[0]][posicionnaranja[1]]=9;
 			}
@@ -487,6 +491,7 @@ void FantasmaNaranja (int matrizjuego[20][30], int posicionnaranja[2], int *posi
 				}
 				if (matrizjuego[posicionnaranja[0]+1][posicionnaranja[1]]==0){
 					*muertepacman=1;
+					printf("Mato");
 				}
 				matrizjuego[posicionnaranja[0]][posicionnaranja[1]]=9;
 			}
