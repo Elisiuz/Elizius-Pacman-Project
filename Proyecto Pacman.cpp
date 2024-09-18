@@ -582,12 +582,12 @@ void Reinicio (int matrizjuego[20][30], int posicionpacman[2],int posicionnaranj
 	posicionroja[1]=13;
 	matrizjuego[posicionroja[0]][posicionroja[1]]=6;
 	    
-	matrizjuego[posicionrosa[0]][posicionrosa[1]]=9;
+	matrizjuego[posicionrosa[0]][posicionrosa[1]]=2;
 	posicionrosa[0]=8;    
 	posicionrosa[1]=14;   
 	matrizjuego[posicionrosa[0]][posicionrosa[1]]=7;
 	
-	matrizjuego[posicionazul[0]][posicionazul[1]]=9;
+	matrizjuego[posicionazul[0]][posicionazul[1]]=2;
 	posicionazul[0]=9;
 	posicionazul[1]=13; 
 	matrizjuego[posicionazul[0]][posicionazul[1]]=8;
