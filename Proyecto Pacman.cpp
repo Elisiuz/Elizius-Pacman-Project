@@ -283,9 +283,8 @@ void motordejuego(){
 		//system ("pause");
 		//system ("cls");
 		blit(buffer,screen,0,0,0,0,960,660);
-		textprintf(screen, font1,0,0,makecol(255,153,51),"score:");
-		
-		//clear(buffer);//Borramos el buffer
+		textprintf(screen, font1,0,0,makecol(255,153,51),"score:");	
+		clear(buffer);//Borramos el buffer
 		rest(VELOCIDAD);//Maneja la velocidad del juego. Entre más alto el parámetro, más lento el juego
 	}while(true);
 }
@@ -302,7 +301,7 @@ void pintarmapa(int matrizjuego[20][30], BITMAP *buffer, int *poderactivo){
 	vectorMapa[6] = load_bitmap("FantasmaBlinky_Abajo.bmp", NULL);
 	vectorMapa[7] = load_bitmap("FantasmaPinky_I.bmp", NULL);
 	vectorMapa[8] = load_bitmap("FantasmaInky_D.bmp", NULL);
-	vectorMapa[9] = load_bitmap("FantasmaClyde_Arriba.bmp", NULL);
+	vectorMapa[9] = load_bitmap("FantasmaClyde_Arriba.bmp", NULL);  
 	
 	if (*poderactivo==1){
 		vectorMapa[6]=load_bitmap("Fantasmas_Asustados.bmp", NULL);
