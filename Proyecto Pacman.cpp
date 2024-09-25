@@ -211,6 +211,7 @@ void motordejuego(){
 	
 	FONT *font1=load_font("letritas.pcx", NULL,NULL);
 	
+	int score=0;
 	// posicion inicial de pacman en el mapa
 	
 	int matrizjuego[20][30];
@@ -283,7 +284,7 @@ void motordejuego(){
 		//system ("pause");
 		//system ("cls");
 		blit(buffer,screen,0,0,0,0,960,660);
-		textprintf(screen, font1,0,0,makecol(255,153,51),"score:");	
+		textprintf(screen, font1,0,-2,makecol(255,153,51),"score: %i",score);	
 		clear(buffer);//Borramos el buffer
 		rest(VELOCIDAD);//Maneja la velocidad del juego. Entre más alto el parámetro, más lento el juego
 	}while(true);
