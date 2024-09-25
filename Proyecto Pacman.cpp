@@ -209,6 +209,8 @@ void menu(){
 
 void motordejuego(){
 	
+	FONT *font1=load_font("letritas.pcx", NULL,NULL);
+	
 	// posicion inicial de pacman en el mapa
 	
 	int matrizjuego[20][30];
@@ -281,7 +283,9 @@ void motordejuego(){
 		//system ("pause");
 		//system ("cls");
 		blit(buffer,screen,0,0,0,0,960,660);
-		clear(buffer);//Borramos el buffer
+		textprintf(screen, font1,0,0,makecol(255,153,51),"score:");
+		
+		//clear(buffer);//Borramos el buffer
 		rest(VELOCIDAD);//Maneja la velocidad del juego. Entre más alto el parámetro, más lento el juego
 	}while(true);
 }
@@ -573,14 +577,14 @@ void Reinicio (int matrizjuego[20][30], int posicionpacman[2],int posicionnaranj
 	matrizjuego[posicionpacman[0]][posicionpacman[1]]=0; 
 
 	matrizjuego[posicionnaranja[0]][posicionnaranja[1]]=2; //igual se trata de espacio vacio
-	posicionnaranja[0]=9; 
-	posicionnaranja[1]=14;
-	matrizjuego[posicionnaranja[0]][posicionnaranja[1]]=9;
+	posicionnaranja[0]=9;       
+	posicionnaranja[1]=14;     
+	matrizjuego[posicionnaranja[0]][posicionnaranja[1]]=9; 
 	
-	matrizjuego[posicionroja[0]][posicionroja[1]]=2;
-	posicionroja[0]=8;
-	posicionroja[1]=13;
-	matrizjuego[posicionroja[0]][posicionroja[1]]=6;
+	matrizjuego[posicionroja[0]][posicionroja[1]]=2; 
+	posicionroja[0]=8;  
+	posicionroja[1]=13;  
+	matrizjuego[posicionroja[0]][posicionroja[1]]=6;   
 	    
 	matrizjuego[posicionrosa[0]][posicionrosa[1]]=2;
 	posicionrosa[0]=8;    
