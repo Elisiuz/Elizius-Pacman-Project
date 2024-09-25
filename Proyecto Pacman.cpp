@@ -15,7 +15,7 @@ void cargarmapa3();
 void menu();
 void motordejuego();
 void pintarmapa(int matrizjuego[20][30], BITMAP *buffer, int *poderactivo);
-void movimientopacman(int matrizjuego[20][30], int posicionpacman[2], int *poderactivo, int *muertedepacman);
+void movimientopacman(int matrizjuego[20][30], int posicionpacman[2], int *poderactivo, int *muertedepacman, int *score);
 void init();
 void submenuJugar(); 
 void Nuevojuego();
@@ -252,7 +252,7 @@ void motordejuego(){
 	MostrarFruta(matrizjuego);
 	do{  
 		pintarmapa(matrizjuego,buffer, &poderactivo);
-		movimientopacman(matrizjuego, posicionpacman, &poderactivo, &muertepacman);
+		movimientopacman(matrizjuego, posicionpacman, &poderactivo, &muertepacman, &score);
 		TiempoSalida++;
 		if (TiempoSalida==10){
 			SacarFantasma(matrizjuego, posicionnaranja, posicionroja, posicionrosa, posicionazul, 0);			
@@ -348,7 +348,7 @@ void pintarmapa(int matrizjuego[20][30], BITMAP *buffer, int *poderactivo){
 	}
 }
 
-void movimientopacman(int matrizjuego[20][30], int posicionpacman[2], int *poderactivo, int *muertepacman){	
+void movimientopacman(int matrizjuego[20][30], int posicionpacman[2], int *poderactivo, int *muertepacman, int *score){	
 	// si se pone w es que el pacman va hacia arriba
 	
 	if (key[KEY_W]){	
@@ -363,6 +363,7 @@ void movimientopacman(int matrizjuego[20][30], int posicionpacman[2], int *poder
 			matrizjuego[posicionpacman[0]][posicionpacman[1]]=2;
 			posicionpacman[0]=posicionpacman[0]-1;
 			matrizjuego[posicionpacman[0]][posicionpacman[1]]=0;
+			*score=*score+1;
 		}
 		
 	}
@@ -380,6 +381,7 @@ void movimientopacman(int matrizjuego[20][30], int posicionpacman[2], int *poder
 			matrizjuego[posicionpacman[0]][posicionpacman[1]]=2;
 			posicionpacman[0]=posicionpacman[0]+1;
 			matrizjuego[posicionpacman[0]][posicionpacman[1]]=0;
+			*score=*score+1;
 		}
 		
 	}
@@ -397,7 +399,8 @@ void movimientopacman(int matrizjuego[20][30], int posicionpacman[2], int *poder
 			matrizjuego[posicionpacman[0]][posicionpacman[1]]=2;
 			posicionpacman[1]=posicionpacman[1]+1;
 			matrizjuego[posicionpacman[0]][posicionpacman[1]]=0;
-			if (posicionpacman[0]==7 && posicionpacman[1]==29){
+			*score=*score+1;
+			if (posicionpacman[0]==7 && posicionpacman[1]==29){ //es el teleport de los lados, por eso esta disinto
 				posicionpacman[0]=7;
 				posicionpacman[1]=0;
 				matrizjuego [posicionpacman[0]] [posicionpacman[1]]=0;
@@ -419,6 +422,7 @@ void movimientopacman(int matrizjuego[20][30], int posicionpacman[2], int *poder
 			matrizjuego[posicionpacman[0]][posicionpacman[1]]=2;
 			posicionpacman[1]=posicionpacman[1]-1;
 			matrizjuego[posicionpacman[0]][posicionpacman[1]]=0;
+			*score=*score+1;
 			if (posicionpacman[0]==7 && posicionpacman[1]==0){
 				posicionpacman[0]=7;    
 				posicionpacman[1]=29;   
