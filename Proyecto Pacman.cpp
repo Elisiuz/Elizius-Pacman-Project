@@ -212,6 +212,7 @@ void motordejuego(){
 	FONT *font1=load_font("letritas.pcx", NULL,NULL);
 	
 	int score=0;
+	int Nivel=0;
 	// posicion inicial de pacman en el mapa
 	
 	int matrizjuego[20][30];
@@ -282,9 +283,12 @@ void motordejuego(){
 			TiempoSalida=0;
 		}
 		//system ("pause");
-		//system ("cls");
+		//system ("cls"); 
 		blit(buffer,screen,0,0,0,0,960,660);
-		textprintf(screen, font1,0,-2,makecol(255,153,51),"score: %i",score);	
+		textprintf(screen, font1,0,-2,makecol(255,153,51),"score: %i",score);  
+		textprintf(screen, font1,200,-2,makecol(8,211,251),"[Esc] Pausa");	    
+		textprintf(screen, font1,400,-2,makecol(251,236,8),"Nivel: %i", Nivel);
+
 		clear(buffer);//Borramos el buffer
 		rest(VELOCIDAD);//Maneja la velocidad del juego. Entre más alto el parámetro, más lento el juego
 	}while(true);
@@ -302,7 +306,8 @@ void pintarmapa(int matrizjuego[20][30], BITMAP *buffer, int *poderactivo){
 	vectorMapa[6] = load_bitmap("FantasmaBlinky_Abajo.bmp", NULL);
 	vectorMapa[7] = load_bitmap("FantasmaPinky_I.bmp", NULL);
 	vectorMapa[8] = load_bitmap("FantasmaInky_D.bmp", NULL);
-	vectorMapa[9] = load_bitmap("FantasmaClyde_Arriba.bmp", NULL);  
+	vectorMapa[9] = load_bitmap("FantasmaClyde_Arriba.bmp", NULL); 
+	vectorMapa[10]= load_bitmap("Vidas3.bmp", NULL); 
 	
 	if (*poderactivo==1){
 		vectorMapa[6]=load_bitmap("Fantasmas_Asustados.bmp", NULL);
@@ -310,6 +315,8 @@ void pintarmapa(int matrizjuego[20][30], BITMAP *buffer, int *poderactivo){
 		vectorMapa[8]=load_bitmap("Fantasmas_Asustados.bmp", NULL);
 		vectorMapa[9]=load_bitmap("Fantasmas_Asustados.bmp", NULL);
 	}
+	
+	draw_sprite(buffer, vectorMapa[10], 750,0);
 	
 	for (i=0; i<=19; i++){
 		for (j=0; j<=29; j++){
