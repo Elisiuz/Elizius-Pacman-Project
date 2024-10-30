@@ -3,7 +3,6 @@
 #include <allegro.h>
 #include <string.h>
 
-
 #define VELOCIDAD 200 //Importante no usar valores negativos
 
 //Crear tres mapas
@@ -250,6 +249,7 @@ void motordejuego(){
 	int vidaspacman=3;
 	
 	BITMAP *buffer = create_bitmap(960,660);
+	BITMAP *findejuego = load_bitmap("perdiste.bmp", NULL);
 		
 	cargarmapa1(matrizjuego);
 	MostrarFruta(matrizjuego);
@@ -285,6 +285,7 @@ void motordejuego(){
 			TiempoSalida=0;
 			vidaspacman--;
 		}
+		
 		//system ("pause");
 		//system ("cls"); 
 		blit(buffer,screen,0,0,0,0,960,660);
@@ -294,7 +295,13 @@ void motordejuego(){
 
 		clear(buffer);//Borramos el buffer
 		rest(VELOCIDAD);//Maneja la velocidad del juego. Entre más alto el parámetro, más lento el juego
-	}while(true);
+	}while(vidaspacman>0);
+	clear_keybuf();//Borramos el buffer de entrada del teclado
+	clear(buffer);
+	do{
+		blit(findejuego, buffer, 0, 0, 0, 0, 900, 660);
+		blit(buffer, screen, 0, 0, 0, 0, 960, 660);
+	}while(!key[KEY_ESC]);
 }
  
 void pintarmapa(int matrizjuego[20][30], BITMAP *buffer, int *poderactivo, int vidaspacman){
@@ -325,8 +332,8 @@ void pintarmapa(int matrizjuego[20][30], BITMAP *buffer, int *poderactivo, int v
 	else if (vidaspacman==2){
 		vectorMapa[10]=load_bitmap("Vidas2.bmp", NULL);
 	}
-	else if (vidaspacman==3){
-		vectorMapa[10]=load_bitmap("Vidas3.bmp", NULL);
+	else {
+		vectorMapa[10]=load_bitmap("Vidas1.bmp", NULL);
 	}
 	
 	draw_sprite(buffer, vectorMapa[10], 750,0);
