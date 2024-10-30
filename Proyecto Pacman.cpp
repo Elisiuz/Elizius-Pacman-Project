@@ -14,7 +14,7 @@ void cargarmapa2();
 void cargarmapa3(); 
 void menu();
 void motordejuego();
-void pintarmapa(int matrizjuego[20][30], BITMAP *buffer, int *poderactivo);
+void pintarmapa(int matrizjuego[20][30], BITMAP *buffer, int *poderactivo, int vidaspacman);
 void movimientopacman(int matrizjuego[20][30], int posicionpacman[2], int *poderactivo, int *muertedepacman, int *score);
 void init();
 void submenuJugar(); 
@@ -247,12 +247,14 @@ void motordejuego(){
 	
 	int muertepacman=0;
 	
+	int vidaspacman=3;
+	
 	BITMAP *buffer = create_bitmap(960,660);
 		
 	cargarmapa1(matrizjuego);
 	MostrarFruta(matrizjuego);
 	do{  
-		pintarmapa(matrizjuego,buffer, &poderactivo);
+		pintarmapa(matrizjuego,buffer, &poderactivo, vidaspacman);
 		movimientopacman(matrizjuego, posicionpacman, &poderactivo, &muertepacman, &score);
 		TiempoSalida++;
 		if (TiempoSalida==10){
@@ -281,6 +283,7 @@ void motordejuego(){
 			Reinicio(matrizjuego, posicionpacman, posicionnaranja, posicionroja, posicionrosa, posicionazul);
 			muertepacman=0;
 			TiempoSalida=0;
+			vidaspacman--;
 		}
 		//system ("pause");
 		//system ("cls"); 
@@ -294,7 +297,7 @@ void motordejuego(){
 	}while(true);
 }
  
-void pintarmapa(int matrizjuego[20][30], BITMAP *buffer, int *poderactivo){
+void pintarmapa(int matrizjuego[20][30], BITMAP *buffer, int *poderactivo, int vidaspacman){
 	int i,j; 
 	BITMAP *vectorMapa[15];
 	vectorMapa[0] = load_bitmap("CuerpoPacman_II.bmp", NULL); //PACMAN;
@@ -307,13 +310,23 @@ void pintarmapa(int matrizjuego[20][30], BITMAP *buffer, int *poderactivo){
 	vectorMapa[7] = load_bitmap("FantasmaPinky_I.bmp", NULL);
 	vectorMapa[8] = load_bitmap("FantasmaInky_D.bmp", NULL);
 	vectorMapa[9] = load_bitmap("FantasmaClyde_Arriba.bmp", NULL); 
-	vectorMapa[10]= load_bitmap("Vidas3.bmp", NULL); 
+	
 	
 	if (*poderactivo==1){
 		vectorMapa[6]=load_bitmap("Fantasmas_Asustados.bmp", NULL);
 		vectorMapa[7]=load_bitmap("Fantasmas_Asustados.bmp", NULL);
 		vectorMapa[8]=load_bitmap("Fantasmas_Asustados.bmp", NULL);
 		vectorMapa[9]=load_bitmap("Fantasmas_Asustados.bmp", NULL);
+	}
+	
+	if (vidaspacman==3){
+		vectorMapa[10]=load_bitmap("Vidas3.bmp", NULL); 
+	} 
+	else if (vidaspacman==2){
+		vectorMapa[10]=load_bitmap("Vidas2.bmp", NULL);
+	}
+	else if (vidaspacman==3){
+		vectorMapa[10]=load_bitmap("Vidas3.bmp", NULL);
 	}
 	
 	draw_sprite(buffer, vectorMapa[10], 750,0);
@@ -372,7 +385,6 @@ void movimientopacman(int matrizjuego[20][30], int posicionpacman[2], int *poder
 			matrizjuego[posicionpacman[0]][posicionpacman[1]]=0;
 			*score=*score+1;
 		}
-		
 	}
 	// si se pone s es que el pacman va hacia abajo
 	else if (key[KEY_S]){
@@ -390,7 +402,6 @@ void movimientopacman(int matrizjuego[20][30], int posicionpacman[2], int *poder
 			matrizjuego[posicionpacman[0]][posicionpacman[1]]=0;
 			*score=*score+1;
 		}
-		
 	}
 	else if (key[KEY_D]){
 		if (matrizjuego [posicionpacman[0]] [posicionpacman[1]+1] !=1){
