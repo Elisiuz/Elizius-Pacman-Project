@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include <stdlib.h> 
+#include <stdlib.h>  
 #include <allegro.h>
 #include <string.h>
 
@@ -228,83 +228,85 @@ void motordejuego(){
 	BITMAP *buffer = create_bitmap(960,660);
 	BITMAP *findejuego = load_bitmap("perdiste.bmp", NULL);
 	
-	
-	TiempoSalida=0;
-	posicion_guardada=0;
-	poderactivo=0;
-	TiempoPoder=0;
-	muertepacman=0;
-	vidaspacman=3;
-	turno=0;
-	
-	posicionpacman[0]=13;
-	posicionpacman[1]=13;
-	
-	//posiciones iniciales de los fantasmas en el mapa
-	
-	posicionnaranja[0]=9;
-	posicionnaranja[1]=14;
-	
-	posicionroja[0]=8; 
-	posicionroja[1]=13;
-	
-	posicionrosa[0]=8;
-	posicionrosa[1]=14;
-	
-	posicionazul[0]=9;
-	posicionazul[1]=13;
-	
-	cargarmapa1(matrizjuego);
-	MostrarFruta(matrizjuego);
-	do{  
-		pintarmapa(matrizjuego,buffer, &poderactivo, vidaspacman);
-		movimientopacman(matrizjuego, posicionpacman, &poderactivo, &muertepacman, &score);
-		TiempoSalida++;
-		if (TiempoSalida==10){
-			SacarFantasma(matrizjuego, posicionnaranja, posicionroja, posicionrosa, posicionazul, 0);			
-		}
-		if (TiempoSalida==20){
-			SacarFantasma(matrizjuego, posicionnaranja, posicionroja, posicionrosa, posicionazul, 1);			
-		}
-		if (TiempoSalida==30){
-			SacarFantasma(matrizjuego, posicionnaranja, posicionroja, posicionrosa, posicionazul, 2);			
-		}
-		if (TiempoSalida==40){
-			SacarFantasma(matrizjuego, posicionnaranja, posicionroja, posicionrosa, posicionazul, 3);			
-		}  
-		if (TiempoSalida>10){
-			FantasmaNaranja(matrizjuego, posicionnaranja, &posicion_guardada, &muertepacman);  
-		}		
-		if (poderactivo==1){
-			TiempoPoder++;
-		}
-		if (TiempoPoder>30){
-			poderactivo=0;
-			TiempoPoder=0;
-		}
-		if (muertepacman==1){
-			Reinicio(matrizjuego, posicionpacman, posicionnaranja, posicionroja, posicionrosa, posicionazul);
-			muertepacman=0;
-			TiempoSalida=0;
-			vidaspacman--;
-		}
-		
-		//system ("pause");
-		//system ("cls"); 
-		blit(buffer,screen,0,0,0,0,960,660);
-		textprintf(screen, font1,0,-2,makecol(255,153,51),"score: %i",score);  
-		textprintf(screen, font1,200,-2,makecol(8,211,251),"[Esc] Pausa");	    
-		textprintf(screen, font1,400,-2,makecol(251,236,8),"Nivel: %i", Nivel);
-
-		clear(buffer);//Borramos el buffer
-		rest(VELOCIDAD);//Maneja la velocidad del juego. Entre más alto el parámetro, más lento el juego
-	}while(vidaspacman>0);
-	clear_keybuf();//Borramos el buffer de entrada del teclado
-	clear(buffer);
 	do{
-		blit(findejuego, buffer, 0, 0, 0, 0, 900, 660);
-		blit(buffer, screen, 0, 0, 0, 0, 960, 660);
-	}while(!key[KEY_ESC]);	
+		TiempoSalida=0;
+		posicion_guardada=4;
+		poderactivo=0;
+		TiempoPoder=0;
+		muertepacman=0;
+		vidaspacman=3;
+		turno=0;
+		score=0;
+		
+		posicionpacman[0]=13;
+		posicionpacman[1]=13;
+		
+		//posiciones iniciales de los fantasmas en el mapa
+		
+		posicionnaranja[0]=9;
+		posicionnaranja[1]=14;
+		
+		posicionroja[0]=8; 
+		posicionroja[1]=13;
+		
+		posicionrosa[0]=8;
+		posicionrosa[1]=14;
+		
+		posicionazul[0]=9;
+		posicionazul[1]=13;
+		
+		cargarmapa1(matrizjuego);
+		MostrarFruta(matrizjuego);
+		do{  
+			pintarmapa(matrizjuego,buffer, &poderactivo, vidaspacman);
+			movimientopacman(matrizjuego, posicionpacman, &poderactivo, &muertepacman, &score);
+			TiempoSalida++;
+			if (TiempoSalida==10){
+				SacarFantasma(matrizjuego, posicionnaranja, posicionroja, posicionrosa, posicionazul, 0);			
+			}
+			if (TiempoSalida==20){
+				SacarFantasma(matrizjuego, posicionnaranja, posicionroja, posicionrosa, posicionazul, 1);			
+			}
+			if (TiempoSalida==30){
+				SacarFantasma(matrizjuego, posicionnaranja, posicionroja, posicionrosa, posicionazul, 2);			
+			}
+			if (TiempoSalida==40){
+				SacarFantasma(matrizjuego, posicionnaranja, posicionroja, posicionrosa, posicionazul, 3);			
+			}  
+			if (TiempoSalida>10){
+				FantasmaNaranja(matrizjuego, posicionnaranja, &posicion_guardada, &muertepacman);  
+			}		
+			if (poderactivo==1){
+				TiempoPoder++;
+			}
+			if (TiempoPoder>30){
+				poderactivo=0;
+				TiempoPoder=0;
+			}
+			if (muertepacman==1){
+				Reinicio(matrizjuego, posicionpacman, posicionnaranja, posicionroja, posicionrosa, posicionazul);
+				muertepacman=0;
+				TiempoSalida=0;
+				vidaspacman--;
+			}
+			
+			//system ("pause");
+			//system ("cls"); 
+			blit(buffer,screen,0,0,0,0,960,660);
+			textprintf(screen, font1,0,-2,makecol(255,153,51),"score: %i",score);  
+			textprintf(screen, font1,200,-2,makecol(8,211,251),"[Esc] Pausa");	    
+			textprintf(screen, font1,400,-2,makecol(251,236,8),"Nivel: %i", Nivel);
+	
+			clear(buffer);//Borramos el buffer
+			rest(VELOCIDAD);//Maneja la velocidad del juego. Entre más alto el parámetro, más lento el juego
+		}while(vidaspacman>0);
+		clear_keybuf();//Borramos el buffer de entrada del teclado
+		clear(buffer);
+		do{
+			blit(findejuego, buffer, 0, 0, 0, 0, 900, 660);
+			blit(buffer, screen, 0, 0, 0, 0, 960, 660);
+		}while(!key[KEY_ESC]);	
+	}while(true);
 
 }
  
