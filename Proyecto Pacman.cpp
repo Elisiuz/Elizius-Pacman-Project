@@ -211,46 +211,49 @@ void motordejuego(){
 	FONT *font1=load_font("letritas.pcx", NULL,NULL);
 	
 	int score=0;
-	int Nivel=0;
-	// posicion inicial de pacman en el mapa
-	
+	int Nivel=0;	// posicion inicial de pacman en el mapa
 	int matrizjuego[20][30];
 	int posicionpacman[2];
+	int posicionnaranja[2];
+	int posicionroja[2];
+	int posicionrosa[2]; 
+	int posicionazul[2];
+	int TiempoSalida = 0; 
+	int posicion_guardada=4;
+	int poderactivo=0;
+	int TiempoPoder=0;
+	int muertepacman=0;
+	int vidaspacman=3;
+	int turno=0;
+	BITMAP *buffer = create_bitmap(960,660);
+	BITMAP *findejuego = load_bitmap("perdiste.bmp", NULL);
+	
+	
+	TiempoSalida=0;
+	posicion_guardada=0;
+	poderactivo=0;
+	TiempoPoder=0;
+	muertepacman=0;
+	vidaspacman=3;
+	turno=0;
+	
 	posicionpacman[0]=13;
 	posicionpacman[1]=13;
 	
 	//posiciones iniciales de los fantasmas en el mapa
 	
-	int posicionnaranja[2];
 	posicionnaranja[0]=9;
 	posicionnaranja[1]=14;
 	
-	int posicionroja[2];
 	posicionroja[0]=8; 
 	posicionroja[1]=13;
 	
-	int posicionrosa[2]; 
 	posicionrosa[0]=8;
 	posicionrosa[1]=14;
 	
-	int posicionazul[2];
 	posicionazul[0]=9;
 	posicionazul[1]=13;
 	
-	int turno=0;
-	
-	int TiempoSalida = 0;
-	int posicion_guardada=4;
-	int poderactivo=0;
-	int TiempoPoder=0;
-	
-	int muertepacman=0;
-	
-	int vidaspacman=3;
-	
-	BITMAP *buffer = create_bitmap(960,660);
-	BITMAP *findejuego = load_bitmap("perdiste.bmp", NULL);
-		
 	cargarmapa1(matrizjuego);
 	MostrarFruta(matrizjuego);
 	do{  
@@ -301,7 +304,8 @@ void motordejuego(){
 	do{
 		blit(findejuego, buffer, 0, 0, 0, 0, 900, 660);
 		blit(buffer, screen, 0, 0, 0, 0, 960, 660);
-	}while(!key[KEY_ESC]);
+	}while(!key[KEY_ESC]);	
+
 }
  
 void pintarmapa(int matrizjuego[20][30], BITMAP *buffer, int *poderactivo, int vidaspacman){
