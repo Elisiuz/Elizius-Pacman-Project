@@ -225,6 +225,7 @@ void motordejuego(){
 	int muertepacman=0;
 	int vidaspacman=3;
 	int turno=0;
+	int nivel=1;
 	BITMAP *buffer = create_bitmap(960,660);
 	BITMAP *findejuego = load_bitmap("perdiste.bmp", NULL);
 	
@@ -288,6 +289,7 @@ void motordejuego(){
 				muertepacman=0;
 				TiempoSalida=0;
 				vidaspacman--;
+			
 			}
 			
 			//system ("pause");
@@ -299,7 +301,14 @@ void motordejuego(){
 	
 			clear(buffer);//Borramos el buffer
 			rest(VELOCIDAD);//Maneja la velocidad del juego. Entre más alto el parámetro, más lento el juego
-		}while(vidaspacman>0);
+		}while(vidaspacman>0 && score<20);
+		//Significa que pasó de nivel
+		if(score>=20){
+			nivel++;	
+			printf("ENTRA");
+			continue;
+		}
+		///Muestra la pantalla de perdedor
 		clear_keybuf();//Borramos el buffer de entrada del teclado
 		clear(buffer);
 		do{
@@ -323,6 +332,7 @@ void pintarmapa(int matrizjuego[20][30], BITMAP *buffer, int *poderactivo, int v
 	vectorMapa[7] = load_bitmap("FantasmaPinky_I.bmp", NULL);
 	vectorMapa[8] = load_bitmap("FantasmaInky_D.bmp", NULL);
 	vectorMapa[9] = load_bitmap("FantasmaClyde_Arriba.bmp", NULL); 
+	vectorMapa[10]= load_bitmap("1Frutas.bmp", NULL);
 	
 	
 	if (*poderactivo==1){
