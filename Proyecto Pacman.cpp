@@ -238,7 +238,7 @@ void motordejuego(){
 		vidaspacman=3;
 		turno=0;
 		score=0;
-		
+		nivel = 1;
 		posicionpacman[0]=13;
 		posicionpacman[1]=13;
 		
@@ -297,13 +297,13 @@ void motordejuego(){
 			blit(buffer,screen,0,0,0,0,960,660);
 			textprintf(screen, font1,0,-2,makecol(255,153,51),"score: %i",score);  
 			textprintf(screen, font1,200,-2,makecol(8,211,251),"[Esc] Pausa");	    
-			textprintf(screen, font1,400,-2,makecol(251,236,8),"Nivel: %i", Nivel);
+			textprintf(screen, font1,400,-2,makecol(251,236,8),"Nivel: %i", nivel);
 	
 			clear(buffer);//Borramos el buffer
 			rest(VELOCIDAD);//Maneja la velocidad del juego. Entre más alto el parámetro, más lento el juego
-		}while(vidaspacman>0 && score<20);
+		}while(vidaspacman>0 && score<30);
 		//Significa que pasó de nivel
-		if(score>=20){
+		if(score>=30){
 			nivel++;	
 			printf("ENTRA");
 			continue;
@@ -396,13 +396,16 @@ void movimientopacman(int matrizjuego[20][30], int posicionpacman[2], int *poder
 	
 	if (key[KEY_W]){	
 		if (matrizjuego [posicionpacman[0]-1 ] [posicionpacman[1]] !=1){	
-			if (matrizjuego[posicionpacman[0]-1 ] [posicionpacman[1]]==5){	
+			if (matrizjuego[posicionpacman[0]-1 ] [posicionpacman[1]]==5){	// 5 es un poder activo
 				*poderactivo=1;
 			}
-			if (matrizjuego[posicionpacman[0]-1][posicionpacman[1]]==9){
+			if (matrizjuego[posicionpacman[0]-1][posicionpacman[1]]==9){ // 9 es el fantasma
 				*muertepacman=1;
 				return;
 			} 
+			if (matrizjuego[posicionpacman[0]-1][posicionpacman[1]]==3){
+				*score=*score+3;
+			}
 			matrizjuego[posicionpacman[0]][posicionpacman[1]]=2;
 			posicionpacman[0]=posicionpacman[0]-1;
 			matrizjuego[posicionpacman[0]][posicionpacman[1]]=0;
@@ -418,7 +421,9 @@ void movimientopacman(int matrizjuego[20][30], int posicionpacman[2], int *poder
 			if (matrizjuego[posicionpacman[0]+1][posicionpacman[1]]==9){
 				*muertepacman=1; // Esto representa la muerte del pacman. 
 				return;
-
+			}
+			if (matrizjuego[posicionpacman[0]+1][posicionpacman[1]]==3){
+				*score=*score+3;
 			}
 			matrizjuego[posicionpacman[0]][posicionpacman[1]]=2;
 			posicionpacman[0]=posicionpacman[0]+1;
@@ -433,9 +438,10 @@ void movimientopacman(int matrizjuego[20][30], int posicionpacman[2], int *poder
 			}
 			if (matrizjuego[posicionpacman[0]][posicionpacman[1]+1]==9){
 				*muertepacman=1;
-				printf("Muere a la derecha");
 				return;
-
+			}
+			if (matrizjuego[posicionpacman[0]][posicionpacman[1]+1]==3){
+				*score=*score+3;
 			}
 			matrizjuego[posicionpacman[0]][posicionpacman[1]]=2;
 			posicionpacman[1]=posicionpacman[1]+1;
@@ -448,7 +454,7 @@ void movimientopacman(int matrizjuego[20][30], int posicionpacman[2], int *poder
 				matrizjuego[7][29]=2;
 			}
 		}
-	}
+	} 
 	
 	else if (key[KEY_A]){
 		if (matrizjuego[ posicionpacman[0]] [posicionpacman[1]-1] !=1){
@@ -458,7 +464,9 @@ void movimientopacman(int matrizjuego[20][30], int posicionpacman[2], int *poder
 			if (matrizjuego[posicionpacman[0]][posicionpacman[1]-1] ==9){
 				*muertepacman=1;
 				return;
-
+			}
+			if (matrizjuego[posicionpacman[0]][posicionpacman[1]-1]==3){
+				*score=*score+3;
 			}
 			matrizjuego[posicionpacman[0]][posicionpacman[1]]=2;
 			posicionpacman[1]=posicionpacman[1]-1;
