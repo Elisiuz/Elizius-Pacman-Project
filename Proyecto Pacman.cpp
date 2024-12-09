@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>  
 #include <allegro.h>
-#include <string.h>
+#include <string.h> 
 
 #define VELOCIDAD 200 //Importante no usar valores negativos
 
@@ -509,8 +509,7 @@ void FantasmaNaranja (int matrizjuego[20][30], int posicionnaranja[2], int *posi
 					matrizjuego[posicionnaranja[0]][posicionnaranja[1]]=9;
 					matrizjuego[7][0]=2;
 				} 
-			}
-			
+			}		
 		break;
 		case 1: //Derecha
 			if(matrizjuego[posicionnaranja[0]][posicionnaranja[1]+1] !=1){
@@ -547,8 +546,7 @@ void FantasmaNaranja (int matrizjuego[20][30], int posicionnaranja[2], int *posi
 				*posicion_guardada=matrizjuego[posicionnaranja[0]][posicionnaranja[1]];
 				if (*posicion_guardada==0){
 					*posicion_guardada=2;
-				}
-				
+				}	
 				matrizjuego[posicionnaranja[0]][posicionnaranja[1]]=9;
 			}
 		break; //Abajo
