@@ -1,4 +1,4 @@
-#include <stdio.h>
+#include <stdio.h>    
 #include <stdlib.h>  
 #include <allegro.h>
 #include <string.h> 
@@ -13,8 +13,8 @@ void cargarmapa2();
 void cargarmapa3(); 
 void menu();
 void motordejuego();
-void pintarmapa(int matrizjuego[20][30], BITMAP *buffer, int *poderactivo, int vidaspacman);
-void movimientopacman(int matrizjuego[20][30], int posicionpacman[2], int *poderactivo, int *muertedepacman, int *score);
+void pintarmapa(int matrizjuego[20][30], BITMAP *buffer, int *poderactivo, int vidaspacman, int score_frutas, int nivel);
+void movimientopacman(int matrizjuego[20][30], int posicionpacman[2], int *poderactivo, int *muertepacman, int *score, int *score_frutas);
 void init();
 void submenuJugar(); 
 void Nuevojuego();
@@ -211,7 +211,6 @@ void motordejuego(){
 	FONT *font1=load_font("letritas.pcx", NULL,NULL);
 	
 	int score=0;
-	int Nivel=0;	// posicion inicial de pacman en el mapa
 	int matrizjuego[20][30];
 	int posicionpacman[2];
 	int posicionnaranja[2];
@@ -222,8 +221,9 @@ void motordejuego(){
 	int posicion_guardada=4;
 	int poderactivo=0;
 	int TiempoPoder=0;
-	int muertepacman=0;
+	int muertepacman=0; 
 	int vidaspacman=3;
+	int score_frutas=0;
 	int turno=0;
 	int nivel=1;
 	BITMAP *buffer = create_bitmap(960,660);
@@ -238,7 +238,6 @@ void motordejuego(){
 		vidaspacman=3;
 		turno=0;
 		score=0;
-		nivel = 1;
 		posicionpacman[0]=13;
 		posicionpacman[1]=13;
 		
@@ -259,8 +258,8 @@ void motordejuego(){
 		cargarmapa1(matrizjuego);
 		MostrarFruta(matrizjuego);
 		do{  
-			pintarmapa(matrizjuego,buffer, &poderactivo, vidaspacman);
-			movimientopacman(matrizjuego, posicionpacman, &poderactivo, &muertepacman, &score);
+			pintarmapa(matrizjuego,buffer, &poderactivo, vidaspacman, score_frutas, nivel);
+			movimientopacman(matrizjuego, posicionpacman, &poderactivo, &muertepacman, &score, &score_frutas);
 			TiempoSalida++;
 			if (TiempoSalida==10){
 				SacarFantasma(matrizjuego, posicionnaranja, posicionroja, posicionrosa, posicionazul, 0);			
@@ -289,9 +288,7 @@ void motordejuego(){
 				muertepacman=0;
 				TiempoSalida=0;
 				vidaspacman--;
-			
 			}
-			
 			//system ("pause");
 			//system ("cls"); 
 			blit(buffer,screen,0,0,0,0,960,660);
@@ -319,7 +316,7 @@ void motordejuego(){
 
 }
  
-void pintarmapa(int matrizjuego[20][30], BITMAP *buffer, int *poderactivo, int vidaspacman){
+void pintarmapa(int matrizjuego[20][30], BITMAP *buffer, int *poderactivo, int vidaspacman, int score_frutas, int nivel){
 	int i,j; 
 	BITMAP *vectorMapa[15];
 	vectorMapa[0] = load_bitmap("CuerpoPacman_II.bmp", NULL); //PACMAN;
@@ -332,8 +329,7 @@ void pintarmapa(int matrizjuego[20][30], BITMAP *buffer, int *poderactivo, int v
 	vectorMapa[7] = load_bitmap("FantasmaPinky_I.bmp", NULL);
 	vectorMapa[8] = load_bitmap("FantasmaInky_D.bmp", NULL);
 	vectorMapa[9] = load_bitmap("FantasmaClyde_Arriba.bmp", NULL); 
-	vectorMapa[10]= load_bitmap("1Frutas.bmp", NULL);
-	
+	vectorMapa[11] = load_bitmap("Espacio.bmp", NULL);
 	
 	if (*poderactivo==1){
 		vectorMapa[6]=load_bitmap("Fantasmas_Asustados.bmp", NULL);
@@ -352,7 +348,26 @@ void pintarmapa(int matrizjuego[20][30], BITMAP *buffer, int *poderactivo, int v
 		vectorMapa[10]=load_bitmap("Vidas1.bmp", NULL);
 	}
 	
-	draw_sprite(buffer, vectorMapa[10], 750,0);
+	draw_sprite(buffer, vectorMapa[10], 750,0); //Es para que pinte las vidas 
+	printf("El score frutas es: %d\n",score_frutas);
+	if (score_frutas==1){
+		vectorMapa[11]= load_bitmap("1Frutas.bmp", NULL);
+	}
+	else if (score_frutas==2){
+		vectorMapa[11]= load_bitmap("2Frutas.bmp", NULL);
+	}
+	else if (score_frutas==3){
+		vectorMapa[11]= load_bitmap ("3Frutas.bmp", NULL);
+	}
+	else if (score_frutas==4){
+		vectorMapa[11]= load_bitmap ("4Frutas.bmp", NULL);
+	}
+	else if (score_frutas==5){
+		vectorMapa[11]= load_bitmap ("5Frutas.bmp", NULL);
+	}
+	
+	draw_sprite(buffer, vectorMapa[11], 550,0);
+	
 	
 	for (i=0; i<=19; i++){
 		for (j=0; j<=29; j++){
@@ -391,7 +406,7 @@ void pintarmapa(int matrizjuego[20][30], BITMAP *buffer, int *poderactivo, int v
 	}
 }
 
-void movimientopacman(int matrizjuego[20][30], int posicionpacman[2], int *poderactivo, int *muertepacman, int *score){	
+void movimientopacman(int matrizjuego[20][30], int posicionpacman[2], int *poderactivo, int *muertepacman, int *score, int *score_frutas){	
 	// si se pone w es que el pacman va hacia arriba
 	
 	if (key[KEY_W]){	
@@ -403,8 +418,9 @@ void movimientopacman(int matrizjuego[20][30], int posicionpacman[2], int *poder
 				*muertepacman=1;
 				return;
 			} 
-			if (matrizjuego[posicionpacman[0]-1][posicionpacman[1]]==3){
+			if (matrizjuego[posicionpacman[0]-1][posicionpacman[1]]==3){ // esto es cuando se come la fruta
 				*score=*score+3;
+				*score_frutas=*score_frutas+1;
 			}
 			matrizjuego[posicionpacman[0]][posicionpacman[1]]=2;
 			posicionpacman[0]=posicionpacman[0]-1;
@@ -424,6 +440,7 @@ void movimientopacman(int matrizjuego[20][30], int posicionpacman[2], int *poder
 			}
 			if (matrizjuego[posicionpacman[0]+1][posicionpacman[1]]==3){
 				*score=*score+3;
+				*score_frutas=*score_frutas+1;
 			}
 			matrizjuego[posicionpacman[0]][posicionpacman[1]]=2;
 			posicionpacman[0]=posicionpacman[0]+1;
@@ -442,6 +459,7 @@ void movimientopacman(int matrizjuego[20][30], int posicionpacman[2], int *poder
 			}
 			if (matrizjuego[posicionpacman[0]][posicionpacman[1]+1]==3){
 				*score=*score+3;
+				*score_frutas=*score_frutas+1;
 			}
 			matrizjuego[posicionpacman[0]][posicionpacman[1]]=2;
 			posicionpacman[1]=posicionpacman[1]+1;
@@ -467,6 +485,7 @@ void movimientopacman(int matrizjuego[20][30], int posicionpacman[2], int *poder
 			}
 			if (matrizjuego[posicionpacman[0]][posicionpacman[1]-1]==3){
 				*score=*score+3;
+				*score_frutas=*score_frutas+1;
 			}
 			matrizjuego[posicionpacman[0]][posicionpacman[1]]=2;
 			posicionpacman[1]=posicionpacman[1]-1;
@@ -604,7 +623,6 @@ void SacarFantasma (int matrizjuego[20][30], int posicionnaranja[2], int posicio
 			matrizjuego[posicionazul[0]][posicionazul[1]]=8;
 			break; 
 	}
-	
 }
 
  void MostrarFruta (int matrizjuego[20][30]){
@@ -668,12 +686,4 @@ void init () {
 	install_mouse();
 	show_mouse(screen);
 } 
-
-
-
-
-
-
-
-	
 
