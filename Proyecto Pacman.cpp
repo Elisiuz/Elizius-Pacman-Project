@@ -1,5 +1,5 @@
-#include <stdio.h>    
-#include <stdlib.h>  
+#include <stdio.h>   
+#include <stdlib.h> 
 #include <allegro.h>
 #include <string.h> 
 
@@ -23,9 +23,10 @@ void regresar();
 int verificarUsuario(char usuario[]);
 void IngresarUsuario (char usuario[], char password[]);
 void FantasmaNaranja(int matrizjuego[20][30], int posicionnaranja[2], int *posicion_guardada, int *muertepacman); //es el que se mueve aleatoriamente
+void FantasmaRojo (int matrizjuego[20][30], int posicionrojo[2], int *posicion_guardada, int *muertepacman);//AQUÍ VA FANTASMA ROJO
 void SacarFantasma (int matrizjuego[20][30], int posicionnaranja[2], int posicionroja[2], int posicionrosa[2], int posicionazul[2], int turno);
 void MostrarFruta (int matrizjuego[20][30]);
-void Reinicio (int matrizjuego[20][30], int posicionpacman[2],int posicionnaranja[2], int posicionroja[2], int posicionrosa[2], int posicionazul[2]);
+void Reinicio (int matrizjuego[20][30], int posicionpacman[2],int posicsionnaranja[2], int posicionroja[2], int posicionrosa[2], int posicionazul[2]);
 
 int main() {
 	srand(time(NULL));
@@ -616,6 +617,12 @@ void FantasmaNaranja (int matrizjuego[20][30], int posicionnaranja[2], int *posi
 	
 //Ojo: el fantasma sale del corral al principio y cuando te lo comes regresa, sería conveniente la función "sacar y meter fantasmas".
 }
+ 
+void FantasmaRojo (int matrizjuego[20][30], int posicionrojo[2], int *posicion_guardada, int *muertepacman){
+	
+	   
+}
+ 
  
 void SacarFantasma (int matrizjuego[20][30], int posicionnaranja[2], int posicionroja[2], int posicionrosa[2], int posicionazul[2], int turno){
 	
