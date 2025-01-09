@@ -620,7 +620,7 @@ void FantasmaNaranja (int matrizjuego[20][30], int posicionnaranja[2], int *posi
  
 void FantasmaRojo (int matrizjuego[20][30], int posicionrojo[2], int *posicion_guardada, int *muertepacman){
 	
-	   
+	   sss
 }
  
  
