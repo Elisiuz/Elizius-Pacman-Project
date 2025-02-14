@@ -23,7 +23,7 @@ void regresar();
 int verificarUsuario(char usuario[]);
 void IngresarUsuario (char usuario[], char password[]);
 void FantasmaNaranja(int matrizjuego[20][30], int posicionnaranja[2], int *posicion_guardada, int *muertepacman); //es el que se mueve aleatoriamente
-void FantasmaRojo (int matrizjuego[20][30], int posicionrojo[2], int *posicion_guardada, int *muertepacman);//AQUÍ VA FANTASMA ROJO
+void FantasmaRojo (int matrizjuego[20][30], int posicionrojo[2], int *posicion_guardada, int posicionpacman[2], int *muertepacman);
 void SacarFantasma (int matrizjuego[20][30], int posicionnaranja[2], int posicionroja[2], int posicionrosa[2], int posicionazul[2], int turno);
 void MostrarFruta (int matrizjuego[20][30]);
 void Reinicio (int matrizjuego[20][30], int posicionpacman[2],int posicsionnaranja[2], int posicionroja[2], int posicionrosa[2], int posicionazul[2]);
@@ -242,7 +242,6 @@ void motordejuego(){
 		posicionpacman[0]=13;
 		posicionpacman[1]=13;
 	
-		
 		//posiciones iniciales de los fantasmas en el mapa
 		
 		posicionnaranja[0]=9;
@@ -275,8 +274,9 @@ void motordejuego(){
 			if (TiempoSalida==40){
 				SacarFantasma(matrizjuego, posicionnaranja, posicionroja, posicionrosa, posicionazul, 3);			
 			}  
-			if (TiempoSalida>10){
-				//FantasmaNaranja(matrizjuego, posicionnaranja, &posicion_guardada, &muertepacman);  
+			if (TiempoSalida>10){ //Ojo: no es medida de segundo, sino de repeticiones de ciclo
+				FantasmaNaranja(matrizjuego, posicionnaranja, &posicion_guardada, &muertepacman);
+				FantasmaRojo(matrizjuego, posicionroja, &posicion_guardada, posicionpacman, &muertepacman);
 			}		
 			if (poderactivo==1){
 				TiempoPoder++;
@@ -618,16 +618,16 @@ void FantasmaNaranja (int matrizjuego[20][30], int posicionnaranja[2], int *posi
 //Ojo: el fantasma sale del corral al principio y cuando te lo comes regresa, sería conveniente la función "sacar y meter fantasmas".
 }
  
-void FantasmaRojo (int matrizjuego[20][30], int posicionrojo[2], int *posicion_guardada, int posicionpacman[2], int *muertepacman){
+void FantasmaRojo (int matrizjuego[20][30], int posicionroja[2], int *posicion_guardada, int posicionpacman[2], int *muertepacman){
 	
-	int direccionHorizontal, direccionVertical;
+	int direccionHorizontal, direccionVertical; 
 	
-	if(posicionrojo[0] > posicionpacman[0]){
+	if(posicionroja[0] > posicionpacman[0]){
 		//El fantasma está en filas abajo del pacman
 		//por lo tanto el fantasma tiene que ir hacia arriba
 		direccionVertical = 1; //Aquí el 1 significa que debe ir hacia arriba
 	}
-	else if(posicionrojo[0] < posicionpacman[0]){
+	else if(posicionroja[0] < posicionpacman[0]){
 		//El fantasma se debe de mover hacia abajo
 		direccionVertical = 2; 
 	}
@@ -635,11 +635,11 @@ void FantasmaRojo (int matrizjuego[20][30], int posicionrojo[2], int *posicion_g
 		direccionVertical = 0; //No se debe de mover de fila
 	}
 	
-	if(posicionrojo[1] > posicionpacman[1]){
+	if(posicionroja[1] > posicionpacman[1]){
 		//El fantasma se debe de mover hacia la izquierda
 		direccionHorizontal = 1; 
 	}
-	else if(posicionrojo[1] < posicionpacman[1]){
+	else if(posicionroja[1] < posicionpacman[1]){
 		//El fantasma se debe de mover hacia la derecha
 		direccionHorizontal = 2;
 	}
@@ -648,19 +648,41 @@ void FantasmaRojo (int matrizjuego[20][30], int posicionrojo[2], int *posicion_g
 		direccionHorizontal = 0;
 	}
 	
-	// -1 es para arriba, para arriba siempre se resta 
-	if(direccionVertical == 1 && matrizjuego[posicionrojo[0]-1] [posicionrojo[1]] != 1){
-		matrizjuego[posicionrojo[0]] [posicionrojo[1]]=*posicion_guardada;
-		if (matrizjuego[posicionrojo[0]-1] [posicionrojo[1]==0]){
+	// -1 es para arriba, para arriba siempre se resta: esto es si el pacman va para arriba
+	if(direccionVertical == 1 && matrizjuego[posicionroja[0]-1] [posicionroja[1]] != 1){
+		matrizjuego[posicionroja[0]] [posicionroja[1]]=*posicion_guardada;
+		if (matrizjuego[posicionroja[0]-1] [posicionroja[1]==0]){
 			*muertepacman=1;		
 		}
-		posicionrojo[0]=posicionrojo[0]-1;
-		*posicion_guardada=matrizjuego[posicionrojo[0]][posicionrojo[1]];
+		posicionroja[0]=posicionroja[0]-1;
+		*posicion_guardada=matrizjuego[posicionroja[0]][posicionroja[1]];
 		if (*posicion_guardada==0){
 			*posicion_guardada=2;
 		}
-		matrizjuego[posicionrojo[0]][posicionrojo[1]]=6; 
+		matrizjuego[posicionroja[0]][posicionroja[1]]=6; 
 	}
+	// +1 para abajo, para abajo se suma 
+
+	if (direcciónVertical== 1 && matrizjuego[posicionroja[0]+1] [posicionroja[1]] != 1){
+		matrizjuego[posicionroja[0]] [posicion[1]]=posicion_guardada;
+		if (matrizjuego[posicionroja[0]+1] [posicionroja[1]==0]){
+			*muertepacman=1;
+		}
+		posicionroja[0]=posicionroja[0]+1;
+		*posicion_guardada = matrizjuego [posicionroja[0]][posicionroja[1]];
+		if (*posicion_guardada==0){
+			*posicion_guardada=2;
+		}
+	}
+	
+	if (direccionHorizontal== 1 && matrizjuego[posicionroja[0]] [posicionroja[1]-1] != 1){
+		matrizjuego[posicionroja[0]] [posicionroja[1]]=*posicion_guardada;
+		if (matrizjuego [posicionroja[0]] [posicionroja[1]-1]==0]){
+			*muertepacman=1;
+		}
+	
+	}
+	
 }
  
  
