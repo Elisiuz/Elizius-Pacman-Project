@@ -618,7 +618,7 @@ void FantasmaNaranja (int matrizjuego[20][30], int posicionnaranja[2], int *posi
 //Ojo: el fantasma sale del corral al principio y cuando te lo comes regresa, sería conveniente la función "sacar y meter fantasmas".
 }
  
-void FantasmaRojo (int matrizjuego[20][30], int posicionrojo[2], int *posicion_guardada, int posicionpacman[2]){
+void FantasmaRojo (int matrizjuego[20][30], int posicionrojo[2], int *posicion_guardada, int posicionpacman[2], int *muertepacman){
 	
 	int direccionHorizontal, direccionVertical;
 	
@@ -648,10 +648,19 @@ void FantasmaRojo (int matrizjuego[20][30], int posicionrojo[2], int *posicion_g
 		direccionHorizontal = 0;
 	}
 	
+	// -1 es para arriba, para arriba siempre se resta 
 	if(direccionVertical == 1 && matrizjuego[posicionrojo[0]-1] [posicionrojo[1]] != 1){
-		
+		matrizjuego[posicionrojo[0]] [posicionrojo[1]]=*posicion_guardada;
+		if (matrizjuego[posicionrojo[0]-1] [posicionrojo[1]==0]){
+			*muertepacman=1;		
+		}
+		posicionrojo[0]=posicionrojo[0]-1;
+		*posicion_guardada=matrizjuego[posicionrojo[0]][posicionrojo[1]];
+		if (*posicion_guardada==0){
+			*posicion_guardada=2;
+		}
+		matrizjuego[posicionrojo[0]][posicionrojo[1]]=6; 
 	}
-	
 }
  
  
