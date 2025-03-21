@@ -27,7 +27,7 @@ void FantasmaNaranja(int matrizjuego[20][30], int posicionnaranja[2], int *posic
 void SacarFantasma (int matrizjuego[20][30], int posicionnaranja[2], int posicionroja[2], int posicionrosa[2], int posicionazul[2], int turno);
 void MostrarFruta (int matrizjuego[20][30]);
 void Reinicio (int matrizjuego[20][30], int posicionpacman[2],int posicionnaranja[2], int posicionroja[2], int posicionrosa[2], int posicionazul[2]);
-void FantasmaRojo (int matrizjuego[20][30], int posicionroja[2], int *posicion_guardada_roja, int posicionpacman[2], int *muertepacman);
+void FantasmaRojo (int matrizjuego[20][30], int posicionroja[2], int *posicion_guardada, int posicionpacman[2], int *muertepacman);
 
 int main() {
 	srand(time(NULL));
@@ -259,19 +259,19 @@ void motordejuego(){
 		movimientopacman(matrizjuego, posicionpacman, &poderactivo, &muertepacman, &score);
 		TiempoSalida++;
 		if (TiempoSalida==10){
-			SacarFantasma(matrizjuego, posicionnaranja, posicionroja, posicionrosa, posicionazul, 0);			
+			//SacarFantasma(matrizjuego, posicionnaranja, posicionroja, posicionrosa, posicionazul, 0);			
 		}
 		if (TiempoSalida==20){
 			SacarFantasma(matrizjuego, posicionnaranja, posicionroja, posicionrosa, posicionazul, 1);			
 		}
 		if (TiempoSalida==30){
-			SacarFantasma(matrizjuego, posicionnaranja, posicionroja, posicionrosa, posicionazul, 2);			
+			//SacarFantasma(matrizjuego, posicionnaranja, posicionroja, posicionrosa, posicionazul, 2);			
 		}
 		if (TiempoSalida==40){
-			SacarFantasma(matrizjuego, posicionnaranja, posicionroja, posicionrosa, posicionazul, 3);			
+			//SacarFantasma(matrizjuego, posicionnaranja, posicionroja, posicionrosa, posicionazul, 3);			
 		}  
 		if (TiempoSalida>10){
-			FantasmaNaranja(matrizjuego, posicionnaranja, &posicion_guardada, &muertepacman);  
+			//FantasmaNaranja(matrizjuego, posicionnaranja, &posicion_guardada, &muertepacman);  
 		}
 		if (TiempoSalida > 20) {
 	    	FantasmaRojo(matrizjuego, posicionroja, &posicion_guardada_roja, posicionpacman, &muertepacman);
@@ -466,7 +466,6 @@ void FantasmaNaranja (int matrizjuego[20][30], int posicionnaranja[2], int *posi
 				if (*posicion_guardada==0){
 					*posicion_guardada=2;
 				}
-			sasaasaxsd
 				
 				matrizjuego[posicionnaranja[0]][posicionnaranja[1]]=9;				
 				if (posicionnaranja[0]==7 && posicionnaranja[1]==0){ // Esto es el teleport de los hoyos de las paredes
@@ -541,242 +540,78 @@ void FantasmaNaranja (int matrizjuego[20][30], int posicionnaranja[2], int *posi
 //Ojo: el fantasma sale del corral al principio y cuando te lo comes regresa, sería conveniente la función "sacar y meter fantasmas".
 }
 
-void FantasmaRojo (int matrizjuego[20][30], int posicionroja[2], int *posicion_guardada_roja, int posicionpacman[2], int *muertepacman){
-    
+void FantasmaRojo (int matrizjuego[20][30], int posicionroja[2], int *posicion_guardada, int posicionpacman[2], int *muertepacman){
+	
+	
+	int direccionHorizontal, direccionVertical; 
+	
+	if(posicionroja[0] > posicionpacman[0]){
+		//El fantasma está en filas abajo del pacman
+		//por lo tanto el fantasma tiene que ir hacia arriba
+		direccionVertical = 1; //Aquí el 1 significa que debe ir hacia arriba
+	}
+	else if(posicionroja[0] < posicionpacman[0]){
+		//El fantasma se debe de mover hacia abajo
+		direccionVertical = 2; 
+	}
+	else{
+		direccionVertical = 0; //No se debe de mover de fila
+	}
+	
+	if(posicionroja[1] > posicionpacman[1]){
+		//El fantasma se debe de mover hacia la izquierda
+		direccionHorizontal = 1; 
+	}
+	else if(posicionroja[1] < posicionpacman[1]){
+		//El fantasma se debe de mover hacia la derecha
+		direccionHorizontal = 2;
+	}
+	else{
+		//Están en la misma columna
+		direccionHorizontal = 0;
+	}
+	
+	direccionVertical = 2;
+	// -1 es para arriba, para arriba siempre se resta: esto es si el pacman está para arriba
+	/*if(direccionVertical == 1 && matrizjuego[posicionroja[0]-1] [posicionroja[1]] != 1){
+		matrizjuego[posicionroja[0]] [posicionroja[1]]=*posicion_guardada;
+		if (matrizjuego[posicionroja[0]-1] [posicionroja[1]==0]){
+			*muertepacman=1;		
+		}
+		posicionroja[0]=posicionroja[0]-1;
+		*posicion_guardada=matrizjuego[posicionroja[0]][posicionroja[1]];
+		if (*posicion_guardada==0){
+			*posicion_guardada=2;
+		}
+		matrizjuego[posicionroja[0]][posicionroja[1]]=6; 
+	}*/
+	
+	// El fantasma debe de ir para abajo
+
+	if (direccionVertical == 2 && matrizjuego[posicionroja[0]+1] [posicionroja[1]] != 1){
+		matrizjuego[posicionroja[0]] [posicionroja[1]]=*posicion_guardada;
+		if (matrizjuego[posicionroja[0]+1] [posicionroja[1]] == 0){
+			printf("ENTRAAA\n");
+			*muertepacman=1;
+		}
+		posicionroja[0]=posicionroja[0]+1;
+		*posicion_guardada = matrizjuego [posicionroja[0]][posicionroja[1]];
+		if (*posicion_guardada==0){
+			*posicion_guardada=2;
+		}
+	}
+	
+	matrizjuego[posicionroja[0]][posicionroja[1]] = 6;
+	
 	/*
-      1) LIBERAR LA CELDA ACTUAL DEL FANTASMA
-      ---------------------------------------
-      - El fantasma estaba ocupando la celda [posicionroja[0]][posicionroja[1]].
-      - Antes de moverse, esa celda debe "restaurarse" al valor que tenía antes de que llegara el fantasma.
-      - Ese valor está en *posicion_guardada_roja (por ejemplo, 4 = puntos pequeños, 2 = espacio, etc.).
-    */
-    matrizjuego[posicionroja[0]][posicionroja[1]] = *posicion_guardada_roja;
-
-    /*
-      2) CALCULAR LAS DIFERENCIAS ENTRE LA POSICIÓN DEL FANTASMA Y LA DE PAC-MAN
-      --------------------------------------------------------------------------
-      - diffFila > 0  => Pac-Man está más abajo que el fantasma.
-      - diffFila < 0  => Pac-Man está más arriba.
-      - diffCol  > 0  => Pac-Man está a la derecha.
-      - diffCol  < 0  => Pac-Man está a la izquierda.
-    */
-    int diffFila = posicionpacman[0] - posicionroja[0];
-    int diffCol  = posicionpacman[1] - posicionroja[1];
-
-    /*
-      3) INTENTAR MOVERSE EN DIRECCIÓN A PAC-MAN
-      ------------------------------------------
-      - Queremos que el fantasma se acerque a Pac-Man.
-      - Decidimos movernos primero en el eje (vertical u horizontal) que tenga mayor diferencia.
-      - En caso de que no se pueda (muro en esa dirección), probamos el otro eje.
-      - Si aun así no se pudo mover (rodeado de muros), hacemos un intento aleatorio para evitar que se quede parado.
-    */
-
-    // Esta variable indicará si finalmente el fantasma logró moverse (1) o no (0).
-    int seMovio = 0;
-
-    /*
-      3.1) DECIDIR SI PREFERIMOS MOVER VERTICAL O HORIZONTAL PRIMERO
-      --------------------------------------------------------------
-      - Si |diffFila| >= |diffCol|, significa que la "distancia" vertical es mayor o igual,
-        así que intentamos primero en vertical (arriba/abajo).
-      - Si |diffFila| < |diffCol|, intentamos primero en horizontal (izquierda/derecha).
-    */
-    if (abs(diffFila) >= abs(diffCol)) {
-        // PRIORIDAD A MOVERSE EN VERTICAL
-
-        // A) CASO: Pac-Man está abajo (diffFila > 0)
-        if (diffFila > 0) {
-            // Verificamos si la fila de abajo sigue estando dentro del mapa (menor a 20)
-            // y que no sea un muro (celda != 1).
-            if (posicionroja[0] + 1 < 20 && matrizjuego[posicionroja[0] + 1][posicionroja[1]] != 1) {
-                // Si allí está Pac-Man (celda == 0), marcamos la muerte del Pac-Man.
-                if (matrizjuego[posicionroja[0] + 1][posicionroja[1]] == 0) {
-                    *muertepacman = 1;
-                }
-                // Movemos al fantasma una fila hacia abajo.
-                posicionroja[0]++;
-                seMovio = 1;  // Se movió con éxito
-            }
-        }
-        // B) CASO: Pac-Man está arriba (diffFila < 0)
-        else if (diffFila < 0) {
-            // Mover una fila arriba si no es un muro y sigue dentro del mapa.
-            if (posicionroja[0] - 1 >= 0 && matrizjuego[posicionroja[0] - 1][posicionroja[1]] != 1) {
-                if (matrizjuego[posicionroja[0] - 1][posicionroja[1]] == 0) {
-                    *muertepacman = 1;
-                }
-                posicionroja[0]--;
-                seMovio = 1;
-            }
-        }
-
-        /*
-          3.2) SI NO SE MOVIÓ EN VERTICAL, SE INTENTA MOVER EN HORIZONTAL
-          --------------------------------------------------------------
-          - Esto pasa si no hay nada que hacer en vertical (no se cumplió diffFila>0 ni diffFila<0)
-            o si había un muro que impidió moverse.
-        */
-        if (!seMovio) {
-            // Pac-Man a la derecha (diffCol > 0)
-            if (diffCol > 0) {
-                // Verificar que a la derecha no sea muro y esté en rango
-                if (posicionroja[1] + 1 < 30 && matrizjuego[posicionroja[0]][posicionroja[1] + 1] != 1) {
-                    if (matrizjuego[posicionroja[0]][posicionroja[1] + 1] == 0) {
-                        *muertepacman = 1;
-                    }
-                    posicionroja[1]++;
-                    seMovio = 1;
-                }
-            }
-            // Pac-Man a la izquierda (diffCol < 0)
-            else if (diffCol < 0) {
-                if (posicionroja[1] - 1 >= 0 && matrizjuego[posicionroja[0]][posicionroja[1] - 1] != 1) {
-                    if (matrizjuego[posicionroja[0]][posicionroja[1] - 1] == 0) {
-                        *muertepacman = 1;
-                    }
-                    posicionroja[1]--;
-                    seMovio = 1;
-                }
-            }
-        }
-    }
-    else {
-        // PRIORIDAD A MOVERSE EN HORIZONTAL (|diffCol| > |diffFila|)
-
-        // A) CASO: Pac-Man a la derecha (diffCol > 0)
-        if (diffCol > 0) {
-            if (posicionroja[1] + 1 < 30 && matrizjuego[posicionroja[0]][posicionroja[1] + 1] != 1) {
-                if (matrizjuego[posicionroja[0]][posicionroja[1] + 1] == 0) {
-                    *muertepacman = 1;
-                }
-                posicionroja[1]++;
-                seMovio = 1;
-            }
-        }
-        // B) CASO: Pac-Man a la izquierda (diffCol < 0)
-        else if (diffCol < 0) {
-            if (posicionroja[1] - 1 >= 0 && matrizjuego[posicionroja[0]][posicionroja[1] - 1] != 1) {
-                if (matrizjuego[posicionroja[0]][posicionroja[1] - 1] == 0) {
-                    *muertepacman = 1;
-                }
-                posicionroja[1]--;
-                seMovio = 1;
-            }
-        }
-
-        /*
-          3.3) SI NO SE MOVIÓ EN HORIZONTAL, SE INTENTA MOVER EN VERTICAL
-          --------------------------------------------------------------
-          - Igual que antes, si hay un muro bloqueando, probamos la otra dirección.
-        */
-        if (!seMovio) {
-            // Pac-Man abajo (diffFila > 0)
-            if (diffFila > 0) {
-                if (posicionroja[0] + 1 < 20 && matrizjuego[posicionroja[0] + 1][posicionroja[1]] != 1) {
-                    if (matrizjuego[posicionroja[0] + 1][posicionroja[1]] == 0) {
-                        *muertepacman = 1;
-                    }
-                    posicionroja[0]++;
-                    seMovio = 1;
-                }
-            }
-            // Pac-Man arriba (diffFila < 0)
-            else if (diffFila < 0) {
-                if (posicionroja[0] - 1 >= 0 && matrizjuego[posicionroja[0] - 1][posicionroja[1]] != 1) {
-                    if (matrizjuego[posicionroja[0] - 1][posicionroja[1]] == 0) {
-                        *muertepacman = 1;
-                    }
-                    posicionroja[0]--;
-                    seMovio = 1;
-                }
-            }
-        }
-    }
-
-    /*
-      4) MOVIMIENTO ALEATORIO DE RESERVA
-      ----------------------------------
-      - Si hasta aquí no se ha podido mover (seMovio == 0), significa que las rutas
-        para ir hacia Pac-Man estaban bloqueadas por muros.
-      - Para evitar que el fantasma se quede quieto en su lugar, elegimos
-        una dirección aleatoria y probamos hasta 4 veces.
-    */
-    if (!seMovio) {
-        int i;               // Para el bucle
-        int intento;         // Dirección aleatoria
-        int movimientoOk = 0; // Se moverá si encuentra una dirección libre
-
-        // Probamos hasta 4 direcciones, una por cada loop
-        for (i = 0; i < 4 && !movimientoOk; i++) {
-            // Generamos un número aleatorio entre 0 y 3:
-            // 0 = arriba, 1 = abajo, 2 = izquierda, 3 = derecha
-            intento = rand() % 4;
-
-            switch (intento) {
-                case 0: // ARRIBA
-                    if (posicionroja[0] - 1 >= 0 && matrizjuego[posicionroja[0] - 1][posicionroja[1]] != 1) {
-                        if (matrizjuego[posicionroja[0] - 1][posicionroja[1]] == 0) {
-                            *muertepacman = 1;
-                        }
-                        posicionroja[0]--;
-                        movimientoOk = 1; // Se movió
-                    }
-                    break;
-
-                case 1: // ABAJO
-                    if (posicionroja[0] + 1 < 20 && matrizjuego[posicionroja[0] + 1][posicionroja[1]] != 1) {
-                        if (matrizjuego[posicionroja[0] + 1][posicionroja[1]] == 0) {
-                            *muertepacman = 1;
-                        }
-                        posicionroja[0]++;
-                        movimientoOk = 1;
-                    }
-                    break;
-
-                case 2: // IZQUIERDA
-                    if (posicionroja[1] - 1 >= 0 && matrizjuego[posicionroja[0]][posicionroja[1] - 1] != 1) {
-                        if (matrizjuego[posicionroja[0]][posicionroja[1] - 1] == 0) {
-                            *muertepacman = 1;
-                        }
-                        posicionroja[1]--;
-                        movimientoOk = 1;
-                    }
-                    break;
-
-                case 3: // DERECHA
-                    if (posicionroja[1] + 1 < 30 && matrizjuego[posicionroja[0]][posicionroja[1] + 1] != 1) {
-                        if (matrizjuego[posicionroja[0]][posicionroja[1] + 1] == 0) {
-                            *muertepacman = 1;
-                        }
-                        posicionroja[1]++;
-                        movimientoOk = 1;
-                    }
-                    break;
-            }
-        }
-    }
-
-    /*
-      5) ACTUALIZAR NUEVA CELDA DEL FANTASMA ROJO
-      -------------------------------------------
-      - Guardar qué había en la nueva posición (para restaurarlo después).
-      - Si era Pac-Man (0), lo convertimos en 2 (espacio) porque ya se marcó *muertepacman = 1.
-      - Ponemos 6 en la celda final para dibujar al fantasma rojo en esa posición.
-    */
-
-    // Guardamos el valor original que había antes de colocar el fantasma,
-    // para usarlo en la próxima iteración (la próxima vez que se mueva).
-    *posicion_guardada_roja = matrizjuego[posicionroja[0]][posicionroja[1]];
-
-    // Si en esa casilla estaba Pac-Man (0), ya lo marcamos como muerto,
-    // pero para no "romper" el mapa, lo cambiamos a 2.
-    if (*posicion_guardada_roja == 0) {
-        *posicion_guardada_roja = 2;
-    }
-
-    // Finalmente, colocamos el fantasma rojo (6) en la posición que calculamos.
-    matrizjuego[posicionroja[0]][posicionroja[1]] = 6;
+	if (direccionHorizontal== 1 && matrizjuego[posicionroja[0]] [posicionroja[1]-1] != 1){
+		matrizjuego[posicionroja[0]] [posicionroja[1]]=*posicion_guardada;
+		if (matrizjuego [posicionroja[0]] [posicionroja[1]-1] == 0){
+			*muertepacman=1;
+		}
+	
+	}
+	*/
 }
 
 
