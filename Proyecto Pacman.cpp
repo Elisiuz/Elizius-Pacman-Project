@@ -24,6 +24,10 @@ void regresar();
 int verificarUsuario(char usuario[]);
 void IngresarUsuario (char usuario[], char password[]);
 void FantasmaNaranja(int matrizjuego[20][30], int posicionnaranja[2], int *posicion_guardada, int *muertepacman); //es el que se mueve aleatoriamente
+<<<<<<< HEAD
+=======
+void FantasmaRojo (int matrizjuego[20][30], int posicionrojo[2], int *posicion_guardada, int *muertepacman);//AQUÍ VA FANTASMA ROJO
+>>>>>>> parent of 58a03f1 (Pacman)
 void SacarFantasma (int matrizjuego[20][30], int posicionnaranja[2], int posicionroja[2], int posicionrosa[2], int posicionazul[2], int turno);
 void MostrarFruta (int matrizjuego[20][30]);
 void Reinicio (int matrizjuego[20][30], int posicionpacman[2],int posicionnaranja[2], int posicionroja[2], int posicionrosa[2], int posicionazul[2]);
@@ -251,6 +255,7 @@ void motordejuego(){
 	int posicion_guardada_roja = 4; 
 	
 	BITMAP *buffer = create_bitmap(960,660);
+<<<<<<< HEAD
 		
 	cargarmapa1(matrizjuego);
 	MostrarFruta(matrizjuego);
@@ -260,6 +265,86 @@ void motordejuego(){
 		TiempoSalida++;
 		if (TiempoSalida==10){
 			SacarFantasma(matrizjuego, posicionnaranja, posicionroja, posicionrosa, posicionazul, 0);			
+=======
+	BITMAP *findejuego = load_bitmap("perdiste.bmp", NULL);
+	
+	do{
+		TiempoSalida=0;
+		posicion_guardada=4;
+		poderactivo=0;
+		TiempoPoder=0;
+		muertepacman=0;
+		vidaspacman=3;
+		turno=0;
+		score=0;
+		posicionpacman[0]=13;
+		posicionpacman[1]=13;
+	
+		
+		//posiciones iniciales de los fantasmas en el mapa
+		
+		posicionnaranja[0]=9;
+		posicionnaranja[1]=14;
+		
+		posicionroja[0]=8; 
+		posicionroja[1]=13;
+		
+		posicionrosa[0]=8;
+		posicionrosa[1]=14;
+		
+		posicionazul[0]=9;
+		posicionazul[1]=13;
+		
+		cargarmapa1(matrizjuego);
+		MostrarFruta(matrizjuego);
+		do{  
+			pintarmapa(matrizjuego,buffer, &poderactivo, vidaspacman, score_frutas, nivel);
+			movimientopacman(matrizjuego, posicionpacman, &poderactivo, &muertepacman, &score, &score_frutas);
+			TiempoSalida++;
+			if (TiempoSalida==10){
+				SacarFantasma(matrizjuego, posicionnaranja, posicionroja, posicionrosa, posicionazul, 0);			
+			}
+			if (TiempoSalida==20){
+				SacarFantasma(matrizjuego, posicionnaranja, posicionroja, posicionrosa, posicionazul, 1);			
+			}
+			if (TiempoSalida==30){
+				SacarFantasma(matrizjuego, posicionnaranja, posicionroja, posicionrosa, posicionazul, 2);			
+			}
+			if (TiempoSalida==40){
+				SacarFantasma(matrizjuego, posicionnaranja, posicionroja, posicionrosa, posicionazul, 3);			
+			}  
+			if (TiempoSalida>10){
+				//FantasmaNaranja(matrizjuego, posicionnaranja, &posicion_guardada, &muertepacman);  
+			}		
+			if (poderactivo==1){
+				TiempoPoder++;
+			}
+			if (TiempoPoder>30){
+				poderactivo=0;
+				TiempoPoder=0;
+			}
+			if (muertepacman==1){
+				Reinicio(matrizjuego, posicionpacman, posicionnaranja, posicionroja, posicionrosa, posicionazul); //Esto es ciuando pierde una vida
+				muertepacman=0;
+				TiempoSalida=0;
+				vidaspacman--;
+			}
+			//system ("pause");
+			//system ("cls"); 
+			blit(buffer,screen,0,0,0,0,960,660);
+			textprintf(screen, font1,0,-2,makecol(255,153,51),"score: %i",score);  
+			textprintf(screen, font1,200,-2,makecol(8,211,251),"[Esc] Pausa");	    
+			textprintf(screen, font1,400,-2,makecol(251,236,8),"Nivel: %i", nivel);
+	
+			clear(buffer);//Borramos el buffer
+			rest(VELOCIDAD);//Maneja la velocidad del juego. Entre más alto el parámetro, más lento el juego
+		}while(vidaspacman>0 && score<30);
+		//Significa que pasó de nivel
+		if(score>=30){
+			nivel++;	
+			printf("ENTRA");
+			continue;
+>>>>>>> parent of 58a03f1 (Pacman)
 		}
 		if (TiempoSalida==20){
 			SacarFantasma(matrizjuego, posicionnaranja, posicionroja, posicionrosa, posicionazul, 1);			
@@ -540,6 +625,7 @@ void FantasmaNaranja (int matrizjuego[20][30], int posicionnaranja[2], int *posi
 	
 //Ojo: el fantasma sale del corral al principio y cuando te lo comes regresa, sería conveniente la función "sacar y meter fantasmas".
 }
+<<<<<<< HEAD
 
 void FantasmaRojo (int matrizjuego[20][30], int posicionroja[2], int *posicion_guardada_roja, int posicionpacman[2], int *muertepacman){
     
@@ -777,6 +863,52 @@ void FantasmaRojo (int matrizjuego[20][30], int posicionroja[2], int *posicion_g
 
     // Finalmente, colocamos el fantasma rojo (6) en la posición que calculamos.
     matrizjuego[posicionroja[0]][posicionroja[1]] = 6;
+=======
+ 
+void FantasmaRojo (int matrizjuego[20][30], int posicionrojo[2], int *posicion_guardada, int posicionpacman[2], int *muertepacman){
+	
+	int direccionHorizontal, direccionVertical;
+	
+	if(posicionrojo[0] > posicionpacman[0]){
+		//El fantasma está en filas abajo del pacman
+		//por lo tanto el fantasma tiene que ir hacia arriba
+		direccionVertical = 1; //Aquí el 1 significa que debe ir hacia arriba
+	}
+	else if(posicionrojo[0] < posicionpacman[0]){
+		//El fantasma se debe de mover hacia abajo
+		direccionVertical = 2; 
+	}
+	else{
+		direccionVertical = 0; //No se debe de mover de fila
+	}
+	
+	if(posicionrojo[1] > posicionpacman[1]){
+		//El fantasma se debe de mover hacia la izquierda
+		direccionHorizontal = 1; 
+	}
+	else if(posicionrojo[1] < posicionpacman[1]){
+		//El fantasma se debe de mover hacia la derecha
+		direccionHorizontal = 2;
+	}
+	else{
+		//Están en la misma columna
+		direccionHorizontal = 0;
+	}
+	
+	// -1 es para arriba, para arriba siempre se resta 
+	if(direccionVertical == 1 && matrizjuego[posicionrojo[0]-1] [posicionrojo[1]] != 1){
+		matrizjuego[posicionrojo[0]] [posicionrojo[1]]=*posicion_guardada;
+		if (matrizjuego[posicionrojo[0]-1] [posicionrojo[1]==0]){
+			*muertepacman=1;		
+		}
+		posicionrojo[0]=posicionrojo[0]-1;
+		*posicion_guardada=matrizjuego[posicionrojo[0]][posicionrojo[1]];
+		if (*posicion_guardada==0){
+			*posicion_guardada=2;
+		}
+		matrizjuego[posicionrojo[0]][posicionrojo[1]]=6; 
+	}
+>>>>>>> parent of 58a03f1 (Pacman)
 }
 
 
