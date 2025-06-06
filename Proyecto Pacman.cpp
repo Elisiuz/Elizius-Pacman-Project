@@ -542,7 +542,6 @@ void FantasmaNaranja (int matrizjuego[20][30], int posicionnaranja[2], int *posi
 
 void FantasmaRojo (int matrizjuego[20][30], int posicionroja[2], int *posicion_guardada, int posicionpacman[2], int *muertepacman){
 	
-	
 	int direccionHorizontal, direccionVertical; 
 	
 	if(posicionroja[0] > posicionpacman[0]){
@@ -571,20 +570,21 @@ void FantasmaRojo (int matrizjuego[20][30], int posicionroja[2], int *posicion_g
 		direccionHorizontal = 0;
 	}
 	
-	direccionVertical = 2;
+	//direccionVertical = 2;
 	// -1 es para arriba, para arriba siempre se resta: esto es si el pacman está para arriba
-	/*if(direccionVertical == 1 && matrizjuego[posicionroja[0]-1] [posicionroja[1]] != 1){
+	if(direccionVertical == 1 && matrizjuego[posicionroja[0]-1] [posicionroja[1]] != 1){
 		matrizjuego[posicionroja[0]] [posicionroja[1]]=*posicion_guardada;
-		if (matrizjuego[posicionroja[0]-1] [posicionroja[1]==0]){
-			*muertepacman=1;		
+		if (matrizjuego[posicionroja[0]-1] [posicionroja[1]] == 0){
+			*muertepacman=1;
+			printf("ENTRAAA");		
 		}
 		posicionroja[0]=posicionroja[0]-1;
 		*posicion_guardada=matrizjuego[posicionroja[0]][posicionroja[1]];
 		if (*posicion_guardada==0){
 			*posicion_guardada=2;
 		}
-		matrizjuego[posicionroja[0]][posicionroja[1]]=6; 
-	}*/
+		
+	}
 	
 	// El fantasma debe de ir para abajo
 
