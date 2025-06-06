@@ -547,7 +547,7 @@ void FantasmaRojo (int matrizjuego[20][30], int posicionroja[2], int *posicion_g
 	if(posicionroja[0] > posicionpacman[0]){
 		//El fantasma está en filas abajo del pacman
 		//por lo tanto el fantasma tiene que ir hacia arriba
-		direccionVertical = 1; //Aquí el 1 significa que debe ir hacia arriba
+		direccionVertical = 1; //Aquí el 1 significa que debe ir hacia arriba /OK
 	}
 	else if(posicionroja[0] < posicionpacman[0]){
 		//El fantasma se debe de mover hacia abajo
@@ -575,8 +575,7 @@ void FantasmaRojo (int matrizjuego[20][30], int posicionroja[2], int *posicion_g
 	if(direccionVertical == 1 && matrizjuego[posicionroja[0]-1] [posicionroja[1]] != 1){
 		matrizjuego[posicionroja[0]] [posicionroja[1]]=*posicion_guardada;
 		if (matrizjuego[posicionroja[0]-1] [posicionroja[1]] == 0){
-			*muertepacman=1;
-			printf("ENTRAAA");		
+			*muertepacman=1;	
 		}
 		posicionroja[0]=posicionroja[0]-1;
 		*posicion_guardada=matrizjuego[posicionroja[0]][posicionroja[1]];
@@ -591,7 +590,6 @@ void FantasmaRojo (int matrizjuego[20][30], int posicionroja[2], int *posicion_g
 	if (direccionVertical == 2 && matrizjuego[posicionroja[0]+1] [posicionroja[1]] != 1){
 		matrizjuego[posicionroja[0]] [posicionroja[1]]=*posicion_guardada;
 		if (matrizjuego[posicionroja[0]+1] [posicionroja[1]] == 0){
-			printf("ENTRAAA\n");
 			*muertepacman=1;
 		}
 		posicionroja[0]=posicionroja[0]+1;
@@ -601,22 +599,27 @@ void FantasmaRojo (int matrizjuego[20][30], int posicionroja[2], int *posicion_g
 		}
 	}
 	
+	if (direccionVertical == 1 && matrizjuego[posicionroja[0]][posicionroja[1]+1] !=1){
+		matrizjuego[posicionroja[0]] [posicionroja[1]] = *posicion_guardada;
+		if (matrizjuego[posicionroja[0]][posicionroja[1]+1]==0) {
+			*muertepacman=1;
+			
+		posicionroja[1]=posicionroja[1]+1;
+		*posicion_guardada = matrizjuego [posicionroja[0]][posicionroja[1]];
+		if (*posicion_guardada==0){
+			*posicion_guardada=0;
+		}
+		
+			
+		}
+			
+		
+	}  
+	
 	matrizjuego[posicionroja[0]][posicionroja[1]] = 6;
 	
-	/*
-	if (direccionHorizontal== 1 && matrizjuego[posicionroja[0]] [posicionroja[1]-1] != 1){
-		matrizjuego[posicionroja[0]] [posicionroja[1]]=*posicion_guardada;
-		if (matrizjuego [posicionroja[0]] [posicionroja[1]-1] == 0){
-			*muertepacman=1;
-		}
-	
 	}
-	*/
-}
-
-
-
-   	
+	
 void SacarFantasma (int matrizjuego[20][30], int posicionnaranja[2], int posicionroja[2], int posicionrosa[2], int posicionazul[2], int turno){
 	
 	switch(turno){
