@@ -613,7 +613,6 @@ void FantasmaRojo (int matrizjuego[20][30], int posicionroja[2], int *posicion_g
 			
 		}
 			
-		
 	}  
 	
 	matrizjuego[posicionroja[0]][posicionroja[1]] = 6;
