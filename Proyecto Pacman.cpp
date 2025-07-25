@@ -587,7 +587,7 @@ void FantasmaRojo (int matrizjuego[20][30], int posicionroja[2], int *posicion_g
 	
 	// El fantasma debe de ir para abajo
 
-	if (direccionVertical == 2 && matrizjuego[posicionroja[0]+1] [posicionroja[1]] != 1){
+	else if (direccionVertical == 2 && matrizjuego[posicionroja[0]+1] [posicionroja[1]] != 1){
 		matrizjuego[posicionroja[0]] [posicionroja[1]]=*posicion_guardada;
 		if (matrizjuego[posicionroja[0]+1] [posicionroja[1]] == 0){
 			*muertepacman=1;
@@ -599,25 +599,24 @@ void FantasmaRojo (int matrizjuego[20][30], int posicionroja[2], int *posicion_g
 		}
 	}
 	
-	if (direccionVertical == 1 && matrizjuego[posicionroja[0]][posicionroja[1]+1] !=1){
-		matrizjuego[posicionroja[0]] [posicionroja[1]] = *posicion_guardada;
-		if (matrizjuego[posicionroja[0]][posicionroja[1]+1]==0) {
+	
+	// El fantasma va para la izquierda 
+	
+	else if (direccionHorizontal == 1 && matrizjuego[posicionroja[0]] [posicionroja[1]-1] != 1) {
+		matrizjuego[posicionroja[0]] [posicionroja[1]]=*posicion_guardada;
+		if (matrizjuego[posicionroja[0]] [posicionroja[1]-1] == 0){
 			*muertepacman=1;
-			
-		posicionroja[1]=posicionroja[1]+1;
-		*posicion_guardada = matrizjuego [posicionroja[0]][posicionroja[1]];
+		}
+		posicionroja[1]=posicionroja[1]-1;
+		*posicion_guardada=matrizjuego[posicionroja[0]][posicionroja[1]];
 		if (*posicion_guardada==0){
-			*posicion_guardada=0;
+			*posicion_guardada=1;
 		}
-		
-			
-		}
-			
-	}  
+	} 
 	
 	matrizjuego[posicionroja[0]][posicionroja[1]] = 6;
 	
-	}
+}
 	
 void SacarFantasma (int matrizjuego[20][30], int posicionnaranja[2], int posicionroja[2], int posicionrosa[2], int posicionazul[2], int turno){
 	
