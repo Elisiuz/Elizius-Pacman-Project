@@ -9,7 +9,7 @@
 //Crear tres mapas
 // Primero las funciones que carguen cada mapa
 
-void cargarmapa1(int matrizjuego[20][30]); 
+void cargarmapa1(int matrizjuego[20][30]);  
 void cargarmapa2();
 void cargarmapa3(); 
 void menu();
@@ -613,9 +613,7 @@ void FantasmaRojo (int matrizjuego[20][30], int posicionroja[2], int *posicion_g
 			*posicion_guardada=1;
 		}
 	} 
-	
 	matrizjuego[posicionroja[0]][posicionroja[1]] = 6;
-	
 }
 	
 void SacarFantasma (int matrizjuego[20][30], int posicionnaranja[2], int posicionroja[2], int posicionrosa[2], int posicionazul[2], int turno){
