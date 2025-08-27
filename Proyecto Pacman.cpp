@@ -258,18 +258,13 @@ void motordejuego(){
 		pintarmapa(matrizjuego,buffer, &poderactivo);
 		movimientopacman(matrizjuego, posicionpacman, &poderactivo, &muertepacman, &score);
 		TiempoSalida++;
-		if (TiempoSalida==10){
-			SacarFantasma(matrizjuego, posicionnaranja, posicionroja, posicionrosa, posicionazul, 0);			
+		
+		if(TiempoSalida<40){
+			SacarFantasma(matrizjuego, posicionnaranja, posicionroja, posicionrosa, posicionazul, TiempoSalida);	
 		}
-		if (TiempoSalida==20){
-			SacarFantasma(matrizjuego, posicionnaranja, posicionroja, posicionrosa, posicionazul, 1);			
-		}
-		if (TiempoSalida==30){
-			//SacarFantasma(matrizjuego, posicionnaranja, posicionroja, posicionrosa, posicionazul, 2);			
-		}
-		if (TiempoSalida==40){
-			//SacarFantasma(matrizjuego, posicionnaranja, posicionroja, posicionrosa, posicionazul, 3);			
-		}  
+		
+		
+		
 		if (TiempoSalida>10){
 			FantasmaNaranja(matrizjuego, posicionnaranja, &posicion_guardada, &muertepacman);  
 		}
@@ -630,34 +625,36 @@ void FantasmaRojo (int matrizjuego[20][30], int posicionroja[2], int *posicion_g
 	
 void SacarFantasma (int matrizjuego[20][30], int posicionnaranja[2], int posicionroja[2], int posicionrosa[2], int posicionazul[2], int turno){
 	
+	
 	switch(turno){
-		case 0:
+		case 10:
 			matrizjuego[posicionnaranja[0]][posicionnaranja[1]]=2; // Se actualiza la coordenada como un espacio vacío
 			posicionnaranja[0]=7; // posicion vertical
 			posicionnaranja[1]=11; // posicion horizontal
 			matrizjuego[posicionnaranja[0]][posicionnaranja[1]]=9; // Se actualiza la localización del fantasma en la coordenada de arriba
 			break;
 			
-		case 1:
+		case 20:
 			matrizjuego[posicionroja[0]][posicionroja[1]]=2;
 			posicionroja[0]=8;
 			posicionroja[1]=11;
 			matrizjuego[posicionroja[0]][posicionroja[1]]=6; 
 			break;
 			
-		case 2:
+		case 30:
 			matrizjuego[posicionrosa[0]][posicionrosa[1]]=2;
 			posicionrosa[0]= 8;
 			posicionrosa[1]= 16;
 			matrizjuego[posicionrosa[0]][posicionrosa[1]]=7;
 			break;
 		
-		case 3:
+		case 40:
 			matrizjuego[posicionazul[0]][posicionazul[1]]=2;
 			posicionazul[0]=10;
 			posicionazul[1]=11;
 			matrizjuego[posicionazul[0]][posicionazul[1]]=8;
 			break; 
+	
 	}
 	
 }
