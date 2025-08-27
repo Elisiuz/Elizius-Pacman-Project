@@ -14,7 +14,7 @@ void cargarmapa2();
 void cargarmapa3(); 
 void menu();
 void motordejuego();
-void pintarmapa(int matrizjuego[20][30], BITMAP *buffer, int *poderactivo);
+void pintarmapa(int matrizjuego[20][30], BITMAP *buffer, int *poderactivo, int vidas); //OJO AQUI NOS QUEDAMOS !!!!
 void movimientopacman(int matrizjuego[20][30], int posicionpacman[2], int *poderactivo, int *muertedepacman, int *score);
 void init();
 void submenuJugar(); 
@@ -259,12 +259,10 @@ void motordejuego(){
 		movimientopacman(matrizjuego, posicionpacman, &poderactivo, &muertepacman, &score);
 		TiempoSalida++;
 		
-		if(TiempoSalida<40){
+		if(TiempoSalida<=40){
 			SacarFantasma(matrizjuego, posicionnaranja, posicionroja, posicionrosa, posicionazul, TiempoSalida);	
 		}
-		
-		
-		
+			
 		if (TiempoSalida>10){
 			FantasmaNaranja(matrizjuego, posicionnaranja, &posicion_guardada, &muertepacman);  
 		}
@@ -297,7 +295,7 @@ void motordejuego(){
 	}while(true);
 }
  
-void pintarmapa(int matrizjuego[20][30], BITMAP *buffer, int *poderactivo){
+void pintarmapa(int matrizjuego[20][30], BITMAP *buffer, int *poderactivo, int vidas){
 	int i,j; 
 	BITMAP *vectorMapa[15];
 	vectorMapa[0] = load_bitmap("CuerpoPacman_II.bmp", NULL); //PACMAN;
@@ -311,6 +309,7 @@ void pintarmapa(int matrizjuego[20][30], BITMAP *buffer, int *poderactivo){
 	vectorMapa[8] = load_bitmap("FantasmaInky_D.bmp", NULL);
 	vectorMapa[9] = load_bitmap("FantasmaClyde_Arriba.bmp", NULL); 
 	vectorMapa[10]= load_bitmap("Vidas3.bmp", NULL); 
+	
 	
 	if (*poderactivo==1){
 		vectorMapa[6]=load_bitmap("Fantasmas_Asustados.bmp", NULL);
