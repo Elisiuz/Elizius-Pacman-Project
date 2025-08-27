@@ -570,10 +570,6 @@ void FantasmaRojo (int matrizjuego[20][30], int posicionroja[2], int *posicion_g
 		direccionHorizontal = 0;
 	}
 
-	printf("direccionHorizontal: %d\n", direccionHorizontal);
-	printf("direccionVertical: %d\n", direccionVertical);
-	printf("matrizjuego: %d\n", matrizjuego);
-	
 	//direccionVertical = 2;
 	// -1 es para arriba, para arriba siempre se resta: esto es si el pacman está para arriba
 	if(direccionVertical == 1 && matrizjuego[posicionroja[0]-1] [posicionroja[1]] != 1){
@@ -588,7 +584,7 @@ void FantasmaRojo (int matrizjuego[20][30], int posicionroja[2], int *posicion_g
 		}
 		
 	}
-	
+	 
 	// El fantasma debe de ir para abajo
 
 	else if (direccionVertical == 2 && matrizjuego[posicionroja[0]+1] [posicionroja[1]] != 1){
