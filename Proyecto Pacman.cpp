@@ -259,7 +259,7 @@ void motordejuego(){
 		movimientopacman(matrizjuego, posicionpacman, &poderactivo, &muertepacman, &score);
 		TiempoSalida++;
 		if (TiempoSalida==10){
-			//SacarFantasma(matrizjuego, posicionnaranja, posicionroja, posicionrosa, posicionazul, 0);			
+			SacarFantasma(matrizjuego, posicionnaranja, posicionroja, posicionrosa, posicionazul, 0);			
 		}
 		if (TiempoSalida==20){
 			SacarFantasma(matrizjuego, posicionnaranja, posicionroja, posicionrosa, posicionazul, 1);			
@@ -271,7 +271,7 @@ void motordejuego(){
 			//SacarFantasma(matrizjuego, posicionnaranja, posicionroja, posicionrosa, posicionazul, 3);			
 		}  
 		if (TiempoSalida>10){
-			//FantasmaNaranja(matrizjuego, posicionnaranja, &posicion_guardada, &muertepacman);  
+			FantasmaNaranja(matrizjuego, posicionnaranja, &posicion_guardada, &muertepacman);  
 		}
 		if (TiempoSalida > 20) {
 	    	FantasmaRojo(matrizjuego, posicionroja, &posicion_guardada_roja, posicionpacman, &muertepacman);
@@ -287,7 +287,7 @@ void motordejuego(){
 			Reinicio(matrizjuego, posicionpacman, posicionnaranja, posicionroja, posicionrosa, posicionazul);
 			muertepacman=0;
 			TiempoSalida=0;
-		}
+		} 
 		
 		
 		//system ("pause");
@@ -582,7 +582,6 @@ void FantasmaRojo (int matrizjuego[20][30], int posicionroja[2], int *posicion_g
 		if (*posicion_guardada==0){
 			*posicion_guardada=2;
 		}
-		
 	}
 	 
 	// El fantasma debe de ir para abajo
