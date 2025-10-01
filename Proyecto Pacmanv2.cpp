@@ -282,19 +282,27 @@ void motordejuego(){
 			Reinicio(matrizjuego, posicionpacman, posicionnaranja, posicionroja, posicionrosa, posicionazul);
 			muertepacman=0;
 			TiempoSalida=0;
-		} 
-		
-		
+			vidas--;
+		} 		
 		//system ("pause");
 		//system ("cls"); 
 		blit(buffer,screen,0,0,0,0,960,660);
-		textprintf(screen, font1,0,-2,makecol(255,153,51),"score: %i",score);  
+		textprintf(screen, font1,0,-2,makecol(255,153,51),"score: %i",score);   
 		textprintf(screen, font1,200,-2,makecol(8,211,251),"[Esc] Pausa");	    
 		textprintf(screen, font1,400,-2,makecol(251,236,8),"Nivel: %i", Nivel);
 
 		clear(buffer);//Borramos el buffer
 		rest(VELOCIDAD);//Maneja la velocidad del juego. Entre más alto el parámetro, más lento el juego
-	}while(true);
+	}while(vidas>0);
+	
+	//vectorMapa[11]= load_bitmap("perdiste.bmp", NULL);
+	BITMAP *final;
+	final = load_bitmap("perdiste.bmp",NULL);
+	
+	do{
+		blit(final,buffer,0,0,0,0,900,660);
+		blit(buffer,screen,0,0,0,0,960,660);
+	}while(!key[KEY_ESC]);
 }
  
 void pintarmapa(int matrizjuego[20][30], BITMAP *buffer, int *poderactivo, int vidas){
@@ -311,6 +319,18 @@ void pintarmapa(int matrizjuego[20][30], BITMAP *buffer, int *poderactivo, int v
 	vectorMapa[8] = load_bitmap("FantasmaInky_D.bmp", NULL);
 	vectorMapa[9] = load_bitmap("FantasmaClyde_Arriba.bmp", NULL); 
 	
+	
+	if (vidas==3){
+		vectorMapa[10]= load_bitmap("Vidas3.bmp", NULL);
+	}
+	else if(vidas==2){
+		vectorMapa[10]= load_bitmap("Vidas2.bmp", NULL);
+	}
+	else {
+		vectorMapa[10]= load_bitmap("Vidas1.bmp", NULL);
+	}
+	
+	
 	if (*poderactivo==1){
 		vectorMapa[6]=load_bitmap("Fantasmas_Asustados.bmp", NULL);
 		vectorMapa[7]=load_bitmap("Fantasmas_Asustados.bmp", NULL);
@@ -320,15 +340,6 @@ void pintarmapa(int matrizjuego[20][30], BITMAP *buffer, int *poderactivo, int v
 	
 	draw_sprite(buffer, vectorMapa[10], 750,0);
 	
-	if (vidas==3){
-		vectorMapa[10]= load_bitmap("Vidas3.bmp", NULL);
-	}
-	else if(vidas==2){
-		vectorMapa[10]= load_bitmap("Vidas2.bmp", NULL);
-	}
-	else if (vidas==1){
-		vectorMapa[10]= load_bitmap("Vidas1.bmp", NULL);
-	}
 	
 	for (i=0; i<=19; i++){
 		for (j=0; j<=29; j++){
