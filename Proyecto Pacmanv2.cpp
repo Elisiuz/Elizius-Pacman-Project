@@ -10,11 +10,11 @@
 // Primero las funciones que carguen cada mapa
 
 void cargarmapa1(int matrizjuego[20][30]);  
-void cargarmapa2();
+void cargarmapa2(int matrizjuego[20][30]);
 void cargarmapa3(); 
 void menu();
 void motordejuego();
-void pintarmapa(int matrizjuego[20][30], BITMAP *buffer, int *poderactivo, int vidas); 
+void pintarmapa(int matrizjuego[20][30], BITMAP *buffer, int *poderactivo, int vidas,int nivel); 
 void movimientopacman(int matrizjuego[20][30], int posicionpacman[2], int *poderactivo, int *muertedepacman, int *score);
 void init();
 void submenuJugar(); 
@@ -57,8 +57,8 @@ void cargarmapa1(int matrizjuego[20][30]){
 		{1,4,4,4,1,1,1,4,4,1,4,4,1,1,1,1,4,4,4,1,4,4,4,1,1,1,1,4,4,1},
 		{1,4,4,4,4,4,4,4,4,1,4,4,4,4,4,4,4,4,4,1,4,4,4,4,4,4,4,4,4,1},
 		{1,4,4,4,4,4,4,4,4,4,4,4,1,1,1,1,4,4,4,4,4,4,4,4,4,4,4,4,4,1},
-		{1,4,4,4,1,4,4,4,1,4,4,4,4,0,4,4,4,4,4,4,4,4,4,4,1,4,4,4,4,1},
-		{1,5,1,4,1,4,4,4,1,4,4,4,1,1,1,1,4,4,4,4,4,4,4,4,1,4,4,5,4,1},
+		{1,4,4,4,1,4,4,4,1,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,1,4,4,4,4,1},
+		{1,5,1,4,1,4,4,4,1,4,4,4,4,4,0,4,4,4,4,4,4,4,4,4,1,4,4,5,4,1},
 		{1,4,1,4,1,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,1,4,4,4,4,1},
 		{1,4,1,4,1,1,1,1,1,4,4,4,1,1,1,1,4,4,4,4,1,1,1,1,1,4,4,1,4,1},
 		{1,4,1,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,1,4,1},
@@ -75,6 +75,40 @@ void cargarmapa1(int matrizjuego[20][30]){
 		
 	}
 		
+}
+
+void cargarmapa2(int matrizjuego[20][30]){
+	int mapa[20][30] = {
+	    {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}, //1
+	    {1,4,4,1,4,4,1,4,4,1,4,1,4,4,1,1,4,4,4,4,4,1,4,4,1,4,4,4,4,1}, //2
+	    {1,4,1,1,4,1,4,1,4,1,4,1,1,4,4,4,4,1,1,4,1,4,1,4,1,1,1,4,4,1}, //3
+	    {1,4,1,4,4,4,4,1,4,1,4,1,1,4,1,1,4,1,1,4,1,4,1,4,4,4,4,1,4,1}, //4
+	    {1,4,1,4,1,1,4,1,4,4,1,1,4,4,4,4,4,4,1,4,4,4,1,4,1,1,4,1,4,1}, //5
+	    {1,4,1,4,1,1,4,1,4,1,4,1,1,4,1,1,4,1,1,4,1,4,1,4,1,1,4,1,4,1}, //6
+	    {1,4,4,4,4,4,4,4,4,4,4,1,1,4,1,1,4,1,1,4,4,4,4,4,4,4,4,4,4,1}, //7
+	    {1,4,1,1,4,1,1,4,1,1,4,4,4,4,4,4,4,4,4,4,1,1,4,1,1,1,1,1,4,1}, //8
+	    {1,4,4,4,4,4,4,4,4,4,4,1,4,1,1,1,1,4,1,4,4,4,4,4,4,4,4,4,4,1}, //9
+	    {1,4,1,4,1,1,1,1,1,1,4,1,4,1,6,7,1,4,1,4,1,1,1,1,1,1,4,1,4,1}, //10
+	    {4,4,4,4,4,4,4,4,4,4,4,1,4,1,8,9,1,4,1,4,4,4,4,4,4,4,4,4,4,4}, //11
+	    {1,4,1,1,1,1,1,1,1,1,4,4,4,1,1,1,1,4,4,4,1,1,1,1,1,1,1,1,4,1}, //12
+	    {1,4,1,4,4,4,4,4,4,1,4,1,4,4,4,4,4,4,1,4,1,4,4,4,4,4,4,1,4,1}, //13
+	    {1,4,4,4,1,1,1,1,4,1,4,1,4,1,1,1,1,4,1,4,1,4,1,1,1,1,4,4,4,1}, //14
+	    {1,4,1,4,4,4,4,4,4,4,4,4,4,4,0,4,4,4,4,4,4,4,4,4,4,4,4,1,4,1}, //15
+	    {1,4,1,4,1,1,1,4,1,4,1,4,1,1,1,1,1,1,4,1,4,1,4,1,1,1,4,1,4,1}, //16
+	    {1,4,1,4,4,4,4,4,1,4,4,4,1,4,4,4,4,1,4,4,4,1,4,4,4,4,4,1,4,1}, //17
+	    {1,4,1,1,1,1,1,4,1,4,1,4,1,4,1,1,4,1,4,1,4,1,4,1,1,1,1,1,4,1}, //18
+	    {1,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,1}, //19
+	    {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}  //20
+	};
+		
+	int i,j;
+	
+	for (i=0; i<=19; i++){
+		for (j=0; j<=29; j++){
+			matrizjuego[i][j]=mapa[i][j];
+		}
+		
+	}
 }
 
 void submenuJugar(){
@@ -213,14 +247,14 @@ void motordejuego(){
 	FONT *font1=load_font("letritas.pcx", NULL,NULL);
 	
 	int score=0;
-	int Nivel=0;
+	int nivel=1;
 	// posicion inicial de pacman en el mapa
 	
 	int matrizjuego[20][30];
 	int posicionpacman[2];
-	posicionpacman[0]=13;
-	posicionpacman[1]=13;
-	
+
+	posicionpacman[0]=14;
+	posicionpacman[1]=14;
 	//posiciones iniciales de los fantasmas en el mapa
 	
 	int posicionnaranja[2];
@@ -254,45 +288,59 @@ void motordejuego(){
 	
 	BITMAP *buffer = create_bitmap(960,660);
 		
-	cargarmapa1(matrizjuego);
-	MostrarFruta(matrizjuego);
-	do{  
-		pintarmapa(matrizjuego,buffer, &poderactivo, vidas);
-		movimientopacman(matrizjuego, posicionpacman, &poderactivo, &muertepacman, &score);
-		TiempoSalida++;
-		
-		if(TiempoSalida<=40){
-			SacarFantasma(matrizjuego, posicionnaranja, posicionroja, posicionrosa, posicionazul, TiempoSalida);	
-		}
-			
-		if (TiempoSalida>10){
-			FantasmaNaranja(matrizjuego, posicionnaranja, &posicion_guardada, &muertepacman);  
-		}
-		if (TiempoSalida > 20) {
-	    	FantasmaRojo(matrizjuego, posicionroja, &posicion_guardada_roja, posicionpacman, &muertepacman);
-		}		
-		if (poderactivo==1){
-			TiempoPoder++;
-		}
-		if (TiempoPoder>30){
-			poderactivo=0;
-			TiempoPoder=0;
-		}
-		if (muertepacman==1){
-			Reinicio(matrizjuego, posicionpacman, posicionnaranja, posicionroja, posicionrosa, posicionazul);
-			muertepacman=0;
-			TiempoSalida=0;
-			vidas--;
-		} 		
-		//system ("pause");
-		//system ("cls"); 
-		blit(buffer,screen,0,0,0,0,960,660);
-		textprintf(screen, font1,0,-2,makecol(255,153,51),"score: %i",score);   
-		textprintf(screen, font1,200,-2,makecol(8,211,251),"[Esc] Pausa");	    
-		textprintf(screen, font1,400,-2,makecol(251,236,8),"Nivel: %i", Nivel);
 
-		clear(buffer);//Borramos el buffer
-		rest(VELOCIDAD);//Maneja la velocidad del juego. Entre más alto el parámetro, más lento el juego
+	do{
+		score = 0;
+		TiempoSalida = 0;
+		switch(nivel){
+			case 1:
+				cargarmapa1(matrizjuego);
+				break;
+			case 2:
+				cargarmapa2(matrizjuego);
+				break;
+		}
+		MostrarFruta(matrizjuego);
+		do{  
+			pintarmapa(matrizjuego,buffer, &poderactivo, vidas,nivel);
+			movimientopacman(matrizjuego, posicionpacman, &poderactivo, &muertepacman, &score);
+			TiempoSalida++;
+			
+			if(TiempoSalida<=40){
+				SacarFantasma(matrizjuego, posicionnaranja, posicionroja, posicionrosa, posicionazul, TiempoSalida);	
+			}
+				
+			if (TiempoSalida>10){
+				FantasmaNaranja(matrizjuego, posicionnaranja, &posicion_guardada, &muertepacman);  
+			}
+			if (TiempoSalida > 20) {
+		    	FantasmaRojo(matrizjuego, posicionroja, &posicion_guardada_roja, posicionpacman, &muertepacman);
+			}		
+			if (poderactivo==1){
+				TiempoPoder++;
+			}
+			if (TiempoPoder>30){
+				poderactivo=0;
+				TiempoPoder=0;
+			}
+			if (muertepacman==1){
+				Reinicio(matrizjuego, posicionpacman, posicionnaranja, posicionroja, posicionrosa, posicionazul);
+				muertepacman=0;
+				TiempoSalida=0;
+				vidas--;
+			} 		
+		
+			blit(buffer,screen,0,0,0,0,960,660);
+			textprintf(screen, font1,0,-2,makecol(255,153,51),"score: %i",score);   
+			textprintf(screen, font1,200,-2,makecol(8,211,251),"[Esc] Pausa");	    
+			textprintf(screen, font1,400,-2,makecol(251,236,8),"Nivel: %i", nivel);
+	
+			clear(buffer);//Borramos el buffer
+			rest(VELOCIDAD);//Maneja la velocidad del juego. Entre más alto el parámetro, más lento el juego
+		}while(vidas>0 && score<15);
+		nivel++;
+		Reinicio(matrizjuego, posicionpacman, posicionnaranja, posicionroja, posicionrosa, posicionazul);
+
 	}while(vidas>0);
 	
 	//vectorMapa[11]= load_bitmap("perdiste.bmp", NULL);
@@ -305,11 +353,10 @@ void motordejuego(){
 	}while(!key[KEY_ESC]);
 }
  
-void pintarmapa(int matrizjuego[20][30], BITMAP *buffer, int *poderactivo, int vidas){
+void pintarmapa(int matrizjuego[20][30], BITMAP *buffer, int *poderactivo, int vidas, int nivel){
 	int i,j; 
 	BITMAP *vectorMapa[15];
 	vectorMapa[0] = load_bitmap("CuerpoPacman_II.bmp", NULL); //PACMAN;
-	vectorMapa[1] = load_bitmap("Bloques_7.bmp", NULL); //BLOQUE
 	vectorMapa[2] = load_bitmap("Espacio.bmp", NULL);
 	vectorMapa[3] = load_bitmap("Fruta 1.bmp", NULL);
 	vectorMapa[4] = load_bitmap("PuntosChicos.bmp", NULL); // Puntos chicos
@@ -330,6 +377,14 @@ void pintarmapa(int matrizjuego[20][30], BITMAP *buffer, int *poderactivo, int v
 		vectorMapa[10]= load_bitmap("Vidas1.bmp", NULL);
 	}
 	
+	switch(nivel){
+		case 1:
+			vectorMapa[1] = load_bitmap("Bloques_7.bmp", NULL); //BLOQUE
+			break;
+		case 2:
+			vectorMapa[1] = load_bitmap("Bloques_6.bmp", NULL); //BLOQUE
+			break;
+	}
 	
 	if (*poderactivo==1){
 		vectorMapa[6]=load_bitmap("Fantasmas_Asustados.bmp", NULL);
@@ -623,7 +678,7 @@ void FantasmaRojo (int matrizjuego[20][30], int posicionroja[2], int *posicion_g
 		posicionroja[1]=posicionroja[1]-1;
 		*posicion_guardada=matrizjuego[posicionroja[0]][posicionroja[1]];
 		if (*posicion_guardada==0){
-			*posicion_guardada=1;
+			*posicion_guardada=2;
 		}
 	} 
 	
@@ -637,7 +692,7 @@ void FantasmaRojo (int matrizjuego[20][30], int posicionroja[2], int *posicion_g
 		*posicion_guardada=matrizjuego[posicionroja[0]] [posicionroja[1]];
 		
 		if (*posicion_guardada==0){
-			*posicion_guardada=1;
+			*posicion_guardada=2;
 		}
 	}
 	matrizjuego[posicionroja[0]][posicionroja[1]] = 6;
@@ -679,7 +734,7 @@ void SacarFantasma (int matrizjuego[20][30], int posicionnaranja[2], int posicio
 	
 }
 
- void MostrarFruta (int matrizjuego[20][30]){
+void MostrarFruta (int matrizjuego[20][30]){
 	int posicionfruta[2];
 
 	do {
@@ -695,8 +750,8 @@ void Reinicio (int matrizjuego[20][30], int posicionpacman[2],int posicionnaranj
 	// Esta funcion es para reiniciar una vez que el pacman se muera al tocar a un fantasma
 	
 	matrizjuego[posicionpacman[0]][posicionpacman[1]]=2; // Se pone 2 porque es un espacio vacio
-	posicionpacman[0]=13; //Porque es la posición de origen 
-	posicionpacman[1]=13;  // posicion de origen
+	posicionpacman[0]=14; //Porque es la posición de origen 
+	posicionpacman[1]=14;  // posicion de origen
 	matrizjuego[posicionpacman[0]][posicionpacman[1]]=0; 
 
 	matrizjuego[posicionnaranja[0]][posicionnaranja[1]]=2; //igual se trata de espacio vacio
