@@ -301,6 +301,9 @@ void motordejuego(){
 			case 2:
 				cargarmapa2(matrizjuego);
 				break;
+			default:
+				cargarmapa2(matrizjuego);
+				break;
 		}
 		MostrarFruta(matrizjuego);
 		do{  
@@ -312,12 +315,12 @@ void motordejuego(){
 				SacarFantasma(matrizjuego, posicionnaranja, posicionroja, posicionrosa, posicionazul, TiempoSalida);	
 			}
 				
-		/*	if (TiempoSalida>10){
+			if (TiempoSalida>10){
 				FantasmaNaranja(matrizjuego, posicionnaranja, &posicion_guardada, &muertepacman);  
 			}
 			if (TiempoSalida > 20) {
 		    	FantasmaRojo(matrizjuego, posicionroja, &posicion_guardada_roja, posicionpacman, &muertepacman);
-			}		*/
+			}		
 			if (poderactivo==1){
 				TiempoPoder++;
 			}
@@ -344,7 +347,6 @@ void motordejuego(){
 		Reinicio(matrizjuego, posicionpacman, posicionnaranja, posicionroja, posicionrosa, posicionazul);
 
 	}while(vidas>0);
-	
 	//vectorMapa[11]= load_bitmap("perdiste.bmp", NULL);
 	BITMAP *final;
 	final = load_bitmap("perdiste.bmp",NULL);
@@ -385,6 +387,9 @@ void pintarmapa(int matrizjuego[20][30], BITMAP *buffer, int *poderactivo, int v
 			break;
 		case 2:
 			vectorMapa[1] = load_bitmap("Bloques_6.bmp", NULL); //BLOQUE
+			break;
+		default:
+			vectorMapa[1] = load_bitmap("Bloques_7.bmp", NULL); //BLOQUE
 			break;
 	}
 	
@@ -535,7 +540,7 @@ void FantasmaNaranja (int matrizjuego[20][30], int posicionnaranja[2], int *posi
 				}
 				posicionnaranja[1]=posicionnaranja[1]-1;
 				*posicion_guardada=matrizjuego[posicionnaranja[0]][posicionnaranja[1]];
-				if (*posicion_guardada==0){
+				if (*posicion_guardada==0 || *posicion_guardada==8 || *posicion_guardada==6){
 					*posicion_guardada=2;
 				}
 				
@@ -559,7 +564,7 @@ void FantasmaNaranja (int matrizjuego[20][30], int posicionnaranja[2], int *posi
 				}
 				posicionnaranja[1]=posicionnaranja[1]+1;
 				*posicion_guardada=matrizjuego[posicionnaranja[0]][posicionnaranja[1]];
-				if (*posicion_guardada==0){
+				if (*posicion_guardada==0 || *posicion_guardada==8 || *posicion_guardada==6){
 					*posicion_guardada=2;
 				}
 				
@@ -582,7 +587,7 @@ void FantasmaNaranja (int matrizjuego[20][30], int posicionnaranja[2], int *posi
 				}
 				posicionnaranja[0]=posicionnaranja[0]-1;
 				*posicion_guardada=matrizjuego[posicionnaranja[0]][posicionnaranja[1]];
-				if (*posicion_guardada==0){
+				if (*posicion_guardada==0 || *posicion_guardada==8 || *posicion_guardada==6){
 					*posicion_guardada=2;
 				}
 				
@@ -599,7 +604,7 @@ void FantasmaNaranja (int matrizjuego[20][30], int posicionnaranja[2], int *posi
 				}
 				posicionnaranja[0]=posicionnaranja[0]+1;
 				*posicion_guardada=matrizjuego[posicionnaranja[0]][posicionnaranja[1]];
-				if(*posicion_guardada==0){
+				if(*posicion_guardada==0 || *posicion_guardada==8 || *posicion_guardada==6){
 					*posicion_guardada=2; 
 				}
 			
