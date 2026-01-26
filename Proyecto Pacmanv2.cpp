@@ -248,45 +248,25 @@ void motordejuego(){
 	
 	FONT *font1=load_font("letritas.pcx", NULL,NULL);
 	
-	int score=0;
-	int nivel=1;
-	// posicion inicial de pacman en el mapa
-	
-	int matrizjuego[20][30];
-	int posicionpacman[2];
-
+	int score=0, nivel=1,matrizjuego[20][30],posicionpacman[2],posicionnaranja[2],posicionroja[2];
+	int posicionrosa[2],posicionazul[2], turno=0, vidas=3,TiempoSalida=0,posicion_guardada=4,poderactivo=0;
+	int TiempoPoder=0, muertepacman=0,posicion_guardada_roja=4;
 	posicionpacman[0]=14;
 	posicionpacman[1]=14;
+	
 	//posiciones iniciales de los fantasmas en el mapa
 	
-	int posicionnaranja[2];
 	posicionnaranja[0]=9;
 	posicionnaranja[1]=14;
 	
-	int posicionroja[2];
 	posicionroja[0]=8; 
 	posicionroja[1]=13;
 	
-	int posicionrosa[2]; 
 	posicionrosa[0]=8;
 	posicionrosa[1]=14;
 	
-	int posicionazul[2];
 	posicionazul[0]=9;
 	posicionazul[1]=13;
-	
-	int turno=0;
-	
-	int TiempoSalida = 0;
-	int posicion_guardada=4;
-	int poderactivo=0;
-	int TiempoPoder=0;
-	
-	int muertepacman=0;
-	
-	int posicion_guardada_roja = 4; 
-	
-	int vidas=3;
 	
 	BITMAP *buffer = create_bitmap(960,660);
 		
@@ -296,7 +276,7 @@ void motordejuego(){
 		TiempoSalida = 0;
 		switch(nivel){
 			case 1:
-				cargarmapa2(matrizjuego);
+				cargarmapa1(matrizjuego);
 				break;
 			case 2:
 				cargarmapa2(matrizjuego);
@@ -319,7 +299,7 @@ void motordejuego(){
 				FantasmaNaranja(matrizjuego, posicionnaranja, &posicion_guardada, &muertepacman);  
 			}
 			if (TiempoSalida > 20) {
-		    	FantasmaRojo(matrizjuego, posicionroja, &posicion_guardada_roja, posicionpacman, &muertepacman);
+		    	//FantasmaRojo(matrizjuego, posicionroja, &posicion_guardada_roja, posicionpacman, &muertepacman);
 			}		
 			if (poderactivo==1){
 				TiempoPoder++;
@@ -362,7 +342,6 @@ void pintarmapa(int matrizjuego[20][30], BITMAP *buffer, int *poderactivo, int v
 	BITMAP *vectorMapa[15];
 	vectorMapa[0] = load_bitmap("CuerpoPacman_II.bmp", NULL); //PACMAN;
 	vectorMapa[2] = load_bitmap("Espacio.bmp", NULL);
-	vectorMapa[3] = load_bitmap("Fruta 1.bmp", NULL);
 	vectorMapa[4] = load_bitmap("PuntosChicos.bmp", NULL); // Puntos chicos
 	vectorMapa[5] = load_bitmap("PuntosGrandes.bmp", NULL);
 	vectorMapa[6] = load_bitmap("FantasmaBlinky_Abajo.bmp", NULL);
@@ -384,12 +363,19 @@ void pintarmapa(int matrizjuego[20][30], BITMAP *buffer, int *poderactivo, int v
 	switch(nivel){
 		case 1:
 			vectorMapa[1] = load_bitmap("Bloques_7.bmp", NULL); //BLOQUE
+			vectorMapa[3] = load_bitmap("Fruta 1.bmp", NULL);
+			vectorMapa[11] = load_bitmap("Espacio.bmp",NULL);
 			break;
 		case 2:
 			vectorMapa[1] = load_bitmap("Bloques_6.bmp", NULL); //BLOQUE
+			vectorMapa[3] = load_bitmap("Fruta 2.bmp", NULL);
+			vectorMapa[11] = load_bitmap("1Frutas.bmp",NULL);
+
 			break;
 		default:
-			vectorMapa[1] = load_bitmap("Bloques_7.bmp", NULL); //BLOQUE
+			vectorMapa[1] = load_bitmap("Bloques_8.bmp", NULL); //BLOQUE
+			vectorMapa[3] = load_bitmap("Fruta 1.bmp", NULL);
+			vectorMapa[11] = load_bitmap("2Frutas.bmp",NULL);
 			break;
 	}
 	
@@ -401,42 +387,12 @@ void pintarmapa(int matrizjuego[20][30], BITMAP *buffer, int *poderactivo, int v
 	}
 	
 	draw_sprite(buffer, vectorMapa[10], 750,0);
-	
+	draw_sprite(buffer, vectorMapa[11], 600,0);
 	
 	for (i=0; i<=19; i++){
 		for (j=0; j<=29; j++){
-			if(matrizjuego[i][j] == 1){ //BLOQUE
-				draw_sprite(buffer,vectorMapa[1],j*30,i*30+35);
-			}
-			else if(matrizjuego[i][j] == 0){ //PACMAN
-				draw_sprite(buffer,vectorMapa[0],j*30,i*30+35);
-			}
-			else if (matrizjuego[i][j] == 4) {
-				draw_sprite(buffer, vectorMapa[4], j*30, i*30+35);
-			}
-			else if (matrizjuego[i][j]== 2){
-				draw_sprite(buffer, vectorMapa[2], j*30, i*30+35);
-			}
-			else if (matrizjuego[i][j]==6){
-				draw_sprite(buffer, vectorMapa[6], j*30, i*30+35);
-			}
-			else if (matrizjuego[i][j]==8){
-				draw_sprite(buffer, vectorMapa[8], j*30, i*30+35);
-			}
-			else if (matrizjuego[i][j]==9){
-				draw_sprite(buffer, vectorMapa[9], j*30, i*30+35);
-			}
-			else if (matrizjuego[i][j]==7){
-				draw_sprite(buffer, vectorMapa[7], j*30, i*30+35);
-			}
-			else if (matrizjuego[i][j]==5){
-				draw_sprite(buffer, vectorMapa[5], j*30, i*30+35);
-			}
-			else if (matrizjuego[i][j]==3){
-				draw_sprite (buffer, vectorMapa[3], j*30, i*30+35);
-			}
+			draw_sprite(buffer,vectorMapa[ matrizjuego[i][j] ],j*30,i*30+35);
 		}
-		//printf("\n");
 	}
 }
 
