@@ -250,13 +250,10 @@ void motordejuego(){
 	FONT *font1=load_font("letritas.pcx", NULL,NULL);
 	
 	int score=0, nivel=1,matrizjuego[20][30],posicionpacman[2],posicionnaranja[2],posicionroja[2];
-<<<<<<< Updated upstream
+
 	int posicionrosa[2],posicionazul[2], turno=0, vidas=3,TiempoSalida=0,posicion_guardada=4,poderactivo=0,posicion_guardada_pacman = 0;
 	int TiempoPoder=0, muertepacman=0,posicion_guardada_roja=4,posicion_guardada_rosa=4,contador_frutas=0;
-=======
-	int posicionrosa[2],posicionazul[2], turno=0, vidas=3,TiempoSalida=0,posicion_guardada=4,poderactivo=0;
-	int TiempoPoder=0, muertepacman=0,posicion_guardada_roja=4;
->>>>>>> Stashed changes
+
 	posicionpacman[0]=14;
 	posicionpacman[1]=14;
 	
