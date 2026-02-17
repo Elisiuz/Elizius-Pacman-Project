@@ -397,24 +397,21 @@ void pintarmapa(int matrizjuego[20][30], BITMAP *buffer, int *poderactivo, int v
 	switch(nivel){
 		case 1:
 			vectorMapa[1] = load_bitmap("Bloques_7.bmp", NULL); //BLOQUE
-
-			
-
-			vectorMapa[3] = load_bitmap("Fruta 1.bmp", NULL);
-			vectorMapa[11] = load_bitmap("Espacio.bmp",NULL);
+			//vectorMapa[3] = load_bitmap("Fruta 1.bmp", NULL);
+			//vectorMapa[11] = load_bitmap("Espacio.bmp",NULL);
 
 			break;
 		case 2:
 			vectorMapa[1] = load_bitmap("Bloques_6.bmp", NULL); //BLOQUE
-			vectorMapa[3] = load_bitmap("Fruta 2.bmp", NULL);
-			vectorMapa[11] = load_bitmap("1Frutas.bmp",NULL);
+			//vectorMapa[3] = load_bitmap("Fruta 2.bmp", NULL);
+			//vectorMapa[11] = load_bitmap("1Frutas.bmp",NULL);
 
 			break;
 		default:
 			vectorMapa[1] = load_bitmap("Bloques_8.bmp", NULL); //BLOQUE
 
-			vectorMapa[3] = load_bitmap("Fruta 1.bmp", NULL);
-			vectorMapa[11] = load_bitmap("2Frutas.bmp",NULL);
+			//vectorMapa[3] = load_bitmap("Fruta 1.bmp", NULL);
+			//vectorMapa[11] = load_bitmap("2Frutas.bmp",NULL);
 
 			break;
 	}
