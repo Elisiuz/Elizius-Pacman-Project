@@ -19,7 +19,7 @@ void movimientopacman(int matrizjuego[20][30], int posicionpacman[2], int *poder
 void init();
 void submenuJugar(); 
 void Nuevojuego();
-int continuarjuego();
+int continuarjuego(); 
 void regresar();
 int verificarUsuario(char usuario[]);
 void IngresarUsuario (char usuario[], char password[]);
@@ -305,10 +305,10 @@ void motordejuego(){
 			if (TiempoSalida>10){
 				FantasmaNaranja(matrizjuego, posicionnaranja, &posicion_guardada, &muertepacman);  
 			}
-			if (TiempoSalida > 20) {
+			if (TiempoSalida > 20 && TiempoSalida%8){
 		    	FantasmaRojo(matrizjuego, posicionroja, &posicion_guardada_roja, posicionpacman, &muertepacman);
 			}		
-			if(TiempoSalida > 30){
+			if(TiempoSalida > 30 && TiempoSalida%5==0){
 				FantasmaRosa(matrizjuego, posicionrosa, &posicion_guardada_rosa, posicionpacman, &muertepacman);
 			}
 			if (TiempoSalida >40){
@@ -635,7 +635,7 @@ void FantasmaNaranja (int matrizjuego[20][30], int posicionnaranja[2], int *posi
 		case 3:
 			if(
 			
-				matrizjuego[posicionnaranja[0]+1][posicionnaranja[1]] !=1
+				matrizjuego[posicionnaranja[0]+1][posicionnaranja[1]] !=1  &&
 				matrizjuego[posicionnaranja[0]+1][posicionnaranja[1]] != 6 && 
 				matrizjuego[posicionnaranja[0]+1][posicionnaranja[1]] != 7 &&
 				matrizjuego[posicionnaranja[0]+1][posicionnaranja[1]] != 8 
